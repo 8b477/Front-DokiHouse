@@ -29,3 +29,5 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 Faire une mise en place avec des fake data dans un premier temp !
 Utiiser toutes les pratique de Angular 17 (MAX)
+
+- 1. relire les datas déja en place , analyer une solution un mini responsive ainsi q'un et CSS clean lisible réutilisable
