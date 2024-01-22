@@ -1,0 +1,99 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 39vw;
+  margin: 0 auto;
+}
+
+.form_area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-image: url('../../../../assets/img/house1-clean.png');
+  background-size: contain;
+  height: auto;
+  width: auto;
+  border: 2px solid #264143;
+  border-radius: 20px;
+  box-shadow: 3px 4px 0px 1px #E99F4C;
+}
+
+.title {
+  color: #c54083;
+  font-weight: 900;
+  font-size: 1.5em;
+  margin-top: 20px;
+}
+
+.sub_title {
+  color:mintcream;
+  font-weight: 600;
+  margin: 5px 0;
+}
+
+.form_group {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  margin: 10px;
+}
+
+.form_style {
+  outline: none;
+  border: 2px solid #264143;
+  box-shadow: 3px 4px 0px 1px #E99F4C;
+  width: 290px;
+  padding: 12px 10px;
+  border-radius: 4px;
+  font-size: 15px;
+}
+
+.form_style:focus, .btn:focus {
+  transform: translateY(4px);
+  box-shadow: 1px 2px 0px 0px #E99F4C;
+}
+
+.btn {
+  padding: 15px;
+  margin: 25px 0px;
+  width: 290px;
+  font-size: 15px;
+  background: #DE5499;
+  border-radius: 10px;
+  font-weight: 800;
+  box-shadow: 3px 3px 0px 0px #E99F4C;
+}
+
+.btn:hover {
+  opacity: .9;
+}
+
+
+.container-left{
+    background-image: url('../../../../assets/img/logo-couleur.png');
+    background-size: contain;
+    background-repeat: repeat;
+    height: 419px;
+    width: 100px;
+    border-radius: 10px;
+    margin: 0;
+}
+.container-right{
+    background-image: url('../../../../assets/img/logo-couleur.png');
+    background-size: contain;
+    background-repeat: repeat;
+    height: 419px;
+    width: 100px;
+    border-radius: 10px;
+    margin: 0;
+}
+
+
+#wrapper{
+    display: flex;
+    margin: 0.8rem auto;
+    width: 66vw;
+    align-items: center;
+}

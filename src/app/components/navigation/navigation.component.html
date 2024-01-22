@@ -1,17 +1,30 @@
 <nav>
-    <ul>
-        <li><a [routerLink]="['/']">Home</a></li>
+    <ul class="nav-links">
+        <li>
+            <a [routerLink]="['/']" class="link">Accueil</a>
+        </li>
 
-        <li><a [routerLink]="['/contact']">Contact</a></li>
-        <li><a [routerLink]="['/contact/mailing']">Mail</a></li>
-        <li><a [routerLink]="['/contact/mapping']">Map</a></li>
+        <li>
+            <a [routerLink]="['/signup']" class="link">Inscription</a>
+        </li>
 
-        <li><a [routerLink]="['/about']">About</a></li>
-        <li><a [routerLink]="['/about/experience']">Expérience</a></li>
-        <li><a [routerLink]="['/about/skill']">Skill</a></li>
+        <li class ="center">
+            <a [routerLink]="['/login']" class="link">Connexion</a>
+        </li>
 
-        <li><a [routerLink]="['/signup']">SignUp</a></li>
-        <li><a [routerLink]="['/login']">Login</a></li>
+        <li class="forward">
+            <a [routerLink]="['/contact']" class="link">Contact</a>
+        </li>
+
+        <li class ="forward">
+            <a [routerLink]="['/about']" class="link">À propos</a>
+        </li>
     </ul>
-
 </nav>
+
+
+        <!-- <li><a [routerLink]="['/contact/mailing']" class="link">Contact/Mail</a></li>
+        <li><a [routerLink]="['/contact/mapping']" class="link">Contact/Map</a></li>
+
+        <li><a [routerLink]="['/about/experience']" class="link">About/Expérience</a></li>
+        <li><a [routerLink]="['/about/skill']" class="link">About/Skill</a></li> -->
