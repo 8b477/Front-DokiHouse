@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   text-align: center;
-  width: 39vw;
+  width: 50%;
   margin: 0 auto;
 }
 
@@ -12,9 +12,8 @@
   align-items: center;
   flex-direction: column;
   background-image: url('../../../../assets/img/house1-clean.png');
-  background-size: contain;
-  height: auto;
-  width: auto;
+  background-size: cover;
+  min-height: 500px;
   border: 2px solid #264143;
   border-radius: 20px;
   box-shadow: 3px 4px 0px 1px #E99F4C;
@@ -70,30 +69,47 @@
   opacity: .9;
 }
 
+.container-left-img{
+    background-image: url('../../../../assets/img/logo-couleur.png');
+    background-size: contain;
+    background-repeat: repeat;
+    height: 400px;
+    width: 100px;
+    border-radius: 10px;
+    margin: 0;
+}
 
 .container-left{
-    background-image: url('../../../../assets/img/logo-couleur.png');
-    background-size: contain;
-    background-repeat: repeat;
-    height: 419px;
-    width: 100px;
-    border-radius: 10px;
-    margin: 0;
-}
-.container-right{
-    background-image: url('../../../../assets/img/logo-couleur.png');
-    background-size: contain;
-    background-repeat: repeat;
-    height: 419px;
-    width: 100px;
-    border-radius: 10px;
-    margin: 0;
+    display: flex;
+    justify-content: center;
+    width: 25%;
 }
 
+.container-right{
+    display: flex;
+    justify-content: center;
+    width: 25%;
+}
+
+.container-right-img{
+    background-image: url('../../../../assets/img/logo-couleur.png');
+    background-size: contain;
+    background-repeat: repeat;
+    height: 400px;
+    width: 100px;
+    border-radius: 10px;
+    margin: 0;
+}
 
 #wrapper{
     display: flex;
     margin: 0.8rem auto;
-    width: 66vw;
+    width: 99vw;
+    height: 90%;
     align-items: center;
+    flex-wrap: wrap;
+}
+
+.footer{
+  width: 100%;
 }
