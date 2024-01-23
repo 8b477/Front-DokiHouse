@@ -6,22 +6,49 @@
 
     <div class="container">
         <div class="form_area">
-            <form action="">
+            <form [formGroup]="signUpForm" (ngSubmit)="submitForm()">
+
                 <div class="form_group">
-                    <label class="sub_title" for="name">Pseudo</label>
-                    <input placeholder="Enter your full name" class="form_style" type="text">
+                    <label class="sub_title" for="name">Nom :</label>
+                    <input formControlName="name" placeholder="Enter your full name" class="form_style" type="text">
+                        @if (signUpForm.controls['name'].touched && !signUpForm.controls['name'].valid) 
+                        {                           
+                            <app-register-user [tooltipText]="'Le nom doit être de minimum 3 caractères'" [errorMessage]="'Le nom est pas correct ! '"></app-register-user>
+                        }
                 </div>
+
                 <div class="form_group">
-                    <label class="sub_title" for="email">Email</label>
-                    <input placeholder="Enter your email" id="email" class="form_style" type="email">
+                    <label class="sub_title" for="email">Email :</label>
+                    <input formControlName="mail" placeholder="Enter your email" id="email" class="form_style" type="email">
+                    
+                    @if (signUpForm.controls['mail'].touched && !signUpForm.controls['mail'].valid) 
+                        {                           
+                            <app-register-user [tooltipText]="'Le mail fourni est incorrect, vérifiez l\'orthographe'"  [errorMessage]="'Le mail est invalide !'"></app-register-user>
+                        }
                 </div>
+
                 <div class="form_group">
-                    <label class="sub_title" for="password">Mot de passe</label>
-                    <input placeholder="Enter your password" id="password" class="form_style" type="password">
+                    <label class="sub_title" for="password">Mot de passe :</label>
+                    <input formControlName="passwd" placeholder="Enter your password" id="password" class="form_style" type="password">
+                    @if (signUpForm.controls['passwd'].touched && !signUpForm.controls['passwd'].valid) 
+                        {                           
+                        <app-register-user [tooltipText]="'Le mot de passe doit contenir minimum 8 caractères, 1 majuscule, 1 chiffre et 1 caractères spécial'" [errorMessage]="'Mot de passe invalide ! '"></app-register-user>
+                        }
                 </div>
+
+                 <div class="form_group">
+                    <label class="sub_title" for="passwordConfirm">Confirme passe :</label>
+                    <input formControlName="passwdConfirm" placeholder="Confirm password" id="passwordConfirm" class="form_style" type="password">
+                    @if (signUpForm.controls['passwdConfirm'].touched && !signUpForm.controls['passwdConfirm'].valid) 
+                    {                           
+                        <app-register-user [tooltipText]="'Le champ password et le champ confirm doivent correspondre'" [errorMessage]="'La confirmation n\'est pas valide ! '"></app-register-user>
+                    }
+                </div>
+
                 <div>
-                    <button class="btn">Inscription</button>
+                    <button type="submit" class="btn">Inscription</button>
                 </div>
+
             </form>
         </div>
     </div>
