@@ -20,7 +20,7 @@ export const routes: Routes =
     {'path' : 'login', component : LoginComponent},
     {'path' : 'signup', component : SignUpComponent},
 
-// --> ABOUT AND CHILD
+// --> ABOUT + CHILD
     { 'path' : 'about', component : AboutComponent},
 
     { 'path' : 'about', children : [

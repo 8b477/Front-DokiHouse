@@ -23,12 +23,12 @@
 
 
 .error__icon {
-  position: relative;
+  position: relative; // <=============== (1)
 }
 
 
 .error__icon::before {
-  content: attr(data-tooltip);
+  content: attr(data-tooltip); // <=============== (2)
   position: absolute;
   transform: translateX(-100%);
   display: none;
@@ -40,7 +40,7 @@
 
 
 .error__icon:hover::before {
-  display: block;
+  display: block; // <=============== (3)
 }
 
 

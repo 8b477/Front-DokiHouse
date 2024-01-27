@@ -11,9 +11,10 @@
                 <div class="form_group">
                     <label class="sub_title" for="name">Nom :</label>
                     <input formControlName="name" placeholder="Enter your full name" class="form_style" type="text">
+                    
                         @if (signUpForm.controls['name'].touched && !signUpForm.controls['name'].valid) 
                         {                           
-                            <app-register-user [tooltipText]="'Le nom doit être de minimum 3 caractères'" [errorMessage]="'Le nom est pas correct ! '"></app-register-user>
+                            <app-form-error-handler [tooltipText]="'Le nom doit être de minimum 3 caractères'" [errorMessage]="'Le nom est pas correct ! '"></app-form-error-handler>
                         }
                 </div>
 
@@ -23,25 +24,27 @@
                     
                     @if (signUpForm.controls['mail'].touched && !signUpForm.controls['mail'].valid) 
                         {                           
-                            <app-register-user [tooltipText]="'Le mail fourni est incorrect, vérifiez l\'orthographe'"  [errorMessage]="'Le mail est invalide !'"></app-register-user>
+                            <app-form-error-handler [tooltipText]="'Le mail fourni est incorrect, vérifiez l\'orthographe'"  [errorMessage]="'Le mail est invalide !'"></app-form-error-handler>
                         }
                 </div>
 
                 <div class="form_group">
                     <label class="sub_title" for="password">Mot de passe :</label>
                     <input formControlName="passwd" placeholder="Enter your password" id="password" class="form_style" type="password">
+
                     @if (signUpForm.controls['passwd'].touched && !signUpForm.controls['passwd'].valid) 
                         {                           
-                        <app-register-user [tooltipText]="'Le mot de passe doit contenir minimum 8 caractères, 1 majuscule, 1 chiffre et 1 caractères spécial'" [errorMessage]="'Mot de passe invalide ! '"></app-register-user>
+                        <app-form-error-handler [tooltipText]="'Le mot de passe doit contenir minimum 8 caractères, 1 majuscule, 1 chiffre et 1 caractères spécial'" [errorMessage]="'Mot de passe invalide ! '"></app-form-error-handler>
                         }
                 </div>
 
                  <div class="form_group">
                     <label class="sub_title" for="passwordConfirm">Confirme passe :</label>
                     <input formControlName="passwdConfirm" placeholder="Confirm password" id="passwordConfirm" class="form_style" type="password">
+
                     @if (signUpForm.controls['passwdConfirm'].touched && !signUpForm.controls['passwdConfirm'].valid) 
                     {                           
-                        <app-register-user [tooltipText]="'Le champ password et le champ confirm doivent correspondre'" [errorMessage]="'La confirmation n\'est pas valide ! '"></app-register-user>
+                        <app-form-error-handler [tooltipText]="'Le champ password et le champ confirm doivent correspondre'" [errorMessage]="'La confirmation n\'est pas valide ! '"></app-form-error-handler>
                     }
                 </div>
 
