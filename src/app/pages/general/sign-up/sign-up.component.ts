@@ -41,7 +41,13 @@ export class SignUpComponent implements OnInit{
 
         this.user = new userCreateModels(name,mail,passwd,passwdConfirm);
 
-        this.userHttpService.CreateUser(this.user);
+        this.userHttpService.CreateUser(this.user)
+                            .subscribe
+                            ({
+                               next : user => console.log(JSON.stringify(user)),
+                               error : error => console.log(error),
+                               complete : () => console.log('User load complete')
+                            })
     }
 
 

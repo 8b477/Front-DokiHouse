@@ -1,22 +1,24 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { userCreateModels } from '../mocks/userModels/create/userCreateModel';
+import { User } from '../mocks/userModels/generic/User';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'any'
 })
 export class UserHttpService {
 
-  baseUrl : string = "https://localhost:7043/api/User";
+  private baseUrl : string = "https://localhost:7043/api/User";
+
   httpClient = inject(HttpClient);
 
   constructor() { }
 
-  CreateUser(model : userCreateModels)
+  CreateUser(model : userCreateModels) : Observable<User>
   {
-    this.httpClient.post(this.baseUrl, model).subscribe(
-    (result) => { console.log(result) },
-    (error) => { console.log(error) }
-    )
+    return this.httpClient.post<User>(this.baseUrl, model) 
   }
 }
+
+
