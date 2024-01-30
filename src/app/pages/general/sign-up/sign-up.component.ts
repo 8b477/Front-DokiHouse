@@ -1,28 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms'
 
 import { FooterComponent } from './../footer/footer.component';
 import { FormErrorHandlerComponent } from '../../../utils/form-error-handler/form-error-handler.component';
 import { userCreateModels } from '../../../mocks/userModels/create/userCreateModel';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { UserHttpServiceService } from '../../../services/user-http-service.service';
+import { UserHttpService } from '../../../services/user-http.service';
 
 
 
-@Component({
+@Component({  
     selector: 'app-sign-up',
     standalone: true,
     templateUrl: './sign-up.component.html',
     styleUrl: './sign-up.component.scss',
-    imports: [ReactiveFormsModule, FooterComponent, FormErrorHandlerComponent, HttpClientModule]
+    imports: [ReactiveFormsModule, FooterComponent, FormErrorHandlerComponent]
 })
 export class SignUpComponent implements OnInit{
 
     signUpForm! : FormGroup;
     user! : userCreateModels;
+    private userHttpService = inject(UserHttpService);
 
-
-    constructor(private formBuilder : FormBuilder, private httpMyService : UserHttpServiceService ,private httpService : HttpClient) {}
+    constructor(private formBuilder : FormBuilder) {}
 
     ngOnInit(): void {
         this.signUpForm = this.formBuilder.group
@@ -42,8 +41,7 @@ export class SignUpComponent implements OnInit{
 
         this.user = new userCreateModels(name,mail,passwd,passwdConfirm);
 
-        this.httpMyService.CreateUser(this.user);
-
+        this.userHttpService.CreateUser(this.user);
     }
 
 
