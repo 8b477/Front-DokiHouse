@@ -4,6 +4,7 @@ import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angula
 import { FooterComponent } from './../footer/footer.component';
 import { FormErrorHandlerComponent } from '../../../utils/form-error-handler/form-error-handler.component';
 import { userCreateModels } from '../../../mocks/userModels/create/userCreateModel';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 
 
@@ -12,17 +13,15 @@ import { userCreateModels } from '../../../mocks/userModels/create/userCreateMod
     standalone: true,
     templateUrl: './sign-up.component.html',
     styleUrl: './sign-up.component.scss',
-    imports: [ReactiveFormsModule, FooterComponent, FormErrorHandlerComponent]
+    imports: [ReactiveFormsModule, FooterComponent, FormErrorHandlerComponent, HttpClientModule]
 })
 export class SignUpComponent implements OnInit{
 
     signUpForm! : FormGroup;
     user! : userCreateModels;
 
-    constructor(private formBuilder : FormBuilder) 
-    {
 
-    }
+    constructor(private formBuilder : FormBuilder, private httpService : HttpClient) {}
 
     ngOnInit(): void {
         this.signUpForm = this.formBuilder.group
@@ -35,14 +34,27 @@ export class SignUpComponent implements OnInit{
     }
 
     submitForm() :void{
-        const name = this.signUpForm.controls['name'].value as string
-        const mail = this.signUpForm.controls['mail'].value as string
-        const passwd = this.signUpForm.controls['passwd'].value as string
-        const passwdConfirm = this.signUpForm.controls['passwdConfirm'].value as string
+        let name = this.signUpForm.controls['name'].value as string
+        let mail = this.signUpForm.controls['mail'].value as string
+        let passwd = this.signUpForm.controls['passwd'].value as string
+        let passwdConfirm = this.signUpForm.controls['passwdConfirm'].value as string
 
         this.user = new userCreateModels(name,mail,passwd,passwdConfirm);
 
-        console.log(this.user);
+        this.httpService.post("https://localhost:7043/api/User", this.user)
+        .subscribe(
+            (response) => {
+                console.log("Réponse de la requête POST :", response);
+                name = "";
+                mail = "";
+                passwd = "";
+                passwdConfirm = "";
+            },
+            (error) => {
+                console.error("Erreur lors de la requête POST :", error);
+            }           
+        );
     }
+
 
 }
