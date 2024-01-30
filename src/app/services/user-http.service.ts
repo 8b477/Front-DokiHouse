@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { userCreateModels } from '../mocks/userModels/create/userCreateModel';
-import { User } from '../mocks/userModels/generic/User';
+import { User } from '../mocks/userModels/interface/User';
 import { Observable } from 'rxjs';
 
 @Injectable({
