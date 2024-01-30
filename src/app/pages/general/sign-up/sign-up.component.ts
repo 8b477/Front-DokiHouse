@@ -5,6 +5,7 @@ import { FooterComponent } from './../footer/footer.component';
 import { FormErrorHandlerComponent } from '../../../utils/form-error-handler/form-error-handler.component';
 import { userCreateModels } from '../../../mocks/userModels/create/userCreateModel';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { UserHttpServiceService } from '../../../services/user-http-service.service';
 
 
 
@@ -21,7 +22,7 @@ export class SignUpComponent implements OnInit{
     user! : userCreateModels;
 
 
-    constructor(private formBuilder : FormBuilder, private httpService : HttpClient) {}
+    constructor(private formBuilder : FormBuilder, private httpMyService : UserHttpServiceService ,private httpService : HttpClient) {}
 
     ngOnInit(): void {
         this.signUpForm = this.formBuilder.group
@@ -41,19 +42,8 @@ export class SignUpComponent implements OnInit{
 
         this.user = new userCreateModels(name,mail,passwd,passwdConfirm);
 
-        this.httpService.post("https://localhost:7043/api/User", this.user)
-        .subscribe(
-            (response) => {
-                console.log("Réponse de la requête POST :", response);
-                name = "";
-                mail = "";
-                passwd = "";
-                passwdConfirm = "";
-            },
-            (error) => {
-                console.error("Erreur lors de la requête POST :", error);
-            }           
-        );
+        this.httpMyService.CreateUser(this.user);
+
     }
 
 
