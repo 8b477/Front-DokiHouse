@@ -1,3 +1,4 @@
+import { LocalStorageService } from './../../../services/localStorage/local-storage.service';
 import { DecodeTokenService } from './../../../services/token/decode-token.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -20,7 +21,7 @@ export class LoginComponent implements OnInit{
   userModel : UserLogin | undefined;
   tokenDecoded! : GetToken;
 
-  constructor(private formBuilder : FormBuilder, private httpLogService : LogService, private decodeTokenService : DecodeTokenService){ }
+  constructor(private formBuilder : FormBuilder, private httpLogService : LogService, private decodeTokenService : DecodeTokenService, private localStorageSerice : LocalStorageService){ }
 
 
   ngOnInit(): void {
@@ -43,9 +44,8 @@ export class LoginComponent implements OnInit{
                        ({
                         next : token =>
                         {
-                         this.tokenDecoded = this.decodeTokenService.decodeToken(token.token)
-                         console.log('tokenDecoded : ' + JSON.stringify(this.tokenDecoded));
-                         console.log('avec le nom : ' + this.tokenDecoded.name + 'avec l\'id : ' + this.tokenDecoded.nameid);
+                         this.tokenDecoded = this.decodeTokenService.decodeToken(token.value)
+                         this.setLocalStorage();
                         },
                         error : error => console.log(error),
                         complete: () => console.log('request log is finish')
@@ -53,5 +53,8 @@ export class LoginComponent implements OnInit{
   }
 
 
+  private setLocalStorage() : void{
+    this.localStorageSerice.setContextToken(this.tokenDecoded.nameid, this.tokenDecoded.name,this.tokenDecoded.role);
+  }
 
 }
