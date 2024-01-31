@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormErrorHandlerComponent } from '../../../utils/form-error-handler/form-error-handler.component';
 import { FooterComponent } from "../../../components/footer/footer.component";
+import { LogService } from '../../../services/login/log.service';
+import { UserLogin } from '../../../mocks/userModels/login/UserLogin';
 
 @Component({
     selector: 'app-login',
@@ -13,8 +15,9 @@ import { FooterComponent } from "../../../components/footer/footer.component";
 export class LoginComponent implements OnInit{
 
   loginForm! : FormGroup;
+  userModel : UserLogin | undefined;
 
-  constructor(private formBuilder : FormBuilder){ }
+  constructor(private formBuilder : FormBuilder, private httpLogService : LogService){ }
 
 
   ngOnInit(): void {
@@ -27,8 +30,19 @@ export class LoginComponent implements OnInit{
 
 
   submitLogForm() :void{
-    console.log('mail : ' + this.loginForm.controls['mail'].value);
-    console.log('pass : ' + this.loginForm.controls['passwd'].value);
+    const mail = this.loginForm.controls['mail'].value;
+    const passwd = this.loginForm.controls['passwd'].value;
+
+    this.userModel = new UserLogin(mail, passwd);
+
+    this.httpLogService.getToken(this.userModel)
+                       .subscribe
+                       ({
+                        next : token => console.log('le token de validation : ' + token.token),
+                        error : error => console.log(error),
+                        complete: () => console.log('request log is finish')
+                       })
   }
+
 
 }
