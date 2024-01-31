@@ -1,0 +1,116 @@
+#wrapper{
+    display: flex;
+    margin: 0.8rem auto;
+    width: 99vw;
+    height: 90%;
+    align-items: center;
+    flex-wrap: wrap;
+
+  .container-left{
+      display: flex;
+      justify-content: center;
+      width: 25%;
+
+    .container-left-img{
+        background-image: url('/assets/img/logo-couleur.png');
+        background-size: contain;
+        background-repeat: repeat;
+        height: 400px;
+        width: 100px;
+        border-radius: 10px;
+        margin: 0;
+    }
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 50%;
+    margin: 0 auto;
+
+    .form_area {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background-image: url('/assets/img/house1-clean.png');
+      background-size: cover;
+      min-height: 500px;
+      border: 2px solid #264143;
+      border-radius: 20px;
+      box-shadow: 3px 4px 0px 1px #E99F4C;
+
+      .form_group {
+        display: flex;
+        flex-direction: column;
+        align-items: baseline;
+        margin: 10px;
+
+        .sub_title {
+          color:mintcream;
+          font-weight: 600;
+          margin: 5px 0;
+        }
+        
+        .form_style {
+          outline: none;
+          border: 2px solid #264143;
+          box-shadow: 3px 4px 0px 1px #E99F4C;
+          width: 290px;
+          padding: 12px 10px;
+          border-radius: 4px;
+          font-size: 15px;
+
+          &:focus{
+            transform: translateY(4px);
+            box-shadow: 1px 2px 0px 0px #E99F4C;
+          }
+        }
+
+      }
+      .btn {
+        padding: 15px;
+        margin: 25px 0px;
+        width: 290px;
+        font-size: 15px;
+        background: #DE5499;
+        border-radius: 10px;
+        font-weight: 800;
+        box-shadow: 3px 3px 0px 0px #E99F4C;
+
+        &:hover{
+          opacity: .9;
+        }
+
+        &:focus{
+          transform: translateY(4px);
+          box-shadow: 1px 2px 0px 0px #E99F4C;
+        }      
+      }
+
+    }
+  }
+}
+
+
+.container-right{
+    display: flex;
+    justify-content: center;
+    width: 25%;
+
+    .container-right-img{
+    background-image: url('/assets/img/logo-couleur.png');
+    background-size: contain;
+    background-repeat: repeat;
+    height: 400px;
+    width: 100px;
+    border-radius: 10px;
+    margin: 0;
+  }
+}
+
+
+.footer{
+  width: 100%;
+}

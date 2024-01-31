@@ -1,1 +1,46 @@
-<p>login works!</p>
+<div id="wrapper">
+
+    <div class="container-left">
+        <div class="container-left-img"></div>
+    </div>
+
+    <div class="container">
+        <div class="form_area">
+            <form [formGroup]="loginForm" (ngSubmit)="submitLogForm()">
+
+                <div class="form_group">
+                    <label class="sub_title" for="email">Email :</label>
+                    <input formControlName="mail" placeholder="Enter your email" id="email" class="form_style" type="email">
+                    
+                    @if (loginForm.controls['mail'].touched && !loginForm.controls['mail'].valid) 
+                        {                           
+                            <app-form-error-handler [tooltipText]="'Le mail fourni est incorrect, vérifiez l\'orthographe'"  [errorMessage]="'Le mail est invalide !'"></app-form-error-handler>
+                        }
+                </div>
+
+                <div class="form_group">
+                    <label class="sub_title" for="password">Mot de passe :</label>
+                    <input formControlName="passwd" placeholder="Enter your password" id="password" class="form_style" type="password">
+
+                    @if (loginForm.controls['passwd'].touched && !loginForm.controls['passwd'].valid) 
+                        {                           
+                        <app-form-error-handler [tooltipText]="'Le mot de passe doit contenir minimum 8 caractères, 1 majuscule, 1 chiffre et 1 caractères spécial'" [errorMessage]="'Mot de passe invalide ! '"></app-form-error-handler>
+                        }
+                </div>
+               
+                <div>
+                    <button type="submit" class="btn">CONNEXION</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <div class="container-right">
+        <div class="container-right-img"></div>
+    </div>
+
+    <div class="footer">
+        <compo-footer></compo-footer>
+    </div>
+
+</div>
