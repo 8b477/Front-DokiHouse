@@ -22,7 +22,6 @@ export class LocalStorageService {
     return localStorage.getItem('tokenName');
   }
 
-
   getContextTokenRole() : string | null{
   return localStorage.getItem('tokenRole');
   }

@@ -6,7 +6,8 @@ import { FormErrorHandlerComponent } from '../../../utils/form-error-handler/for
 import { FooterComponent } from "../../../components/footer/footer.component";
 import { LogService } from '../../../services/login/log.service';
 import { UserLogin } from '../../../mocks/userModels/login/UserLogin';
-import { GetToken } from '../../../mocks/token/GetToken';
+import { TokenModel } from '../../../mocks/token/TokenModel';
+
 
 @Component({
     selector: 'app-login',
@@ -19,7 +20,7 @@ export class LoginComponent implements OnInit{
 
   loginForm! : FormGroup;
   userModel : UserLogin | undefined;
-  tokenDecoded! : GetToken;
+  tokenModel! : TokenModel;
 
   constructor(private formBuilder : FormBuilder, private httpLogService : LogService, private decodeTokenService : DecodeTokenService, private localStorageSerice : LocalStorageService){ }
 
@@ -43,9 +44,9 @@ export class LoginComponent implements OnInit{
                        .subscribe
                        ({
                         next : token =>
-                        {
-                         this.tokenDecoded = this.decodeTokenService.decodeToken(token.value)
-                         this.setLocalStorage();
+                        {                                           
+                          this.tokenModel = this.decodeTokenService.decodeToken(token.token); 
+                          this.setLocalStorage();
                         },
                         error : error => console.log(error),
                         complete: () => console.log('request log is finish')
@@ -54,7 +55,10 @@ export class LoginComponent implements OnInit{
 
 
   private setLocalStorage() : void{
-    this.localStorageSerice.setContextToken(this.tokenDecoded.nameid, this.tokenDecoded.name,this.tokenDecoded.role);
+    this.localStorageSerice.setContextToken(this.tokenModel.nameid.toString(), this.tokenModel.name,this.tokenModel.role);
   }
+
+
+
 
 }

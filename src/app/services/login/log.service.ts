@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserLogin } from '../../mocks/userModels/login/UserLogin';
 import { Observable } from 'rxjs';
-import { TokenCrypted } from '../../mocks/token/TokenCrypted';
 
 @Injectable({
   providedIn: 'any'
@@ -13,9 +12,9 @@ export class LogService {
 
   constructor(private http : HttpClient) { }
 
-  getToken(model : UserLogin) : Observable<TokenCrypted>
+  getToken(model : UserLogin) : Observable<any>
   {
-    return this.http.post<any>(this.baseUrl, model)
+    return this.http.post(this.baseUrl, model)
   }
 
 }
