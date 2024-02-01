@@ -1,13 +1,14 @@
+
 .nav-links{
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 2rem auto;
+  margin: 0 auto;
   background-image: url('/assets/img/BG-jardin.png');
   background-size: cover;
   background-repeat: no-repeat;
   border-radius: 12px;
-  width: 76%;
+  width: 76vw;
   height: 100px;
   box-shadow: 2px 2px 12px 4px rgba(0,0,0,0.68);
   -webkit-box-shadow: 2px 2px 12px 4px rgba(0,0,0,0.68);
