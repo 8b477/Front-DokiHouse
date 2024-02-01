@@ -8,10 +8,15 @@ export class LocalStorageService {
   constructor() { }
 
 
-  setContextToken(tokenId : string, tokenName : string, tokenRole : string) : void{
+  setContextToken(token : string, tokenId : string, tokenName : string, tokenRole : string) : void{
+    localStorage.setItem('token', token)
     localStorage.setItem('tokenId', tokenId)
     localStorage.setItem('tokenName', tokenName)
     localStorage.setItem('tokenRole', tokenRole)
+  }
+
+  getContextToken() : string | null{
+  return localStorage.getItem('token');
   }
 
   getContextTokenId() : string | null{

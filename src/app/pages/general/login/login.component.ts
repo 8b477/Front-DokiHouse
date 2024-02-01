@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit{
   loginForm! : FormGroup;
   userModel : UserLogin | undefined;
   tokenModel! : TokenModel;
+  tokenPayload! : string;
 
   constructor(private formBuilder : FormBuilder, private httpLogService : LogService, private decodeTokenService : DecodeTokenService, private localStorageSerice : LocalStorageService){ }
 
@@ -44,7 +45,8 @@ export class LoginComponent implements OnInit{
                        .subscribe
                        ({
                         next : token =>
-                        {                                           
+                        {                               
+                          this.tokenPayload = token.token;            
                           this.tokenModel = this.decodeTokenService.decodeToken(token.token); 
                           this.setLocalStorage();
                         },
@@ -55,10 +57,16 @@ export class LoginComponent implements OnInit{
 
 
   private setLocalStorage() : void{
-    this.localStorageSerice.setContextToken(this.tokenModel.nameid.toString(), this.tokenModel.name,this.tokenModel.role);
+    this.localStorageSerice.setContextToken(this.tokenPayload, this.tokenModel.nameid.toString(), this.tokenModel.name,this.tokenModel.role);
   }
 
 
+testPayload()
+{
+  let tokendata = this.localStorageSerice.getContextToken()
+
+  console.log(tokendata);
+}
 
 
 }
