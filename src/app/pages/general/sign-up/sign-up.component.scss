@@ -14,8 +14,8 @@
         background-image: url('/assets/img/logo-couleur.png');
         background-size: contain;
         background-repeat: repeat;
-        height: 400px;
-        width: 100px;
+        height: 536px;
+        width: 108px;
         border-radius: 10px;
         margin: 0;
     }
@@ -38,12 +38,19 @@
       border: 2px solid #264143;
       border-radius: 20px;
       box-shadow: 3px 4px 0px 1px #E99F4C;
+      min-height: 550px;
 
       .form_group {
         display: flex;
         flex-direction: column;
         align-items: baseline;
         margin: 10px;
+        background: rgba(83, 32, 32, 0.21);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(8.7px);
+        -webkit-backdrop-filter: blur(8.7px);
+        border: 1px solid rgba(83, 32, 32, 0.18);
 
         .sub_title {
           color:mintcream;
@@ -101,8 +108,8 @@
     background-image: url('/assets/img/logo-couleur.png');
     background-size: contain;
     background-repeat: repeat;
-    height: 400px;
-    width: 100px;
+    height: 536px;
+    width: 108px;
     border-radius: 10px;
     margin: 0;
   }
