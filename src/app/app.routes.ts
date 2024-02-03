@@ -1,17 +1,13 @@
-import { SignUpComponent } from './pages/general/sign-up/sign-up.component';
 import { Routes } from '@angular/router';
+
+import { SignUpComponent } from './pages/general/sign-up/sign-up.component';
 import { HomeComponent } from './pages/general/home/home.component';
 import { LoginComponent } from './pages/general/login/login.component';
-
 import { AboutComponent } from './pages/general/about/about.component';
 import { ExperienceComponent } from './pages/general/about/experience/experience.component';
 import { SkillComponent } from './pages/general/about/skill/skill.component';
-
-import { ContactComponent } from './pages/general/contact/contact.component';
-import { MailingComponent } from './pages/general/contact/mailing/mailing.component';
-import { MappingComponent } from './pages/general/contact/mapping/mapping.component';
-
 import { NotFoundComponent } from './pages/general/not-found/not-found.component';
+import { BlogComponent } from './pages/application/blog/blog.component';
 
 
 export const routes: Routes = 
@@ -20,7 +16,7 @@ export const routes: Routes =
     {'path' : 'login', component : LoginComponent},
     {'path' : 'signup', component : SignUpComponent},
 
-// --> ABOUT + CHILD
+// --> ABOUT + CHILD ->SUPPORT
     { 'path' : 'about', component : AboutComponent},
 
     { 'path' : 'about', children : [
@@ -29,16 +25,23 @@ export const routes: Routes =
         ]
     },
     
-    
-// --> CONTACT + CHILD
-    { 'path' : 'contact', component : ContactComponent },
-    { 'path' : 'contact', children : [
-            { path : 'mailing', component : MailingComponent},
-            { path : 'mapping', component : MappingComponent}
-        ]
-    },
+// --> BLOG
+    { 'path' : 'blog', component : BlogComponent },
 
 
 // --> ERROR
     {'path' : '**', component : NotFoundComponent},
 ];
+
+
+/*
+        ----> ROUTE PROFIL + CHILDREN
+
+    { 'path' : 'profil', component : AboutComponent},
+
+    { 'path' : 'profil', children : [
+            { path : 'user', component :  },
+            { path : 'bonsai', component :  }
+        ]
+    },
+*/
