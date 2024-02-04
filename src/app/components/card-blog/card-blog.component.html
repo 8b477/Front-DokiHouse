@@ -1,8 +1,8 @@
 <div class="card">
-  <div class="card-image"></div>
+  <img class="card-image" src="{{ cardPicture }}">
   <p class="card-title">{{cardTextTitle}}</p>
   <p class="card-body">
     {{ cardTextBody }}
   </p>
-  <p class="footer">Written by <span class="by-name">{{ cardAuthorName }}</span> on <span class="date">{{ cardDatePublied }}</span></p>
+  <p class="footer">Written by <span class="by-name">{{ cardAuthorName }}</span> on <span class="date">{{ cardDatePublied | date : 'dd/MM/YYYY'}}</span></p>
 </div>

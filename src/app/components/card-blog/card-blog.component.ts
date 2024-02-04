@@ -1,17 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-card-blog',
   standalone: true,
-  imports: [],
+  imports: [DatePipe],
   templateUrl: './card-blog.component.html',
   styleUrl: './card-blog.component.scss'
 })
 export class CardBlogComponent {
 
-  cardTextTitle : string = ""
-  cardTextBody : string = ""
-  cardAuthorName : string = ""
-  cardDatePublied : Date = new Date()
+  @Input() cardPicture : string = ""
+  @Input() cardTextTitle : string = ""
+  @Input() cardTextBody : string = ""
+  @Input() cardAuthorName : string = ""
+  @Input() cardDatePublied : Date = new Date()
 
 }
