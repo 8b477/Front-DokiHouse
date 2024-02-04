@@ -1,3 +1,10 @@
+/* All delay classes will take half the time to start */
+:root {
+  --animate-delay: 0.5s;
+}
+
+
+
 *{
     box-sizing: border-box;
     margin: 0;
