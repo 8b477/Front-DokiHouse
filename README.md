@@ -13,4 +13,5 @@ When you click on picture/ blog you have redirection to post cibling, if user is
 If the user is log then he can add comments
 
 
-
++ Nice to have : 
+ - Add search bar for filter blogs like on date or A-Z

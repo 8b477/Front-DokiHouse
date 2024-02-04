@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { UserLogin } from '../../mocks/userModels/login/UserLogin';
+import { UserLogin } from '../../mocks/models/user/login/UserLogin';
 import { Observable } from 'rxjs';
 
 @Injectable({

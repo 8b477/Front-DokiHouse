@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { userCreateModels } from '../../mocks/userModels/create/userCreateModel';
-import { User } from '../../mocks/userModels/User';
+import { userCreateModels } from '../../mocks/models/user/create/userCreateModel';
 import { Observable } from 'rxjs';
+import { User } from '../../mocks/models/user/generic/User';
 
 @Injectable({
   providedIn: 'any'

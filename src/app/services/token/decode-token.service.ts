@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { jwtDecode } from "jwt-decode";
-import { TokenModel } from '../../mocks/token/TokenModel';
+import { TokenModel } from '../../mocks/models/token/TokenModel';
 
 
 @Injectable({

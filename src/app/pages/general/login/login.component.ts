@@ -5,8 +5,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { DecodeTokenService } from './../../../services/token/decode-token.service';
 import { FooterComponent } from "../../../components/footer/footer.component";
 import { LogService } from '../../../services/login/log.service';
-import { UserLogin } from '../../../mocks/userModels/login/UserLogin';
-import { TokenModel } from '../../../mocks/token/TokenModel';
+import { UserLogin } from '../../../mocks/models/user/login/UserLogin';
+import { TokenModel } from '../../../mocks/models/token/TokenModel';
 import { FormErrorHandlerComponent } from '../../../components/form-error-handler/form-error-handler.component';
 
 
