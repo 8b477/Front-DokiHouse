@@ -2,9 +2,9 @@ import { Component, OnInit, inject } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms'
 
 import { FooterComponent } from '../../../components/footer/footer.component';
-import { FormErrorHandlerComponent } from '../../../utils/form-error-handler/form-error-handler.component';
 import { userCreateModels } from '../../../mocks/userModels/create/userCreateModel';
 import { UserHttpService } from '../../../services/user/user-http.service';
+import { FormErrorHandlerComponent } from '../../../components/form-error-handler/form-error-handler.component';
 
 
 

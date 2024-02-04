@@ -1,12 +1,13 @@
 import { LocalStorageService } from './../../../services/localStorage/local-storage.service';
-import { DecodeTokenService } from './../../../services/token/decode-token.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { FormErrorHandlerComponent } from '../../../utils/form-error-handler/form-error-handler.component';
+
+import { DecodeTokenService } from './../../../services/token/decode-token.service';
 import { FooterComponent } from "../../../components/footer/footer.component";
 import { LogService } from '../../../services/login/log.service';
 import { UserLogin } from '../../../mocks/userModels/login/UserLogin';
 import { TokenModel } from '../../../mocks/token/TokenModel';
+import { FormErrorHandlerComponent } from '../../../components/form-error-handler/form-error-handler.component';
 
 
 @Component({
