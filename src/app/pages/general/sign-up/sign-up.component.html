@@ -1,12 +1,12 @@
 <div id="wrapper">
 
     <div class="container-left">
-        <div class="container-left-img"></div>
+        <div class="container-left-img animate__animated animate__zoomInLeft"></div>
     </div>
 
     <div class="container">
         <div class="form_area">
-            <form [formGroup]="signUpForm" (ngSubmit)="submitForm()">
+            <form [formGroup]="signUpForm" class="animate__animated animate__fadeIn animate__delay-1s" (ngSubmit)="submitForm()">
                 <div class="form_group">
                     <label class="sub_title" for="name">Nom :</label>
                     <input formControlName="name" placeholder="Enter your full name" class="form_style" type="text">
@@ -55,10 +55,10 @@
         </div>
     </div>
     <div class="container-right nav-links">
-        <div class="container-right-img"></div>
+        <div class="container-right-img animate__animated animate__zoomInRight"></div>
     </div>
 
-    <div class="footer">
+    <div class="footer animate__animated animate__bounceIn animate__delay-2s">
         <compo-footer></compo-footer>
     </div>
 

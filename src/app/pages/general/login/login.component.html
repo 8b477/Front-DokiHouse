@@ -1,12 +1,12 @@
 <div id="wrapper">
 
     <div class="container-left">
-        <div class="container-left-img"></div>
+        <div class="container-left-img animate__animated animate__zoomInLeft"></div>
     </div>
 
     <div class="container">
         <div class="form_area">
-            <form [formGroup]="loginForm" (ngSubmit)="submitLogForm()">
+            <form [formGroup]="loginForm" class="animate__animated animate__fadeIn animate__delay-1s" (ngSubmit)="submitLogForm()">
 
                 <div class="form_group">
                     <label class="sub_title" for="email">Email :</label>
@@ -36,10 +36,10 @@
         </div>
     </div>
     <div class="container-right">
-        <div class="container-right-img"></div>
+        <div class="container-right-img animate__animated animate__zoomInRight"></div>
     </div>
 
-    <div class="footer">
+    <div class="footer animate__animated animate__bounceIn animate__delay-2s">
         <compo-footer></compo-footer>
     </div>
 
