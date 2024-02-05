@@ -10,4 +10,6 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 })
 export class NavigationComponent {
 
+  connected : boolean = false
+
 }

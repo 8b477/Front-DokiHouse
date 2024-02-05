@@ -1,4 +1,5 @@
 <nav id="navigation">
+    @if (!connected) {
     <ul class="nav-links">
         <li>
             <a [routerLink]="['/']" class="link">Accueil</a>
@@ -20,4 +21,32 @@
             <a [routerLink]="['/support']" class="link">Support</a>
         </li>
     </ul>
+    }
+    @else {
+        <ul class="nav-links">
+        <li>
+            <a [routerLink]="['/']" class="link">Accueil</a>
+        </li>
+
+        <li>
+            <a [routerLink]="['/profil']" class="link">Profil</a>
+        </li>
+
+        <li class ="center">
+            <a [routerLink]="['/bonsai']" class="link">Bonsai</a>
+        </li>
+
+        <li class="forward">
+            <a [routerLink]="['/blog']" class="link">Blog</a>
+        </li>
+
+        <li class ="forward">
+            <a [routerLink]="['/support']" class="link">Support</a>
+        </li>
+
+        <li class ="forward">
+            <button class="link">Déconnexion</button>
+        </li>
+    </ul>
+    }
 </nav>

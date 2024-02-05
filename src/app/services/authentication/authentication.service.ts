@@ -10,12 +10,18 @@ import { TokenModel } from '../../mocks/models/token/TokenModel';
 export class AuthenticationService {
 
   private baseUrl : string = "https://localhost:7043/api/Log";
+  private userAuthorize : boolean = false
+
 
   constructor(private http : HttpClient) { }
 
   login(model : UserLogin) : Observable<TokenModel>
   {
     return this.http.post<TokenModel>(this.baseUrl, model)
+  }
+
+  isAuthenticate() : boolean{
+    return this.userAuthorize
   }
 
 }
