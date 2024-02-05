@@ -4,7 +4,12 @@ Test call back with token in the header for authentication
 If step back is good try to set-up service for authentication ? or may be guard on endpoint
 
 
-FOR BLOG PAGE
+SIGN-UP PAGE
+
+Add Validator perso for compare passwd field with passwdConfirm
+
+
+BLOG PAGE
 
 Need to add child route in route.ts
 
