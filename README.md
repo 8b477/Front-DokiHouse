@@ -7,6 +7,7 @@ If step back is good try to set-up service for authentication ? or may be guard 
 SIGN-UP PAGE
 
 Add Validator perso for compare passwd field with passwdConfirm
+Add infos for when user is correctly create and the same for log
 
 
 BLOG PAGE
