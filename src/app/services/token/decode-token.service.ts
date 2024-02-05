@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { jwtDecode } from "jwt-decode";
+import { TokenDecryptedModel } from '../../mocks/models/token/TokenDecryptedModel';
 import { TokenModel } from '../../mocks/models/token/TokenModel';
 
 
@@ -11,8 +12,8 @@ export class DecodeTokenService {
   constructor() { }
 
 
-  decodeToken(token : string) : TokenModel {
-    const decodedToken = jwtDecode(token);
-    return decodedToken as TokenModel;
+  decodeToken(token : TokenModel) : TokenDecryptedModel {
+    const decodedToken = jwtDecode(token.payload);
+    return decodedToken as TokenDecryptedModel;
   }
 }
