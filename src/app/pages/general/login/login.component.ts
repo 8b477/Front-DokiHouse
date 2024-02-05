@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 
 import { DecodeTokenService } from './../../../services/token/decode-token.service';
 import { FooterComponent } from "../../../components/footer/footer.component";
-import { LogService } from '../../../services/login/log.service';
+import { AuthenticationService } from '../../../services/authentication/log.service';
 import { UserLogin } from '../../../mocks/models/user/login/UserLogin';
 import { TokenModel } from '../../../mocks/models/token/TokenModel';
 import { FormErrorHandlerComponent } from '../../../components/form-error-handler/form-error-handler.component';
@@ -24,7 +24,12 @@ export class LoginComponent implements OnInit{
   tokenModel! : TokenModel;
   tokenPayload! : string;
 
-  constructor(private formBuilder : FormBuilder, private httpLogService : LogService, private decodeTokenService : DecodeTokenService, private localStorageSerice : LocalStorageService){ }
+  constructor(
+    private formBuilder : FormBuilder,
+    private authenticationService : AuthenticationService,
+    private decodeTokenService : DecodeTokenService,
+    private localStorageSerice : LocalStorageService
+){ }
 
 
   ngOnInit(): void {
@@ -42,13 +47,13 @@ export class LoginComponent implements OnInit{
 
     this.userModel = new UserLogin(mail, passwd);
 
-    this.httpLogService.getToken(this.userModel)
+    this.authenticationService.login(this.userModel)
                        .subscribe
                        ({
-                        next : token =>
+                        next : result =>
                         {                               
-                          this.tokenPayload = token.token;            
-                          this.tokenModel = this.decodeTokenService.decodeToken(token.token); 
+                          this.tokenPayload = result.token;            
+                          this.tokenModel = this.decodeTokenService.decodeToken(result.token); 
                           this.setLocalStorage();
                         },
                         error : error => console.log(error),
@@ -62,12 +67,24 @@ export class LoginComponent implements OnInit{
   }
 
 
+/*__________ TEST AREA _________*/
 testPayload()
 {
   let tokendata = this.localStorageSerice.getContextToken()
-
   console.log(tokendata);
 }
 
+testClearStorage(){
+  localStorage.clear()
+}
+
+testGetallDataLocalStorage(){
+  let id = this.localStorageSerice.getContextTokenId()
+  let name = this.localStorageSerice.getContextTokenName()
+  let role = this.localStorageSerice.getContextTokenRole()
+  let token = this.localStorageSerice.getContextToken()
+
+  console.log(`id = ${id}, name = ${name}, role = ${role}, token = ${token} `);
+}
 
 }

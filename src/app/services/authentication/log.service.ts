@@ -6,13 +6,13 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'any'
 })
-export class LogService {
+export class AuthenticationService {
 
   private baseUrl : string = "https://localhost:7043/api/Log";
 
   constructor(private http : HttpClient) { }
 
-  getToken(model : UserLogin) : Observable<any>
+  login(model : UserLogin) : Observable<any>
   {
     return this.http.post(this.baseUrl, model)
   }
