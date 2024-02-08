@@ -1,9 +1,12 @@
 export class TokenModel{
 
-    payload : string
+    token : string
 
 constructor(tokenPayLoad: string) {
-        this.payload = tokenPayLoad
+    if(tokenPayLoad==  undefined || null)
+        console.log(tokenPayLoad)
+
+        this.token = tokenPayLoad
     }
 
 }

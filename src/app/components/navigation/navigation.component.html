@@ -1,29 +1,7 @@
 <nav id="navigation">
-    @if (!connected) {
+
     <ul class="nav-links">
-        <li>
-            <a [routerLink]="['/']" class="link">Accueil</a>
-        </li>
 
-        <li>
-            <a [routerLink]="['/signup']" class="link">Inscription</a>
-        </li>
-
-        <li class ="center">
-            <a [routerLink]="['/login']" class="link">Connexion</a>
-        </li>
-
-        <li class="forward">
-            <a [routerLink]="['/blog']" class="link">blog</a>
-        </li>
-
-        <li class ="forward">
-            <a [routerLink]="['/support']" class="link">Support</a>
-        </li>
-    </ul>
-    }
-    @else {
-        <ul class="nav-links">
         <li>
             <a [routerLink]="['/']" class="link">Accueil</a>
         </li>
@@ -45,8 +23,13 @@
         </li>
 
         <li class ="forward">
-            <button class="link">Déconnexion</button>
+            @if(!isConnectedUser){
+                <a [routerLink]="['/connection']" class="link">Connection</a>
+            }
+            @else {
+                <a (click)="deconnection()" class="link">Deconnection</a>
+            }
         </li>
     </ul>
-    }
+
 </nav>

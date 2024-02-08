@@ -5,6 +5,7 @@ import { FooterComponent } from '../../../components/footer/footer.component';
 import { userCreateModels } from '../../../mocks/models/user/create/userCreateModel';
 import { UserHttpService } from '../../../services/user/user-http.service';
 import { FormErrorHandlerComponent } from '../../../components/form-error-handler/form-error-handler.component';
+import { NavigationComponent } from '../../../components/navigation/navigation.component';
 
 
 
@@ -13,7 +14,7 @@ import { FormErrorHandlerComponent } from '../../../components/form-error-handle
     standalone: true,
     templateUrl: './sign-up.component.html',
     styleUrl: './sign-up.component.scss',
-    imports: [ReactiveFormsModule, FooterComponent, FormErrorHandlerComponent]
+    imports: [ReactiveFormsModule, FooterComponent, FormErrorHandlerComponent, NavigationComponent]
 })
 export class SignUpComponent implements OnInit{
 

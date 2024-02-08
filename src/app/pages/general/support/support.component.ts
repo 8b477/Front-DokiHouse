@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NavigationComponent } from '../../../components/navigation/navigation.component';
 
 
 @Component({
@@ -6,7 +7,7 @@ import { Component } from '@angular/core';
     standalone: true,
     templateUrl: './support.component.html',
     styleUrl: './support.component.scss',
-    imports: []
+    imports: [NavigationComponent]
 })
 export class SupportComponent {
 

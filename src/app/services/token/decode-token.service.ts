@@ -13,7 +13,7 @@ export class DecodeTokenService {
 
 
   decodeToken(token : TokenModel) : TokenDecryptedModel {
-    const decodedToken = jwtDecode(token.payload);
+    const decodedToken = jwtDecode(token.token);
     return decodedToken as TokenDecryptedModel;
   }
 }
