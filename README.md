@@ -21,3 +21,9 @@ If the user is log then he can add comments
 
 + Nice to have : 
  - Add search bar for filter blogs like on date or A-Z
+
+
+
+
+
+---> TRY TO UP STANDALONE STATE OF FALSE FOR NAV COMPONENT
