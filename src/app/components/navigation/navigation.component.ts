@@ -1,8 +1,7 @@
-import { AuthenticationService } from './../../services/authentication/authentication.service';
-
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
+import { AuthenticationService } from './../../services/authentication/authentication.service';
 
 @Component({
   selector: 'navigation',
@@ -13,27 +12,28 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 })
 export class NavigationComponent implements OnInit{
 
+  // SERVICES
+  authenticationService : AuthenticationService = inject(AuthenticationService)
 
+  // VARIABLE  
   isConnectedUser : boolean = false
 
 
-  constructor(private authenticationService : AuthenticationService) 
-  {}
-
-//subscribe dans le init !! bordell
-  ngOnInit(): void {   
-      this.authenticationService.connectedUserSubject.subscribe(
-      {
-        next : (value) => {
-          this.isConnectedUser = value
-          console.log('valeur de value dans le init ' + value);
-        }
-      }
-    )
+  // PRIVATE METHODS
+  private subScribeOnStatusUser(){
+    this.authenticationService.connectedUserSubject.subscribe(
+    {
+      next : (value) => { this.isConnectedUser = value }
+    })
   }
 
 
+ // STATE OF COMPONENT
+  ngOnInit(): void {   
+    this.subScribeOnStatusUser()
+  }
 
+  // PUBLIC METHODS
   deconnection(){
     localStorage.clear()
     this.isConnectedUser = false

@@ -8,7 +8,6 @@ import { FormErrorHandlerComponent } from '../../../components/form-error-handle
 import { NavigationComponent } from '../../../components/navigation/navigation.component';
 
 
-
 @Component({  
     selector: 'app-sign-up',
     standalone: true,
@@ -18,13 +17,25 @@ import { NavigationComponent } from '../../../components/navigation/navigation.c
 })
 export class SignUpComponent implements OnInit{
 
-    signUpForm! : FormGroup;
-    user! : userCreateModels;
-    private userHttpService = inject(UserHttpService);
 
-    constructor(private formBuilder : FormBuilder) {}
+    // PUBLIC VARIABLE
+    user        : userCreateModels | undefined
+    signUpForm! : FormGroup
 
+
+    // SERVICES
+    userHttpService : UserHttpService = inject(UserHttpService);
+    formBuilder     : FormBuilder     = inject(FormBuilder)
+
+
+    // STATE
     ngOnInit(): void {
+        this.buildFormAndValidator()
+    }
+
+
+    // PRIVATE METHODS
+    private buildFormAndValidator(){
         this.signUpForm = this.formBuilder.group
         ({ 
             'name' : ['', [Validators.required, Validators.minLength(3)]],
@@ -34,6 +45,8 @@ export class SignUpComponent implements OnInit{
         });
     }
 
+
+    // PUBLIC METHODS
     submitForm() :void{
         let name = this.signUpForm.controls['name'].value as string
         let mail = this.signUpForm.controls['mail'].value as string
@@ -47,9 +60,8 @@ export class SignUpComponent implements OnInit{
                             ({
                                next : user => console.log(JSON.stringify(user)),
                                error : error => console.log(error),
-                               complete : () => console.log('User load complete')
+                               complete : () => console.log('Request HTTP Create User is finish')
                             })
     }
-
 
 }
