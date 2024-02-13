@@ -1,0 +1,38 @@
+<nav id="navigation">
+
+    <ul class="nav-links">
+
+        <li>
+            <a [routerLink]="['/']" class="link">Accueil</a>
+        </li>
+
+        <li>
+            <a [routerLink]="['/profil']" class="link">Profil</a>
+        </li>
+
+        <li class ="center">
+            <a [routerLink]="['/gallery']" class="link">Gallery</a>
+        </li>
+
+        <li class="forward">
+            <a [routerLink]="['/blog']" class="link">Blog</a>
+        </li>
+
+        <li class ="forward">
+            <a [routerLink]="['/support']" class="link">Support</a>
+        </li>
+
+        <li class ="forward">
+
+            @if(!isConnectedUser){
+                <a [routerLink]="['/login']" class="link">Connection</a>
+            }
+            @else {
+                <a (click)="deconnection()" class="link">Deconnection</a>
+            }
+
+        </li>
+        
+    </ul>
+
+</nav>

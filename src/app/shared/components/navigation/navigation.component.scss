@@ -1,0 +1,88 @@
+#navigation {
+  display: flex;
+  justify-content: center;
+  font-family: 'Shizuru', sans-serif;
+  background: rgba(255, 255, 255, 0);
+  border-radius: 16px;
+  height: 150px;
+
+  .nav-links {
+    position: fixed;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-image: url('/assets/img/Bg-jardin-up.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 40px 15px;
+    border-radius: 12px;
+    width: 85vw;
+    box-shadow: 2px 2px 12px 4px rgba(0, 0, 0, 0.68);
+    -webkit-box-shadow: 2px 2px 12px 4px rgba(0, 0, 0, 0.68);
+    -moz-box-shadow: 2px 2px 12px 4px rgba(0, 0, 0, 0.68);
+
+    li {
+      list-style: none;
+      margin: 0 12px;
+      background: rgba(255, 255, 255, 0);
+      border-radius: 6px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(4.8px);
+      border: 1px solid rgba(196, 255, 146, 4.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      a {
+        position: relative;
+        color: honeydew;
+        font-size: clamp(0.7rem, 1.2vw, 2rem);
+        font-weight: 600;
+        text-transform: uppercase;
+        text-decoration: none;
+
+        &:before {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          height: 3px;
+          width: 0%;
+          background: aquamarine;
+          border-radius: 12px;
+          transition: all 0.4s ease;
+        }
+
+        &:hover:before {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .nav-links li.center a:before {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .nav-links li.forward a:before {
+    width: 100%;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s ease;
+  }
+
+  .nav-links li.forward a:hover:before {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  .link {
+    padding: 20px !important;
+  }
+
+  li > a:hover {
+    text-shadow: 1px -3px 21px rgba(12, 178, 182, 0.67);
+  }
+}

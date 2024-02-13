@@ -1,13 +1,15 @@
 import { Routes } from '@angular/router';
 
-import { SignUpComponent } from './pages/general/sign-up/sign-up.component';
-import { HomeComponent } from './pages/general/home/home.component';
-import { LoginComponent } from './pages/general/login/login.component';
-import { NotFoundComponent } from './pages/general/not-found/not-found.component';
-import { BlogComponent } from './pages/application/blog/blog.component';
-import { SupportComponent } from './pages/general/support/support.component';
-import { BonsaiComponent } from './pages/application/bonsai/bonsai.component';
-import { ProfilComponent } from './pages/application/profil/profil.component';
+import { BlogComponent } from './pages/protected/blog/view/blog.component';
+import { GalleryComponent } from './pages/protected/gallery/gallery.component';
+import { ProfilComponent } from './pages/protected/profil/profil.component';
+import { HomeComponent } from './pages/public/home/home.component';
+import { LoginComponent } from './pages/public/login/login.component';
+import { NotFoundComponent } from './pages/public/not-found/not-found.component';
+import { SignUpComponent } from './pages/public/sign-up/sign-up.component';
+import { SupportComponent } from './pages/public/support/support.component';
+
+
 
 
 export const routes: Routes = 
@@ -24,8 +26,8 @@ export const routes: Routes =
 // ADD ---> https://apprendre.bonjour-angular.com/tips/guard-routes-with-can-match/
 
 
-    // ---> BONSAI
-    {'path' : 'bonsai', loadComponent : () => BonsaiComponent},
+    // ---> GALLERY
+    {'path' : 'gallery', loadComponent : () => GalleryComponent},
 
     // --- PROFIL
     {'path' : 'profil', loadComponent : () => ProfilComponent},
