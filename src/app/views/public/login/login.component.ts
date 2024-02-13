@@ -1,10 +1,10 @@
-import { TokenDecryptedModel } from '../../../models/tokenModels/TokenDecryptedModel';
-import { TokenModel } from '../../../models/tokenModels/TokenModel';
-import { UserLogin } from '../../../models/userModels/userLoginModel/userLoginModel';
-import { AuthenticationService } from '../../../services/authentication-service/authentication.service';
+import { TokenDecryptedModel } from "../../../core/models/tokenModels/TokenDecryptedModel";
+import { TokenModel } from "../../../core/models/tokenModels/TokenModel";
+import { UserLogin } from "../../../core/models/userModels/userLoginModel/userLoginModel";
 import { FooterComponent } from "../../../shared/components/footer/footer.component";
 import { FormErrorInfoComponent } from '../../../shared/components/form-error-info/form-error-info.component';
 import { NavigationComponent } from '../../../shared/components/navigation/navigation.component';
+import { AuthenticationService } from "../../../shared/services/authentication-service/authentication.service";
 
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -57,6 +57,8 @@ export class LoginComponent implements OnInit{
     const passwd = this.loginForm.controls['passwd'].value
 
     this.userModel = { email : email, passwd : passwd}
+
+    this.authenticationService.updateValueSubjectUser(true)
 
     if(this.userModel.email == undefined || this.userModel.passwd == undefined)
       {

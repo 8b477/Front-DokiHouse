@@ -2,10 +2,10 @@ import { Component, OnInit, inject } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms'
 
 import { FooterComponent } from '../../../shared/components/footer/footer.component';
-import { UserHttpService } from '../../../services/user-service/user-http.service';
-import { NavigationComponent } from '../../../shared/components/navigation/navigation.component';
 import { FormErrorInfoComponent } from '../../../shared/components/form-error-info/form-error-info.component';
-import { userCreateModels } from '../../../models/userModels/userCreateModel/userCreateModel';
+import { NavigationComponent } from '../../../shared/components/navigation/navigation.component';
+import { UserHttpService } from '../../../shared/services/user-service/user-http.service';
+import { UserCreateModel } from '../../../core/models/userModels/userCreateModel/UserCreateModel';
 
 
 @Component({  
@@ -18,7 +18,7 @@ import { userCreateModels } from '../../../models/userModels/userCreateModel/use
 export class SignUpComponent implements OnInit{
 
     // PUBLIC VARIABLE
-    user        : userCreateModels | undefined
+    user        : UserCreateModel | undefined
     signUpForm! : FormGroup
 
 
@@ -77,14 +77,7 @@ export class SignUpComponent implements OnInit{
         }
 
         if(this.isValidForm()){
-
             this.userHttpService.CreateUser(this.user)
-                .subscribe
-                ({
-                    next : user => console.log(JSON.stringify(user)),
-                    error : error => console.log(error),
-                    complete : () => console.log('Request HTTP Create User is finish')
-                })
         }
 
     }

@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { AuthenticationService } from '../../services/authentication-service/authentication.service';
 
-import { AuthenticationService } from '../../../services/authentication-service/authentication.service';
 
 @Component({
   selector: 'app-navigation',
@@ -15,6 +15,7 @@ export class NavigationComponent implements OnInit{
   // SERVICES
   authenticationService : AuthenticationService = inject(AuthenticationService)
 
+
   // VARIABLE  
   isConnectedUser : boolean = false
 
@@ -27,10 +28,11 @@ export class NavigationComponent implements OnInit{
   }
 
 
- // STATE OF COMPONENT
+  // STATE OF COMPONENT
   ngOnInit(): void {   
     this.subScribeOnStatusUser()
   }
+
 
   // PUBLIC METHODS
   deconnection(){

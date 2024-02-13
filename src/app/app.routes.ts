@@ -1,13 +1,14 @@
 import { Routes } from '@angular/router';
 
-import { BlogComponent } from './pages/protected/blog/view/blog.component';
-import { GalleryComponent } from './pages/protected/gallery/gallery.component';
-import { ProfilComponent } from './pages/protected/profil/profil.component';
-import { HomeComponent } from './pages/public/home/home.component';
-import { LoginComponent } from './pages/public/login/login.component';
-import { NotFoundComponent } from './pages/public/not-found/not-found.component';
-import { SignUpComponent } from './pages/public/sign-up/sign-up.component';
-import { SupportComponent } from './pages/public/support/support.component';
+import { BlogComponent } from './views/protected/blog/blog.component';
+import { GalleryComponent } from './views/protected/gallery/gallery.component';
+import { ProfilComponent } from './views/protected/profil/profil.component';
+import { HomeComponent } from './views/public/home/home.component';
+import { LoginComponent } from './views/public/login/login.component';
+import { NotFoundComponent } from './views/public/not-found/not-found.component';
+import { SignUpComponent } from './views/public/sign-up/sign-up.component';
+import { SupportComponent } from './views/public/support/support.component';
+
 
 
 

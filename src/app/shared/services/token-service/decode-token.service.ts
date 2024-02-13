@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { jwtDecode } from "jwt-decode";
-import { TokenDecryptedModel } from '../../mocks/models/tokenModels/TokenDecryptedModel';
-import { TokenModel } from '../../mocks/models/tokenModels/TokenModel';
+import { TokenDecryptedModel } from '../../../core/models/tokenModels/TokenDecryptedModel';
+import { TokenModel } from '../../../core/models/tokenModels/TokenModel';
+
 
 
 @Injectable({
