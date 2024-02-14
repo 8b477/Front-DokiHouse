@@ -1,14 +1,14 @@
 import { jwtDecode } from 'jwt-decode';
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, Observable, catchError, map, of } from 'rxjs';
-import { UserConnectedModel } from '../../../core/models/userModels/userConnectedModel/userConnectedModel';
-import { UserLogin } from '../../../core/models/userModels/userLoginModel/userLoginModel';
+import { Observable, Subject, catchError, map, of } from 'rxjs';
+import { UserConnectedModel } from '../../../core/models/userModels/userConnectedModel/UserConnectedModel';
+import { UserLoginModel } from '../../../core/models/userModels/userLoginModel/UserLoginModel';
 
 
 
 @Injectable({
-  providedIn: 'any'
+  providedIn: 'root'
 })
 export class AuthenticationService {
 
@@ -17,7 +17,7 @@ export class AuthenticationService {
 
 
   // PUBLIC VARIABLE
-  connectedUserSubject : BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
+  connectedUserSubject : Subject<boolean | undefined> = new Subject<boolean | undefined>()
 
 
   // SERVICES
@@ -25,7 +25,16 @@ export class AuthenticationService {
 
 
   // PUBLIC METHODS
-  login(model : UserLogin) :Observable<boolean>
+    get isConnectedTest() :boolean{
+      return localStorage.getItem('userInfo') != undefined     
+    }
+
+    emitValueSubjectUser(){
+      this.connectedUserSubject.next(this.isConnectedTest)
+  }
+
+
+  login(model : UserLoginModel) :Observable<boolean>
   {
     return this.http.post(this.baseUrl, model, {responseType : 'text'})
           .pipe(
@@ -39,7 +48,7 @@ export class AuthenticationService {
               }
 
             localStorage.setItem('userInfo', JSON.stringify(connectedUser))
-            this.updateValueSubjectUser(true)
+            this.emitValueSubjectUser()
             
             return true;
             }),
@@ -53,8 +62,6 @@ export class AuthenticationService {
   }
 
 
-  updateValueSubjectUser(value : boolean){
-    this.connectedUserSubject.next(value)
-  }
+
 
 }

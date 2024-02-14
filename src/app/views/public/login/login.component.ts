@@ -1,9 +1,8 @@
 import { TokenDecryptedModel } from "../../../core/models/tokenModels/TokenDecryptedModel";
 import { TokenModel } from "../../../core/models/tokenModels/TokenModel";
-import { UserLogin } from "../../../core/models/userModels/userLoginModel/userLoginModel";
+import { UserLoginModel } from "../../../core/models/userModels/userLoginModel/UserLoginModel";
 import { FooterComponent } from "../../../shared/components/footer/footer.component";
 import { FormErrorInfoComponent } from '../../../shared/components/form-error-info/form-error-info.component';
-import { NavigationComponent } from '../../../shared/components/navigation/navigation.component';
 import { AuthenticationService } from "../../../shared/services/authentication-service/authentication.service";
 
 import { Component, OnInit, inject } from '@angular/core';
@@ -16,7 +15,7 @@ import { Router, RouterLink } from '@angular/router';
     standalone: true,
     templateUrl: './login.component.html',
     styleUrl: './login.component.scss',
-    imports: [ReactiveFormsModule, FormErrorInfoComponent, NavigationComponent , FooterComponent, RouterLink]
+    imports: [ReactiveFormsModule, FormErrorInfoComponent, FooterComponent, RouterLink]
 })
 export class LoginComponent implements OnInit{
 
@@ -24,7 +23,7 @@ export class LoginComponent implements OnInit{
   // PUBLIC VARIABLE
   loginForm!  : FormGroup
   responce    : boolean = false
-  userModel   : UserLogin           | undefined
+  userModel   : UserLoginModel           | undefined
   tokenModel  : TokenDecryptedModel | undefined
   token       : TokenModel          | undefined
 
@@ -50,7 +49,7 @@ export class LoginComponent implements OnInit{
   }
 
 
- // PUBLIC METHODS
+  // PUBLIC METHODS
   submitLogForm() : void {
 
     const email = this.loginForm.controls['mail'].value
@@ -58,7 +57,8 @@ export class LoginComponent implements OnInit{
 
     this.userModel = { email : email, passwd : passwd}
 
-    this.authenticationService.updateValueSubjectUser(true)
+this.authenticationService.connectedUserSubject.next(true);
+this.router.navigateByUrl('/profil');
 
     if(this.userModel.email == undefined || this.userModel.passwd == undefined)
       {

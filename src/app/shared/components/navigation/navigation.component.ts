@@ -17,7 +17,7 @@ export class NavigationComponent implements OnInit{
 
 
   // VARIABLE  
-  isConnectedUser : boolean = false
+  isConnectedUser : boolean | undefined
 
 
   // PRIVATE METHODS
@@ -38,7 +38,7 @@ export class NavigationComponent implements OnInit{
   deconnection(){
     localStorage.clear()
     this.isConnectedUser = false
-    this.authenticationService.updateValueSubjectUser(false)
+    this.authenticationService.emitValueSubjectUser()
   }
 
 

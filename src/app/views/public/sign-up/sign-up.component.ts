@@ -3,7 +3,6 @@ import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angula
 
 import { FooterComponent } from '../../../shared/components/footer/footer.component';
 import { FormErrorInfoComponent } from '../../../shared/components/form-error-info/form-error-info.component';
-import { NavigationComponent } from '../../../shared/components/navigation/navigation.component';
 import { UserHttpService } from '../../../shared/services/user-service/user-http.service';
 import { UserCreateModel } from '../../../core/models/userModels/userCreateModel/UserCreateModel';
 
@@ -13,7 +12,7 @@ import { UserCreateModel } from '../../../core/models/userModels/userCreateModel
     standalone: true,
     templateUrl: './sign-up.component.html',
     styleUrl: './sign-up.component.scss',
-    imports: [ReactiveFormsModule, FooterComponent, FormErrorInfoComponent, NavigationComponent]
+    imports: [ReactiveFormsModule, FooterComponent, FormErrorInfoComponent]
 })
 export class SignUpComponent implements OnInit{
 

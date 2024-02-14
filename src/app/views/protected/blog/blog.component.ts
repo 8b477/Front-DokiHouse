@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
-import { DATABLOG } from '../../../core/mocks/fakeDataBlogs/DATABLOG';
+
 import { Blog } from '../../../core/models/blogModels/BlogModel';
-import { NavigationComponent } from '../../../shared/components/navigation/navigation.component';
 import { CardBlogComponent } from './components/card-blog/card-blog.component';
+import { DATABLOG } from '../../../mocks/fakeDataBlogs/DATABLOG';
 
 
 @Component({
@@ -11,7 +11,7 @@ import { CardBlogComponent } from './components/card-blog/card-blog.component';
     standalone: true,
     templateUrl: './blog.component.html',
     styleUrl: './blog.component.scss',
-    imports: [NavigationComponent, CardBlogComponent]
+    imports: [CardBlogComponent]
 })
 export class BlogComponent {
 

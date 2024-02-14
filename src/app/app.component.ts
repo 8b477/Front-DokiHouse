@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
-import { NavigationComponent } from "./shared/components/navigation/navigation.component";
+import { RouterLink, RouterOutlet } from '@angular/router';
+import { AuthenticationService } from './shared/services/authentication-service/authentication.service';
+import { NavigationComponent } from './shared/components/navigation/navigation.component';
 
 
 
@@ -10,7 +11,7 @@ import { NavigationComponent } from "./shared/components/navigation/navigation.c
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
-    imports: [CommonModule, RouterOutlet, NavigationComponent]
+    imports: [CommonModule, RouterOutlet, RouterLink, NavigationComponent]
 })
 export class AppComponent{
 
