@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication-service/authentication.service';
 
 
@@ -14,7 +14,7 @@ export class NavigationComponent implements OnInit{
 
   // SERVICES
   authenticationService : AuthenticationService = inject(AuthenticationService)
-
+  route = inject(Router)
 
   // VARIABLE  
   isConnectedUser : boolean | undefined
@@ -39,6 +39,7 @@ export class NavigationComponent implements OnInit{
     localStorage.clear()
     this.isConnectedUser = false
     this.authenticationService.emitValueSubjectUser()
+    this.route.navigate(['/'])
   }
 
 
