@@ -15,26 +15,24 @@ import { SupportComponent } from './views/public/support/support.component';
 
 export const routes: Routes = 
 [
-    {'path' : '', component : HomeComponent},
-    {'path' : 'login', loadComponent : () => LoginComponent},
-    {'path' : 'signup', loadComponent : () => SignUpComponent},
+    {'path' : '', title : 'Home', component : HomeComponent},
+    {'path' : 'login', title : 'Login', loadComponent : () => LoginComponent},
+    {'path' : 'signup', title : 'SignUp', loadComponent : () => SignUpComponent},
 
 // --> SUPPORT
-    { 'path' : 'support', loadComponent : () => SupportComponent},
+    { 'path' : 'support', title : 'Support', loadComponent : () => SupportComponent},
 
 // --> BLOG
-    { 'path' : 'blog', loadComponent : () => BlogComponent },
-// ADD ---> https://apprendre.bonjour-angular.com/tips/guard-routes-with-can-match/
-
+    { 'path' : 'blog', title : 'Blog', loadComponent : () => BlogComponent },
 
     // ---> GALLERY
-    {'path' : 'gallery', loadComponent : () => GalleryComponent},
+    {'path' : 'gallery', title : 'Gallery', loadComponent : () => GalleryComponent},
 
     // --- PROFIL
-    {'path' : 'profil', loadComponent : () => ProfilComponent},
+    {'path' : 'profil', title : 'Profil', loadComponent : () => ProfilComponent},
 
 // --> ERROR
-    {'path' : '**', loadComponent : () => NotFoundComponent},
+    {'path' : '**', title : 'NotFound', loadComponent : () => NotFoundComponent},
 ];
 
 

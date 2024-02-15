@@ -57,8 +57,8 @@ export class LoginComponent implements OnInit{
 
     this.userModel = { email : email, passwd : passwd}
 
-this.authenticationService.connectedUserSubject.next(true);
-this.router.navigateByUrl('/profil');
+// this.authenticationService.connectedUserSubject.next(true);
+// this.router.navigateByUrl('/profil');
 
     if(this.userModel.email == undefined || this.userModel.passwd == undefined)
       {
@@ -72,6 +72,7 @@ this.router.navigateByUrl('/profil');
                       this.responce = value 
                       if(value)
                         {
+                          this.authenticationService.emitValueSubjectUser()
                           this.router.navigate(['/profil'])
                         }
                     },
