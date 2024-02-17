@@ -12,10 +12,13 @@ import { Observable } from 'rxjs';
 })
 export class UserHttpService {
 
-  userRepo = inject(UserRepository)
+  // INJECTION
+  userRepo   = inject(UserRepository)
   serviceLog = inject(AuthenticationService)
-  route = inject(Router)
+  route      = inject(Router)
 
+
+  // PUBLIC METHODS
   createUser(model : UserCreateModel)
   {
     return this.userRepo.create(model).subscribe({
@@ -25,7 +28,7 @@ export class UserHttpService {
     })
   }
 
-    getProfil() : Observable<UserModel>{
+  getProfil() : Observable<UserModel>{
       return this.userRepo.getById()
   }
 }
