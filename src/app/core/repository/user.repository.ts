@@ -1,7 +1,7 @@
 import { Observable } from "rxjs";
 import { UserGateway } from "../interfaces/user.getaway"
 import { UserCreateModel } from "../models/userModels/userCreateModel/UserCreateModel";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { inject } from "@angular/core";
 import { environment } from "../../environments/environment";
 import { UserModel } from "../models/userModels/UserModel";
@@ -23,12 +23,18 @@ export class UserRepository implements UserGateway{
     }
 
 
-    getAll(): Observable<any> {
-        throw new Error("Method not implemented.");
+    getById(): Observable<UserModel> {
+        const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+        });
+        const requestOption = { headers : headers }
+
+        return this.httpClient.get<UserModel>(`${this.baseUrl}User/Profil`, requestOption)
     }
 
 
-    getById(): Observable<any> {
+    getAll(): Observable<any> {
         throw new Error("Method not implemented.");
     }
 

@@ -1,9 +1,11 @@
+import { UserModel } from './../../../core/models/userModels/UserModel';
 import { UserRepository } from '../../../core/repository/user.repository';
 import { UserCreateModel } from '../../../core/models/userModels/userCreateModel/UserCreateModel';
 
 import { Injectable, inject } from '@angular/core';
 import { AuthenticationService } from '../authentication-service/authentication.service';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'any'
@@ -14,7 +16,7 @@ export class UserHttpService {
   serviceLog = inject(AuthenticationService)
   route = inject(Router)
 
-  CreateUser(model : UserCreateModel)
+  createUser(model : UserCreateModel)
   {
     return this.userRepo.create(model).subscribe({
       next : () => { this.route.navigate(['/login']) },
@@ -23,6 +25,9 @@ export class UserHttpService {
     })
   }
 
+    getProfil() : Observable<UserModel>{
+      return this.userRepo.getById()
+  }
 }
 
 

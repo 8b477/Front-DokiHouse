@@ -57,9 +57,6 @@ export class LoginComponent implements OnInit{
 
     this.userModel = { email : email, passwd : passwd}
 
-// this.authenticationService.connectedUserSubject.next(true);
-// this.router.navigateByUrl('/profil');
-
     if(this.userModel.email == undefined || this.userModel.passwd == undefined)
       {
         console.error('userModel is not defined')

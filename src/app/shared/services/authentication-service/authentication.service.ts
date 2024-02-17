@@ -48,6 +48,7 @@ export class AuthenticationService {
               }
 
             localStorage.setItem('userInfo', JSON.stringify(connectedUser))
+            localStorage.setItem('token',token)
             this.emitValueSubjectUser()
             
             return true;

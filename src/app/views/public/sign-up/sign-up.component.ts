@@ -76,7 +76,7 @@ export class SignUpComponent implements OnInit{
         }
 
         if(this.isValidForm()){
-            this.userHttpService.CreateUser(this.user)
+            this.userHttpService.createUser(this.user)
         }
 
     }
