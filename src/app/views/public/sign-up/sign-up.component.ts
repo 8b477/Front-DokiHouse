@@ -5,6 +5,7 @@ import { FooterComponent } from '../../../shared/components/footer/footer.compon
 import { FormErrorInfoComponent } from '../../../shared/components/form-error-info/form-error-info.component';
 import { UserHttpService } from '../../../shared/services/user-service/user-http.service';
 import { UserCreateModel } from '../../../core/models/userModels/userCreateModel/UserCreateModel';
+import { checkFieldsMatchValidator } from '../../../shared/validators/checkFieldsMatch.validator';
 
 
 @Component({  
@@ -17,8 +18,8 @@ import { UserCreateModel } from '../../../core/models/userModels/userCreateModel
 export class SignUpComponent implements OnInit{
 
     // PUBLIC VARIABLE
-    user        : UserCreateModel | undefined
-    signUpForm! : FormGroup
+    user          : UserCreateModel | undefined
+    signUpForm!   : FormGroup
 
 
     // SERVICES
@@ -40,24 +41,11 @@ export class SignUpComponent implements OnInit{
             'mail' : ['', [Validators.required, Validators.email]],
             'passwd' : ['', [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,15}')]],
             'passwdConfirm': ['', [Validators.required]]
-        });
-    }
-
-    private isValidForm() : boolean
-    {
-        if(this.user?.name == undefined || this.user?.email == undefined || this.user?.passwd == undefined || this.user?.passwdConfirm == undefined)
-        {
-            console.error('One field or more are undefined')
-            return false;
-        }
-
-        if(this.user?.name == "" || this.user?.email == "" || this.user?.passwd == "" || this.user?.passwdConfirm == "")
-        {
-            console.error('One field or more are empty')
-            return false;
-        }
-
-        return true;
+        },
+            {
+                validator: checkFieldsMatchValidator('passwd', 'passwdConfirm')
+            }
+        );
     }
 
 
@@ -75,10 +63,9 @@ export class SignUpComponent implements OnInit{
             passwdConfirm : passwdConfirm
         }
 
-        if(this.isValidForm()){
+        if(this.signUpForm.valid){
             this.userHttpService.createUser(this.user)
         }
-
     }
 
 }

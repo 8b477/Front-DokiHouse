@@ -3,7 +3,7 @@ import { UserGateway } from "../interfaces/user.getaway"
 import { UserCreateModel } from "../models/userModels/userCreateModel/UserCreateModel";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { inject } from "@angular/core";
-import { environment } from "../../environments/environment";
+import { environment } from "../../../environments/environment";
 import { UserModel } from "../models/userModels/UserModel";
 
 export class UserRepository implements UserGateway{
