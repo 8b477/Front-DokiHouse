@@ -2,10 +2,11 @@ import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { provideStore } from '@ngrx/store';
 import { AuthenticationService } from './shared/services/authentication-service/authentication.service';
 import { UserRepository } from './core/repository/user.repository';
+import { authInterceptor } from './shared/interceptors/auth.interceptor';
 
 
 
@@ -13,7 +14,11 @@ import { UserRepository } from './core/repository/user.repository';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideHttpClient(withFetch()),
+    provideHttpClient(
+      withFetch(),
+      withInterceptors([
+        authInterceptor
+      ])),
     provideRouter(routes),
     provideClientHydration(),
     provideStore(),

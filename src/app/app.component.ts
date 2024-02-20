@@ -1,7 +1,6 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { AuthenticationService } from './shared/services/authentication-service/authentication.service';
 import { NavigationComponent } from './shared/components/navigation/navigation.component';
 
 
