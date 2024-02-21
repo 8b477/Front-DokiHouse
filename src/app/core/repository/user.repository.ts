@@ -24,13 +24,7 @@ export class UserRepository implements UserGateway{
 
 
     getById(): Observable<UserModel> {
-        const headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-        });
-        const requestOption = { headers : headers }
-
-        return this.httpClient.get<UserModel>(`${this.baseUrl}User/Profil`, requestOption)
+        return this.httpClient.get<UserModel>(`${this.baseUrl}User/Profil`)
     }
 
 

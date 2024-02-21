@@ -1,7 +1,9 @@
 # TODO
 
-Test call back with token in the header for authentication
-If step back is good try to set-up service for authentication ? or may be guard on endpoint
+Need to fix display navigation('connection') 
+if token is exist this means the user is not deconnect so we need to show 'Deconnection' not 'Connection'
+
+Need set-up guard
 
 
 SIGN-UP PAGE
@@ -23,7 +25,3 @@ If the user is log then he can add comments
  - Add search bar for filter blogs like on date or A-Z
 
 
-
-
-
----> TRY TO UP STANDALONE STATE OF FALSE FOR NAV COMPONENT
