@@ -9,23 +9,16 @@ import { UserRepository } from './core/repository/user.repository';
 import { authInterceptor } from './shared/interceptors/auth-interceptor/auth.interceptor';
 
 
-
-
-
-
-export const appConfig: ApplicationConfig = {
-  providers: [
-    provideHttpClient(
-      withFetch(),
-      withInterceptors([
-        authInterceptor
-      ])),
+export const appConfig: ApplicationConfig = 
+{
+  providers: 
+  [
+    provideHttpClient(withFetch(), withInterceptors([authInterceptor])),
     provideRouter(routes),
     provideClientHydration(),
     provideStore(),
     AuthenticationService,
     UserRepository
   ]
-
 }
 

@@ -10,40 +10,46 @@ import { SignUpComponent } from './views/public/sign-up/sign-up.component';
 import { SupportComponent } from './views/public/support/support.component';
 
 
-
-
-
 export const routes: Routes = 
 [
-    {'path' : '', title : 'Home', component : HomeComponent},
-    {'path' : 'login', title : 'Login', loadComponent : () => LoginComponent},
-    {'path' : 'signup', title : 'SignUp', loadComponent : () => SignUpComponent},
-
-// --> SUPPORT
-    { 'path' : 'support', title : 'Support', loadComponent : () => SupportComponent},
-
-// --> BLOG
-    { 'path' : 'blog', title : 'Blog', loadComponent : () => BlogComponent },
-
-    // ---> GALLERY
-    {'path' : 'gallery', title : 'Gallery', loadComponent : () => GalleryComponent},
-
-    // --- PROFIL
-    {'path' : 'profil', title : 'Profil', loadComponent : () => ProfilComponent},
-
-// --> ERROR
-    {'path' : '**', title : 'NotFound', loadComponent : () => NotFoundComponent},
-];
-
-
-/*
-        ----> ROUTE PROFIL + CHILDREN
-
-    { 'path' : 'profil', component : AboutComponent},
-
-    { 'path' : 'profil', children : [
-            { path : 'user', component :  },
-            { path : 'bonsai', component :  }
-        ]
+    {
+     title : 'Home',
+     'path' : '',
+     component : HomeComponent
     },
-*/
+    {
+     title : 'Login',
+    'path' : 'login',
+     loadComponent : () => LoginComponent
+    },
+    {
+     title : 'SignUp',
+     'path' : 'signup',
+     loadComponent : () => SignUpComponent
+    },
+    {
+     title : 'Support',
+     'path' : 'support',
+     loadComponent : () => SupportComponent
+     },
+    { 
+     title : 'Blog',
+    'path' : 'blog',
+      loadComponent : () => BlogComponent 
+    },
+    {
+     title : 'Gallery',
+    'path' : 'gallery',
+      loadComponent : () => GalleryComponent
+    },
+    {
+     title : 'Profil',
+     'path' : 'profil',
+     loadComponent : () => ProfilComponent
+    },
+    {
+     title : 'NotFound',
+     'path' : '**',
+     loadComponent : () => NotFoundComponent
+    },
+];

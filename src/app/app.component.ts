@@ -6,14 +6,10 @@ import { NavigationComponent } from './shared/components/navigation/navigation.c
 
 
 @Component({
-    selector: 'app-root',
-    standalone: true,
-    templateUrl: './app.component.html',
-    styleUrl: './app.component.scss',
-    imports: [CommonModule, RouterOutlet, RouterLink, NavigationComponent]
+    selector    : 'app-root',
+    standalone  : true,
+    templateUrl : './app.component.html',
+    styleUrl    : './app.component.scss',
+    imports     : [CommonModule, RouterOutlet, RouterLink, NavigationComponent]
 })
-export class AppComponent{
-
-  title = 'DokiHouse';
-
-}
+export class AppComponent{ title = 'DokiHouse' }

@@ -4,11 +4,11 @@ import { UserHttpService } from '../../../shared/services/user-service/user-http
 
 
 @Component({
-  selector: 'app-profil',
-  standalone: true,
-  imports: [],
-  templateUrl: './profil.component.html',
-  styleUrl: './profil.component.scss'
+  selector    : 'app-profil',
+  standalone  : true,
+  imports     : [],
+  templateUrl : './profil.component.html',
+  styleUrl    : './profil.component.scss'
 })
 export class ProfilComponent implements OnInit{
 

@@ -1,5 +1,5 @@
 export interface UserConnectedModel{
-  id : number
+  id   : number
   name : string
   role : string
 }

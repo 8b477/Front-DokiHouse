@@ -1,5 +1,4 @@
 <nav id="navigation">
-
     <ul class="nav-links">
 
         <li>
@@ -23,16 +22,14 @@
         </li>
 
         <li class ="forward">
-
-            @if(!isConnectedUser){
+            @if(!isConnectedUser)
+            {
                 <a [routerLink]="['/login']" class="link">Connection</a>
             }
-            @else {
+            @else{
                 <a (click)="deconnection()" class="link">Deconnection</a>
             }
-
         </li>
         
     </ul>
-
 </nav>

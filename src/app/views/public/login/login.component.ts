@@ -11,19 +11,18 @@ import { Router, RouterLink } from '@angular/router';
 
 
 @Component({
-    selector: 'app-login',
-    standalone: true,
-    templateUrl: './login.component.html',
-    styleUrl: './login.component.scss',
-    imports: [ReactiveFormsModule, FormErrorInfoComponent, FooterComponent, RouterLink]
+    selector    : 'app-login',
+    standalone  : true,
+    templateUrl : './login.component.html',
+    styleUrl    : './login.component.scss',
+    imports     : [ReactiveFormsModule, FormErrorInfoComponent, FooterComponent, RouterLink]
 })
 export class LoginComponent implements OnInit{
-
 
   // PUBLIC VARIABLE
   loginForm!  : FormGroup
   responce    : boolean = false
-  userModel   : UserLoginModel           | undefined
+  userModel   : UserLoginModel      | undefined
   tokenModel  : TokenDecryptedModel | undefined
   token       : TokenModel          | undefined
 
@@ -40,24 +39,25 @@ export class LoginComponent implements OnInit{
 
 
   // PRIVATE METHODS
-  private buildFormAndValidator() : void {
+  private buildFormAndValidator() : void 
+  {
     this.loginForm = this.formBuilder.group
     ({ 
-        'mail' : ['', [Validators.required, Validators.email]],
+        'mail'   : ['', [Validators.required, Validators.email]],
         'passwd' : ['', [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,15}')]]
     });
   }
 
 
   // PUBLIC METHODS
-  submitLogForm() : void {
-
-    const email = this.loginForm.controls['mail'].value
+  submitLogForm() : void 
+  {
+    const email  = this.loginForm.controls['mail'].value
     const passwd = this.loginForm.controls['passwd'].value
 
     this.userModel = { email : email, passwd : passwd}
 
-    if(this.userModel.email == undefined || this.userModel.passwd == undefined)
+      if(this.userModel.email == undefined || this.userModel.passwd == undefined)
       {
         console.error('userModel is not defined')
       }

@@ -4,17 +4,17 @@ import { AuthenticationService } from '../../services/authentication-service/aut
 
 
 @Component({
-  selector: 'app-navigation',
-  standalone: true,
-  imports: [RouterLink],
-  templateUrl: './navigation.component.html',
-  styleUrl: './navigation.component.scss'
+  selector    : 'app-navigation',
+  standalone  : true,
+  imports     : [RouterLink],
+  templateUrl : './navigation.component.html',
+  styleUrl    : './navigation.component.scss'
 })
 export class NavigationComponent implements OnInit{
 
   // SERVICES
   authenticationService : AuthenticationService = inject(AuthenticationService)
-  route = inject(Router)
+  route                 : Router                = inject(Router)
 
   // VARIABLE  
   isConnectedUser : boolean | undefined
