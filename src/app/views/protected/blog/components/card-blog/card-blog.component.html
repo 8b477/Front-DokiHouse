@@ -1,11 +1,11 @@
 <div class="card">
-  <img class="card-image" src="{{ cardPicture }}">
-  <p class="card-title">{{cardTextTitle}}</p>
-  <p class="card-body">{{ cardTextBody }}</p>
+  <img class="card-image" src="{{ cardBlogPicture }}">
+  <p class="card-title">{{cardBlogTextTitle}}</p>
+  <p class="cardBlog-body">{{ cardBlogTextBody }}</p>
   <p class="footer">
    Écrit par 
-    <span class="by-name">{{ cardAuthorName }}</span>
+    <span class="by-name">{{ cardBlogAuthorName }}</span>
    le 
-    <span class="date">{{ cardDatePublied | date : 'dd/MM/YYYY'}}</span>
+    <span class="date">{{ cardBlogDatePublied | date : 'dd/MM/YYYY'}}</span>
    </p>
 </div>

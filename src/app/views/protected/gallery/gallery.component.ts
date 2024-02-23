@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
+import { CardBonsaiComponent } from "./components/card-bonsai/card-bonsai.component";
 
 @Component({
-  selector: 'app-gallery',
-  standalone: true,
-  imports: [],
-  templateUrl: './gallery.component.html',
-  styleUrl: './gallery.component.scss'
+    selector: 'app-gallery',
+    standalone: true,
+    templateUrl: './gallery.component.html',
+    styleUrl: './gallery.component.scss',
+    imports: [CardBonsaiComponent]
 })
 export class GalleryComponent {
 

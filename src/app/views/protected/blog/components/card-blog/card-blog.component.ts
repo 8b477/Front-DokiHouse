@@ -10,10 +10,9 @@ import { DatePipe } from '@angular/common';
 })
 export class CardBlogComponent {
 
-  @Input() cardPicture     : string = ""
-  @Input() cardTextTitle   : string = ""
-  @Input() cardTextBody    : string = ""
-  @Input() cardAuthorName  : string = ""
-  @Input() cardDatePublied : Date   = new Date()
-
+  @Input() cardBlogPicture     : string = ""
+  @Input() cardBlogTextTitle   : string = ""
+  @Input() cardBlogTextBody    : string = ""
+  @Input() cardBlogAuthorName  : string = ""
+  @Input() cardBlogDatePublied : Date   = new Date()
 }
