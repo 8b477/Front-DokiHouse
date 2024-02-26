@@ -20,10 +20,6 @@ export class AuthenticationService {
   connectedUserSubject : Subject<boolean | undefined> = new Subject<boolean | undefined>()
 
 
-  // SERVICES
-  http : HttpClient = inject(HttpClient)
-
-
   // PUBLIC METHODS
     get isConnectedTest() :boolean{
       return localStorage.getItem('userInfo') != undefined     
@@ -36,7 +32,9 @@ export class AuthenticationService {
 
   login(model : UserLoginModel) :Observable<boolean>
   {
-    return this.http.post(this.baseUrl, model, {responseType : 'text'})
+    const http : HttpClient = inject(HttpClient)
+
+    return http.post(this.baseUrl, model, {responseType : 'text'})
           .pipe(
             map((token) => {
               let decodeToken : any = jwtDecode(token)

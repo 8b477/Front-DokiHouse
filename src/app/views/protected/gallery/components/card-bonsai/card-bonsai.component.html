@@ -1,18 +1,38 @@
+<div class="container text-center">
+  <div class="row">
+<!-- Ici -->
+    <div class="col-4">
+      <div *ngIf="dataFromAPI && dataFromAPI.length > 0" class="card">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+          <ul class="carousel-indicators">
+            <li *ngFor="let item of dataFromAPI; let i = index" [attr.data-target]="'#carouselExampleIndicators'"
+              [attr.data-slide-to]="i" [class.active]="i === currentIndex"></li>
+          </ul>
+          <div class="carousel-inner">
+            <ng-template ngFor let-item [ngForOf]="dataFromAPI" let-i="index">
+            <div id="flex-center">
+              <div class="carousel-item" [class.active]="i === currentIndex">
+                <img class="d-block w-100 min-w" [src]="item.bonsaiPicture[0].fileName" alt="Slide {{ i + 1 }}">
+                <div class="carousel-caption d-none d-md-block bg-text footer">
+                  <h5>{{ item.bonsaiName }}</h5>
+                  <p>{{ item.bonsaiDescription }}</p>
+                </div>
+              </div>
+            </div>
+            </ng-template>
+          </div>
+          <button class="carousel-control-prev" type="button" (click)="prevSlide()">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          </button>
+          <button class="carousel-control-next" type="button" (click)="nextSlide()">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+      <div *ngIf="!dataFromAPI || dataFromAPI.length === 0">
+        <h2>No data to load</h2>
+      </div>
+    </div>
 
-<div>
-  <img [src]="imageToShow" alt="test" height="100px" width="100px">
+  </div>
 </div>
-
-<button (click)="debugger()">debugger</button>
-
-<!-- <div class="card">
-  <img class="card-image" src="{{  }}">
-  <p class="card-title">{{}}</p>
-  <p class="card-body">{{  }}</p>
-  <p class="footer">
-   Écrit par 
-    <span class="by-name">{{  }}</span>
-   le 
-    <span class="date">{{  | date : 'dd/MM/YYYY'}}</span>
-   </p>
-</div> -->
