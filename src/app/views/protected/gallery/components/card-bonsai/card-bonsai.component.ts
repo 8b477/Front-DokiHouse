@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { DATE_PIPE_DEFAULT_TIMEZONE, DatePipe,  NgClass,  NgFor, NgIf } from '@angular/common';
+import { DatePipe,  NgClass,  NgFor, NgIf } from '@angular/common';
 
 
 @Component({
@@ -16,7 +16,7 @@ export class CardBonsaiComponent {
   // @Input() cardBonsaiDescription : string        = '';
   // @Input() cardBonsaiModifiedAt  : string | null = null;
   // @Input() cardBonsaiCreateAt    : Date   | undefined;
-  dataFromAPI: BonsaiData[] = MOCKUP_DATA;
+  dataFromAPI: BonsaiData[] = []
 
 
 currentIndex: { [key: number]: number } = {};
@@ -38,18 +38,19 @@ trackByFn(index : any,item : any) {
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    //this.getTest()
-    // Pour chaque bonsaï, initialise l'index actif à zéro
-    this.dataFromAPI.forEach(bonsai => {
-    this.currentIndex[bonsai.idBonsai] = 0;
-});
-
-  }
+    this.getTest()
+}
 
 
 getTest(){
   this.http.get<BonsaiData[]>("https://localhost:7043/api/Bonsai/GetTest").subscribe({
-    next : (data : BonsaiData[]) => this.dataFromAPI = data,
+    next : (data : BonsaiData[]) =>{
+     this.dataFromAPI = data,
+    // Pour chaque bonsaï, initialise l'index actif à zéro
+    this.dataFromAPI.forEach(bonsai => {
+    this.currentIndex[bonsai.idBonsai] = 0;
+    });
+    },
     error : (error) => console.log(error)
   })
 }
@@ -57,7 +58,11 @@ getTest(){
 debug(){
   console.log(this.dataFromAPI[0]);
   console.log(this.dataFromAPI[1]);
-
+    console.log(this.dataFromAPI);
+this.http.get<BonsaiData[]>("https://localhost:7043/api/Bonsai/GetTest").subscribe({
+    next : (data : BonsaiData[]) => this.dataFromAPI = data,
+    error : (error) => console.log(error)
+  })
 }
 
 }
