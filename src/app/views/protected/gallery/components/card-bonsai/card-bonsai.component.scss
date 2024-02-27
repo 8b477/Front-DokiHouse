@@ -1,8 +1,7 @@
 .card {
   padding: 20px;
   width: 330px;
-  min-height: 400px;
-  max-height: 550px;
+  height: 500px !important;
   margin: 2rem;
   background: radial-gradient(circle, rgb(96 38 63) 0%, rgba(148,187,233,1) 100%);
   border-radius: 20px;
@@ -60,9 +59,7 @@ ul{
 }
 
 .min-w{
-    max-height: 355px;
-    min-height: 355px;
-    max-width: 300px;
+    min-height: 300px;
     min-width: 300px;
 }
 
@@ -71,3 +68,4 @@ ul{
     flex-wrap: wrap;
     justify-content: center;  
 }
+

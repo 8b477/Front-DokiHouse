@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CardBonsaiComponent } from "./components/card-bonsai/card-bonsai.component";
+import { CardBonsaiComponent, MOCKUP_DATA } from "./components/card-bonsai/card-bonsai.component";
 
 @Component({
     selector: 'app-gallery',
@@ -10,4 +10,6 @@ import { CardBonsaiComponent } from "./components/card-bonsai/card-bonsai.compon
 })
 export class GalleryComponent {
 
+data : any[] = MOCKUP_DATA
+ 
 }
