@@ -55,16 +55,6 @@ getTest(){
   })
 }
 
-debug(){
-  console.log(this.dataFromAPI[0]);
-  console.log(this.dataFromAPI[1]);
-    console.log(this.dataFromAPI);
-this.http.get<BonsaiData[]>("https://localhost:7043/api/Bonsai/GetTest").subscribe({
-    next : (data : BonsaiData[]) => this.dataFromAPI = data,
-    error : (error) => console.log(error)
-  })
-}
-
 }
 
 //console.log(this.dataFromAPI[0].bonsaiName);
