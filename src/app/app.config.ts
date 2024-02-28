@@ -7,6 +7,7 @@ import { provideStore } from '@ngrx/store';
 import { AuthenticationService } from './shared/services/authentication-service/authentication.service';
 import { UserRepository } from './core/repository/user.repository';
 import { authInterceptor } from './shared/interceptors/auth-interceptor/auth.interceptor';
+import { BonsaiRepository } from './core/repository/bonsai.repository';
 
 
 export const appConfig: ApplicationConfig = 
@@ -18,7 +19,8 @@ export const appConfig: ApplicationConfig =
     provideClientHydration(),
     provideStore(),
     AuthenticationService,
-    UserRepository
+    UserRepository,
+    BonsaiRepository
   ]
 }
 

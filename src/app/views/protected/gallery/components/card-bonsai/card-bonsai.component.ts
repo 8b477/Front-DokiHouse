@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { DatePipe,  NgClass,  NgFor, NgIf } from '@angular/common';
 import { BonsaiData } from '../../../../../core/models/blogModels/BonsaiData';
+import { GalleryServiceService } from '../../service/gallery-service.service';
 
 
 @Component({
@@ -15,21 +15,21 @@ export class CardBonsaiComponent {
 
 
     // VARIABLE
-    dataFromAPI: BonsaiData[] = []
-    currentIndex: { [key: number]: number } = {};
+    dataFromAPI  : BonsaiData[]              = [];
+    currentIndex : { [key: number]: number } = {};
 
 
     // CONSTRUCTOR
-    constructor(private http: HttpClient) { }
+    constructor(private serviceBonsai :GalleryServiceService){ }
 
 
     // STATE
     ngOnInit(): void {
-        this.getTest()
+        this.getData()
     }
 
 
-    // METHODS
+    // METHODS PUBLIC
     prevSlide(bonsaiId: number, pictureLength: number) {
         this.currentIndex[bonsaiId] = (this.currentIndex[bonsaiId] - 1 + pictureLength) % pictureLength;
     }
@@ -39,17 +39,20 @@ export class CardBonsaiComponent {
     }
 
 
-   private getTest(){
-    this.http.get<BonsaiData[]>("https://localhost:7043/api/Bonsai/GetAllBonsaiAndPicture").subscribe({
-        next : (data : BonsaiData[]) =>{
-        this.dataFromAPI = data,
-        // Pour chaque bonsaï, initialise l'index actif à zéro
-        this.dataFromAPI.forEach(bonsai => {
-        this.currentIndex[bonsai.idBonsai] = 0;
-        });
-        },
-        error : (error) => console.log(error)
-    })
+    // METHODS PRIVATE
+   private getData(){
+    this.serviceBonsai.getAllBonsaiAndPicture().subscribe
+        ({
+            next : (data : BonsaiData[]) =>
+            {
+                this.dataFromAPI = data,
+                this.dataFromAPI.forEach(bonsai => 
+                {
+                    this.currentIndex[bonsai.idBonsai] = 0 // On s'assure que l'index commence à zéro pour le slider
+                });
+            },
+            error : (err) => console.error(err) 
+        })
     }
 
 }
