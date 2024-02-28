@@ -1,6 +1,6 @@
 import { jwtDecode } from 'jwt-decode';
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable, Subject, catchError, map, of } from 'rxjs';
 import { UserConnectedModel } from '../../../core/models/userModels/userConnectedModel/UserConnectedModel';
 import { UserLoginModel } from '../../../core/models/userModels/userLoginModel/UserLoginModel';
@@ -12,12 +12,17 @@ import { UserLoginModel } from '../../../core/models/userModels/userLoginModel/U
 })
 export class AuthenticationService {
 
-  //PRIVATE VARIABLE
+  // INJECTION
+  constructor(private http : HttpClient){ }
+
+
+  // PRIVATE VARIABLE
   private baseUrl : string = "https://localhost:7043/api/Log";
 
 
   // PUBLIC VARIABLE
   connectedUserSubject : Subject<boolean | undefined> = new Subject<boolean | undefined>()
+
 
 
   // PUBLIC METHODS
@@ -32,9 +37,8 @@ export class AuthenticationService {
 
   login(model : UserLoginModel) :Observable<boolean>
   {
-    const http : HttpClient = inject(HttpClient)
 
-    return http.post(this.baseUrl, model, {responseType : 'text'})
+    return this.http.post(this.baseUrl, model, {responseType : 'text'})
           .pipe(
             map((token) => {
               let decodeToken : any = jwtDecode(token)

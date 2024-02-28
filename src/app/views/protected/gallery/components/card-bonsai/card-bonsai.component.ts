@@ -39,13 +39,8 @@ export class CardBonsaiComponent {
     }
 
 
-    trackByFn(index : any,item : any) {
-        return `${index}-${item.id}`; // Utilise un identifiant unique pour chaque élément
-    }
-
-
    private getTest(){
-    this.http.get<BonsaiData[]>("https://localhost:7043/api/Bonsai/GetTest").subscribe({
+    this.http.get<BonsaiData[]>("https://localhost:7043/api/Bonsai/GetAllBonsaiAndPicture").subscribe({
         next : (data : BonsaiData[]) =>{
         this.dataFromAPI = data,
         // Pour chaque bonsaï, initialise l'index actif à zéro
@@ -58,3 +53,4 @@ export class CardBonsaiComponent {
     }
 
 }
+
