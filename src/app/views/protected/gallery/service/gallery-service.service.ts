@@ -1,7 +1,7 @@
-import { Injectable, inject } from '@angular/core';
-import { BonsaiRepository } from '../../../../core/repository/bonsai.repository';
-import { BonsaiData } from '../../../../core/models/blogModels/BonsaiData';
-import { Observable } from 'rxjs';
+import { Injectable, inject } from "@angular/core"
+import { Observable } from "rxjs"
+import { BonsaiRepository } from "../../../../API/Repository/bonsai.repository"
+import { BonsaiData } from "../../../../API/models/blogModels/BonsaiData"
 
 @Injectable({
   providedIn: 'root'

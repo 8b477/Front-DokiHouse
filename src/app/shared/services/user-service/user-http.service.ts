@@ -1,11 +1,11 @@
-import { UserModel } from './../../../core/models/userModels/UserModel';
-import { UserRepository } from '../../../core/repository/user.repository';
-import { UserCreateModel } from '../../../core/models/userModels/userCreateModel/UserCreateModel';
 
 import { Injectable, inject } from '@angular/core';
 import { AuthenticationService } from '../authentication-service/authentication.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { UserRepository } from '../../../API/Repository/user.repository';
+import { UserModel } from '../../../API/models/userModels/UserModel';
+import { UserCreateModel } from '../../../API/models/userModels/userCreateModel/UserCreateModel';
 
 @Injectable({
   providedIn: 'any'

@@ -4,7 +4,7 @@ import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angula
 import { FooterComponent } from '../../../shared/components/footer/footer.component';
 import { FormErrorInfoComponent } from '../../../shared/components/form-error-info/form-error-info.component';
 import { UserHttpService } from '../../../shared/services/user-service/user-http.service';
-import { UserCreateModel } from '../../../core/models/userModels/userCreateModel/UserCreateModel';
+import { UserCreateModel } from '../../../API/models/userModels/userCreateModel/UserCreateModel';
 import { checkFieldsMatchValidator } from '../../../shared/validators/checkFieldsMatch.validator';
 
 

@@ -2,8 +2,9 @@ import { jwtDecode } from 'jwt-decode';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, catchError, map, of } from 'rxjs';
-import { UserConnectedModel } from '../../../core/models/userModels/userConnectedModel/UserConnectedModel';
-import { UserLoginModel } from '../../../core/models/userModels/userLoginModel/UserLoginModel';
+import { UserLoginModel } from '../../../API/Models/userModels/userLoginModel/UserLoginModel';
+import { UserConnectedModel } from '../../../API/Models/userModels/userConnectedModel/UserConnectedModel';
+
 
 
 

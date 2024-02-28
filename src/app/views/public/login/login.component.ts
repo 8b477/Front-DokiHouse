@@ -1,6 +1,6 @@
-import { TokenDecryptedModel } from "../../../core/models/tokenModels/TokenDecryptedModel";
-import { TokenModel } from "../../../core/models/tokenModels/TokenModel";
-import { UserLoginModel } from "../../../core/models/userModels/userLoginModel/UserLoginModel";
+import { TokenDecryptedModel } from "../../../API/Models/tokenModels/TokenDecryptedModel";
+import { TokenModel } from "../../../API/Models/tokenModels/TokenModel";
+import { UserLoginModel } from "../../../API/Models/userModels/userLoginModel/UserLoginModel";
 import { FooterComponent } from "../../../shared/components/footer/footer.component";
 import { FormErrorInfoComponent } from '../../../shared/components/form-error-info/form-error-info.component';
 import { AuthenticationService } from "../../../shared/services/authentication-service/authentication.service";

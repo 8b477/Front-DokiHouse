@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { DatePipe,  NgClass,  NgFor, NgIf } from '@angular/common';
-import { BonsaiData } from '../../../../../core/models/blogModels/BonsaiData';
+
 import { GalleryServiceService } from '../../service/gallery-service.service';
+import { BonsaiData } from '../../../../../API/models/blogModels/BonsaiData';
 
 
 @Component({
