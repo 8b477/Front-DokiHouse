@@ -24,3 +24,33 @@
     </div>
   </div>
 </div>
+
+@if(!dataFromAPI){
+<div class="row">
+  <div *ngFor="let bonsai of dataFromMockup; index as i;" class="col-4">
+    <div class="card">
+      <p class="card-title">Title : {{ bonsai.bonsaiName }}</p>
+      <div id="carouselExampleControls{{bonsai.idBonsai}}" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <ng-container *ngFor="let picture of bonsai.bonsaiPicture; let j = index;">
+            <div class="carousel-item min-w" [class.active]="j === currentIndex[bonsai.idBonsai]">
+              <img class="d-block w-100 card-image" height="300px" width="300px" src="{{ picture.fileName }}" alt="">
+            </div>
+          </ng-container>
+        </div>
+        <button class="carousel-control-prev" type="button"
+          (click)="prevSlide(bonsai.idBonsai, bonsai.bonsaiPicture.length)">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </button>
+        <button class="carousel-control-next" type="button"
+          (click)="nextSlide(bonsai.idBonsai, bonsai.bonsaiPicture.length)">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </button>
+      </div>
+      <p class="footer">{{ bonsai.bonsaiDescription }}</p>
+      <span class="date">Créer le : {{ bonsai.createAt| date : 'dd/MM/YYYY'}}</span>
+    </div>
+  </div>
+</div>
+
+}

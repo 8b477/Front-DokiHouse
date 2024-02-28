@@ -17,20 +17,20 @@ export class ProfilComponent implements OnInit{
   // VARIABLES
   userModel!               : UserModel
   // Compte
-  compteName               : string     = "Compte"                           
-  compteDesciption         : string     = "Options du compte"                
+  compteName               : string     = "Ton compte"                           
+  compteDesciption         : string     = "Personnalise ton compte"                
   compteImage              : string     = "/assets/img/profil/img-compte.svg"
   // Bonsai
-  bonsaiName               : string     = "bonsai"                           
-  bonsaiDesciption         : string     = "Options du bonsai"                
+  bonsaiName               : string     = "Tes Bonsai"                           
+  bonsaiDesciption         : string     = "Crée-Modifie-Partage"                
   bonsaiImage              : string     = "/assets/img/profil/img-bonsai.svg"
   // Bonsai
-  postAndCommentName       : string     = "Post & Comment"                         
-  postAndCommentDesciption : string     = "Options du postAndComment"              
+  postAndCommentName       : string     = "Tes Posts"                         
+  postAndCommentDesciption : string     = "Consulte-Crée"              
   postAndCommentImage      : string     = "/assets/img/profil/img-post-comment.svg"
   // Notification
   notificationName         : string     = "Notifications"                         
-  notificationDesciption   : string     = "Options du notification"              
+  notificationDesciption   : string     = "Retrouve ici toute tes notifications"              
   notificationImage        : string     = "/assets/img/profil/img-notification.svg"
 
   // INJECTION

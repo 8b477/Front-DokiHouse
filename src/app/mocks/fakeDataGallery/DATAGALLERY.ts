@@ -1,4 +1,5 @@
-import { BonsaiData } from "../../core/models/blogModels/BonsaiData";
+import { BonsaiData } from "../../API/models/blogModels/BonsaiData";
+
 
 export const MOCKUP_DATA: BonsaiData[] = [
     {
@@ -33,31 +34,6 @@ export const MOCKUP_DATA: BonsaiData[] = [
         ]
     },
 
-    {
-        idBonsai: 2,
-        idUser: 1,
-        bonsaiName: "Bonsaï Sakura",
-        bonsaiDescription: "Un magnifique bonsaï de cerisier en fleurs.",
-        createAt: "2024-02-26T14:15:38.693",
-        modifiedAt: "0001-01-01T00:00:00",
-        bonsaiPicture: [
-            {
-                idPicture: 4,
-                fileName: "/assets/img/fleur.png",
-                createAt: "2024-02-26T14:34:33.55",
-                modifiedAt: null,
-                idBonsai: 2
-            },
-            {
-                idPicture: 5,
-                fileName: "/assets/img/geisha.png",
-                createAt: "2024-02-26T14:34:33.55",
-                modifiedAt: null,
-                idBonsai: 2
-            }
-        ]
-    }
-    ,
 
     {
         idBonsai: 2,
