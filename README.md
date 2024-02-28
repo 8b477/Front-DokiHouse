@@ -1,26 +1,31 @@
-# TODO
+# 🌿 Bonsai App ToDo List
 
-Need to fix display navigation('connection') 
-if token is exist this means the user is not deconnect so we need to show 'Deconnection' not 'Connection'
+## GALLERY PAGE 🖼️
 
-Need set-up guard
+- [ ] Afficher tous les bonsaïs
+  - Au clic, envoyer sur la page d'un Bonsaï avec plus de détails
 
+## PROFIL PAGE 👤
 
-SIGN-UP PAGE
+### Dashboard
 
-Add infos for when user is correctly create and the same for log
+- [ ] Création de (Bonsaï)
+  - [ ] Ajouter un nouveau Bonsaï
+  - [ ] Mettre à jour un Bonsaï
+  - [ ] Supprimer un Bonsaï
+  - [ ] Afficher tous les bonsaïs de l'utilisateur
 
+- [ ] Modification du (profil)
+  - [ ] Changer de mot de passe
+  - [ ] Changer d'adresse e-mail
+  - [ ] Changer la photo de profil
+  - [ ] Changer son nom
 
-BLOG PAGE
+- [ ] Création d'un (post)
+  - [ ] Ajouter un nouveau post
+  - [ ] Voir tous ses posts et les commentaires associés
+  - [ ] Supprimer un post
 
-Need to add child route in route.ts
-
-When you click on picture/ blog you have redirection to post cibling, if user is not log, his can read but i can't having interaction like add commentary 
-
-If the user is log, so he can add comments
-
-
-+ Nice to have : 
- - Add search bar for filter blogs like on date or A-Z
-
-
+- [ ] Commentaires
+  - [ ] Voir tous ses commentaires
+  - [ ] Mettre en place une notification si quelqu'un répond
