@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FormErrorInfoComponent } from './form-error-info.component';
+import { FormErrorInfoComponent } from '../view/form-error-info.component';
 
 describe('FormErrorInfoComponent', () => {
   let component: FormErrorInfoComponent;

@@ -1,9 +1,9 @@
-import { TokenDecryptedModel } from "../../../API/Models/tokenModels/TokenDecryptedModel";
-import { TokenModel } from "../../../API/Models/tokenModels/TokenModel";
-import { UserLoginModel } from "../../../API/Models/userModels/userLoginModel/UserLoginModel";
-import { FooterComponent } from "../../../shared/components/footer/footer.component";
-import { FormErrorInfoComponent } from '../../../shared/components/form-error-info/form-error-info.component';
-import { AuthenticationService } from "../../../shared/services/authentication-service/authentication.service";
+import { TokenDecryptedModel } from "../../../../API/Models/tokenModels/TokenDecryptedModel";
+import { TokenModel } from "../../../../API/Models/tokenModels/TokenModel";
+import { UserLoginModel } from "../../../../API/Models/userModels/userLoginModel/UserLoginModel";
+import { FooterComponent } from "../../../../shared/components/footer/view/footer.component";
+import { FormErrorInfoComponent } from '../../../../shared/components/form-error-info/view/form-error-info.component';
+import { AuthenticationService } from "../../../../shared/services/authentication-service/authentication.service";
 
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';

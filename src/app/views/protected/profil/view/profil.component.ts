@@ -1,8 +1,8 @@
 
 import { Component, OnInit, inject } from '@angular/core';
-import { UserHttpService } from '../../../shared/services/user-service/user-http.service';
-import { UserModel } from '../../../API/models/userModels/UserModel';
-import { CardProfilComponent } from "./component/card-profil/card-profil.component";
+import { UserHttpService } from '../../../../shared/services/user-service/user-http.service';
+import { UserModel } from '../../../../API/models/userModels/UserModel';
+import { CardProfilComponent } from "../component/card-profil/view/card-profil.component";
 
 
 @Component({

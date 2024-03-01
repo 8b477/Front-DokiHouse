@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { CardBonsaiComponent } from "./components/card-bonsai/card-bonsai.component";
+import { CardBonsaiComponent } from "../components/card-bonsai/view/card-bonsai.component";
+
 
 @Component({
     selector: 'app-gallery',

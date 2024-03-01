@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { DatePipe,  NgClass,  NgFor, NgIf } from '@angular/common';
 
-import { GalleryServiceService } from '../../service/gallery-service.service';
-import { BonsaiData } from '../../../../../API/models/blogModels/BonsaiData';
-import { MOCKUP_DATA } from '../../../../../mocks/fakeDataGallery/DATAGALLERY';
+import { GalleryServiceService } from '../../../service/gallery-service.service';
+import { BonsaiData } from '../../../../../../API/models/blogModels/BonsaiData';
+import { MOCKUP_DATA } from '../../../../../../mocks/fakeDataGallery/DATAGALLERY';
 
 
 @Component({
