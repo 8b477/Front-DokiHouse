@@ -10,22 +10,22 @@
 ### Dashboard
 
 - [ ] Création de (Bonsaï)
-  - [ ] Ajouter un nouveau Bonsaï
-  - [ ] Mettre à jour un Bonsaï
-  - [ ] Supprimer un Bonsaï
-  - [ ] Afficher tous les bonsaïs de l'utilisateur
+- [ ] Ajouter un nouveau Bonsaï
+- [ ] Mettre à jour un Bonsaï
+- [ ] Supprimer un Bonsaï
+- [X] Afficher tous les bonsaïs de l'utilisateur
 
 - [ ] Modification du (profil)
-  - [ ] Changer de mot de passe
-  - [ ] Changer d'adresse e-mail
-  - [ ] Changer la photo de profil
-  - [ ] Changer son nom
+- [ ] Changer de mot de passe
+- [ ] Changer d'adresse e-mail
+- [ ] Changer la photo de profil
+- [ ] Changer son nom
 
 - [ ] Création d'un (post)
-  - [ ] Ajouter un nouveau post
-  - [ ] Voir tous ses posts et les commentaires associés
-  - [ ] Supprimer un post
+- [ ] Ajouter un nouveau post
+- [ ] Voir tous ses posts et les commentaires associés
+- [ ] Supprimer un post
 
 - [ ] Commentaires
-  - [ ] Voir tous ses commentaires
-  - [ ] Mettre en place une notification si quelqu'un répond
+- [ ] Voir tous ses commentaires
+- [ ] Mettre en place une notification si quelqu'un répond
