@@ -32,4 +32,4 @@
 
 ### DEBUG ✍🏻
 
-- [ ] Fixer, supprimer l'affichage de la bordure au clique sur une card, dans la partie profil-menu.
+- [X] Fixer, supprimer l'affichage de la bordure au clique sur une card, dans la partie profil-menu.

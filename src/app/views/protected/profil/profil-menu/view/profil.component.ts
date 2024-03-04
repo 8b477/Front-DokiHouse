@@ -1,7 +1,6 @@
 
 import { Component, OnInit, inject } from '@angular/core';
 import { UserHttpService } from '../../../../../shared/services/user-service/user-http.service';
-import { UserModel } from '../../../../../API/models/userModels/UserModel';
 import { CardProfilComponent } from "../component/card-profil/view/card-profil.component";
 import { RouterLink } from '@angular/router';
 
@@ -16,7 +15,6 @@ import { RouterLink } from '@angular/router';
 export class ProfilComponent implements OnInit{
 
   // VARIABLES
-  userModel!               : UserModel
   // Compte
   compteName               : string     = "Ton compte"                           
   compteDesciption         : string     = "Personnalise ton compte"                
@@ -25,7 +23,7 @@ export class ProfilComponent implements OnInit{
   bonsaiName               : string     = "Tes Bonsai"                           
   bonsaiDesciption         : string     = "Crée-Modifie-Partage"                
   bonsaiImage              : string     = "/assets/img/profil/img-bonsai.svg"
-  // Bonsai
+  // Post
   postAndCommentName       : string     = "Tes Posts"                         
   postAndCommentDesciption : string     = "Consulte-Crée"              
   postAndCommentImage      : string     = "/assets/img/profil/img-post-comment.svg"
@@ -34,16 +32,13 @@ export class ProfilComponent implements OnInit{
   notificationDesciption   : string     = "Retrouve ici toute tes notifications"              
   notificationImage        : string     = "/assets/img/profil/img-notification.svg"
 
+
   // INJECTION
   userService = inject(UserHttpService)
 
+
   // STATE
-  ngOnInit(): void {
-    this.userService.getProfil().subscribe({
-      next : (data) => this.userModel = data,
-      error : (error) => console.error(error)
-    })
-  }
+  ngOnInit(): void {}
 
 
 }

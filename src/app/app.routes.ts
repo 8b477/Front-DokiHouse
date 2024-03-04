@@ -8,6 +8,11 @@ import { SignUpComponent } from './views/public/sign-up/view/sign-up.component';
 import { SupportComponent } from './views/public/support/view/support.component';
 import { GalleryComponent } from './views/protected/gallery/view/gallery.component';
 import { ProfilComponent } from './views/protected/profil/profil-menu/view/profil.component';
+import { ProfilAccountComponent } from './views/protected/profil/profil-account/view/profil-account.component';
+import { ProfilBonsaiComponent } from './views/protected/profil/profil-bonsai/view/profil-bonsai.component';
+import { ProfilPostComponent } from './views/protected/profil/profil-post/view/profil-post.component';
+import { ProfilNotificationComponent } from './views/protected/profil/profil-notification/view/profil-notification.component';
+
 
 
 export const routes: Routes = 
@@ -47,6 +52,16 @@ export const routes: Routes =
      'path' : 'profil',
      loadComponent : () => ProfilComponent
     },
+
+    { path: 'profil', children:[
+      { path : 'account', loadComponent : () => ProfilAccountComponent },
+      { path : 'bonsai', loadComponent : () => ProfilBonsaiComponent },
+      { path : 'post', loadComponent : () => ProfilPostComponent },
+      { path : 'notification', loadComponent : () => ProfilNotificationComponent },
+    ] },
+
+
+
     {
      title : 'NotFound',
      'path' : '**',

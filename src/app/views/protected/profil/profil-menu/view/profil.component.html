@@ -1,31 +1,21 @@
-@if(userModel)
-{
-<h2>Welcome to own manager {{ userModel.name }}</h2>
-<p>Date de création du compte : {{ userModel.createAt }}</p>
-<p>Date de la dernière modification du compte : {{ userModel.modifiedAt }}</p>
-<p>Votre role : {{ userModel.role }}</p>
-}
-@else{
 
 <div class="container" style="height: 60vh; display: flex; justify-content: center; align-items: center;">
 
    <div class="row">
-      <div class="col-3 none-border" routerLink="account">
-         <app-card-profil [cardName]="compteName" [cardDescription]="compteDesciption" [cardImage]="compteImage" />
+      <div class="col-3 none-border">
+         <app-card-profil [cardName]="compteName" [cardDescription]="compteDesciption" [cardImage]="compteImage" routerLink="account"/>
       </div>
       <div class="col-3">
-         <app-card-profil [cardName]="bonsaiName" [cardDescription]="bonsaiDesciption" [cardImage]="bonsaiImage" />
+         <app-card-profil [cardName]="bonsaiName" [cardDescription]="bonsaiDesciption" [cardImage]="bonsaiImage" routerLink="bonsai"/>
       </div>
    <div class="col-3">
       <app-card-profil [cardName]="postAndCommentName" [cardDescription]="postAndCommentDesciption"
-         [cardImage]="postAndCommentImage" />
+         [cardImage]="postAndCommentImage" routerLink="post"/>
    </div>
    <div class="col-3">
       <app-card-profil [cardName]="notificationName" [cardDescription]="notificationDesciption"
-         [cardImage]="notificationImage" />
+         [cardImage]="notificationImage" routerLink="notification"/>
    </div>
 
    </div>
 </div>
-
-}
