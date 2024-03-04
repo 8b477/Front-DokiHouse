@@ -1,8 +1,9 @@
 
 import { Component, OnInit, inject } from '@angular/core';
-import { UserHttpService } from '../../../../shared/services/user-service/user-http.service';
-import { UserModel } from '../../../../API/models/userModels/UserModel';
+import { UserHttpService } from '../../../../../shared/services/user-service/user-http.service';
+import { UserModel } from '../../../../../API/models/userModels/UserModel';
 import { CardProfilComponent } from "../component/card-profil/view/card-profil.component";
+import { RouterLink } from '@angular/router';
 
 
 @Component({
@@ -10,7 +11,7 @@ import { CardProfilComponent } from "../component/card-profil/view/card-profil.c
     standalone: true,
     templateUrl: './profil.component.html',
     styleUrl: './profil.component.scss',
-    imports: [CardProfilComponent]
+    imports: [CardProfilComponent, RouterLink]
 })
 export class ProfilComponent implements OnInit{
 
