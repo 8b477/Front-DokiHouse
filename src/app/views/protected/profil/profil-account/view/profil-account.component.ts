@@ -9,4 +9,9 @@ import { Component } from '@angular/core';
 })
 export class ProfilAccountComponent {
 
+  //VARIABLES
+  name : string = 'Nom de test'
+  email : string = 'email@test.be'
+  role : string = 'larbin'
+
 }
