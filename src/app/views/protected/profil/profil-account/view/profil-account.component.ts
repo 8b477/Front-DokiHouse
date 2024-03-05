@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, inject } from '@angular/core';
+
 
 @Component({
   selector: 'app-profil-account',
@@ -10,8 +12,12 @@ import { Component } from '@angular/core';
 export class ProfilAccountComponent {
 
   //VARIABLES
-  name : string = 'Nom de test'
+  name : string = 'mark'
   email : string = 'email@test.be'
   role : string = 'larbin'
+  avatar : string = `https://api.dicebear.com/7.x/adventurer/svg?seed=${this.name}`
 
+
+
+ 
 }
