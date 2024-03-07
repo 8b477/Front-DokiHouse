@@ -1,4 +1,4 @@
-<h1>Profil {{ name }}</h1>
+<!-- <h1>Profil {{ name }}</h1>
 
 
 
@@ -25,29 +25,104 @@
             </div>
         </div>
     </div>
+</div> -->
+
+<div class="container-md mx-auto position-relative" style="height: 55vh;">
+    <table class="table position-absolute top-50 start-50 translate-middle">
+
+
+        <thead>
+            <tr class="text-center">
+                <th scope="col">Nom</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="input-group mb-3" style="margin-left: 0;">
+                <td class="col" for="change-name" (click)="activeFocusInput()">
+                    <span class="input-group-text justify-content-center">
+                        <label for="change-name">{{ name }} :</label>
+                    </span>
+                </td>
+                <td class="col justify-content-center">
+                    <input id="change-name" type="text" class="form-control text-center" placeholder="Nouveau pseudo">
+                </td>
+
+                <td class="col text-center d-grid gap-2">
+                    <button class="btn btn-primary">Change</button>
+                </td>
+            </tr>
+        </tbody>
+
+
+         <thead>
+            <tr class="text-center">
+                <th scope="col">Mot de passe</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="input-group mb-3" style="margin-left: 0;">
+                <td class="col justify-content-center">
+                    <input id="actual-passwd" type="password" class="form-control text-center" placeholder="Mot de passe actuel">
+                </td>
+                <td class="col justify-content-center">
+                    <input id="new-passwd" type="password" class="form-control text-center" placeholder="Nouveau mot de passe">
+                </td>
+
+                <td class="col text-center d-grid gap-2">
+                    <button class="btn btn-primary">Change</button>
+                </td>
+            </tr>
+        </tbody>
+
+
+         <thead>
+            <tr class="text-center">
+                <th scope="col">Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="input-group mb-3" style="margin-left: 0;">
+                <td class="col justify-content-center">
+                    <input id="actual-mail" type="email" class="form-control text-center" placeholder="Mail actuel">
+                </td>
+                <td class="col justify-content-center">
+                    <input id="new-mail" type="email" class="form-control text-center" placeholder="Nouveau mail">
+                </td>
+
+                <td class="col text-center d-grid gap-2">
+                    <button class="btn btn-primary">Change</button>
+                </td>
+            </tr>
+        </tbody>
+
+
+    </table>
 </div>
 
-<div class="container-sm">
 
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">Pseudo</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr class="input-group mb-3">
 
-            <span class="input-group-text">
-                <label for="change-name">{{ name }} :</label>
-            </span>
-            <input id="change-name" type="text" class="form-control" placeholder="Nouveau nom">
 
-            <td>
-                <button class="btn btn-primary">send</button>
-            </td>
-        </tr>
-    </tbody>
-</table>
+
+
+<button type="button" class="btn btn-primary" id="liveToastBtn" (click)="sendChangement()">Show live toast</button>
+
+<div id="toast-wrapper">
+
+    <div id="toats-head">
+    
+        <p class="col">Attention erreur :</p>
+        <p class="text-right">
+            <button class="col" (click)="closeToast()">❌</button>
+        </p>
+
+
+    </div>
+
+    <div id="toats-bottom" class="col">
+    
+        <p>Le champ à mal été remplie blabla</p>
+
+    </div>
+
 
 </div>
