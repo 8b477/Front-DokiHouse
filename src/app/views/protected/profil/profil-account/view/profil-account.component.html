@@ -1,36 +1,5 @@
-<!-- <h1>Profil {{ name }}</h1>
-
-
-
-
-<p>Email : {{ email }}</p>
-<p>Role : {{ role }}</p>
-
-
-<section>
-    <h2>Avatar</h2>
-    <img src="{{ avatar }}" alt="avatar" height="100px" width="100px">
-</section>
-
-<div class="container-fluid text-center">
-    <div class="row justify-content-center border border-primary-subtle">
-        <h2>Infos compte</h2>
-
-        <div class="col-4 border border-primary">
-            <div class="input-group mb-3">
-                <span class="input-group-text">
-                    <label for="change-name">{{ name }} :</label>
-                </span>
-                <input id="change-name" type="text" class="form-control" placeholder="Nouveau nom">
-            </div>
-        </div>
-    </div>
-</div> -->
-
 <div class="container-md mx-auto position-relative" style="height: 55vh;">
     <table class="table position-absolute top-50 start-50 translate-middle">
-
-
         <thead>
             <tr class="text-center">
                 <th scope="col">Nom</th>
@@ -46,15 +15,12 @@
                 <td class="col justify-content-center">
                     <input id="change-name" type="text" class="form-control text-center" placeholder="Nouveau pseudo">
                 </td>
-
                 <td class="col text-center d-grid gap-2">
                     <button class="btn btn-primary">Change</button>
                 </td>
             </tr>
         </tbody>
-
-
-         <thead>
+        <thead>
             <tr class="text-center">
                 <th scope="col">Mot de passe</th>
             </tr>
@@ -62,20 +28,19 @@
         <tbody>
             <tr class="input-group mb-3" style="margin-left: 0;">
                 <td class="col justify-content-center">
-                    <input id="actual-passwd" type="password" class="form-control text-center" placeholder="Mot de passe actuel">
+                    <input id="actual-passwd" type="password" class="form-control text-center"
+                        placeholder="Mot de passe actuel">
                 </td>
                 <td class="col justify-content-center">
-                    <input id="new-passwd" type="password" class="form-control text-center" placeholder="Nouveau mot de passe">
+                    <input id="new-passwd" type="password" class="form-control text-center"
+                        placeholder="Nouveau mot de passe">
                 </td>
-
                 <td class="col text-center d-grid gap-2">
                     <button class="btn btn-primary">Change</button>
                 </td>
             </tr>
         </tbody>
-
-
-         <thead>
+        <thead>
             <tr class="text-center">
                 <th scope="col">Email</th>
             </tr>
@@ -88,41 +53,26 @@
                 <td class="col justify-content-center">
                     <input id="new-mail" type="email" class="form-control text-center" placeholder="Nouveau mail">
                 </td>
-
                 <td class="col text-center d-grid gap-2">
                     <button class="btn btn-primary">Change</button>
                 </td>
             </tr>
         </tbody>
-
-
     </table>
 </div>
-
-
-
 
 
 
 <button type="button" class="btn btn-primary" id="liveToastBtn" (click)="sendChangement()">Show live toast</button>
 
 <div id="toast-wrapper">
-
     <div id="toats-head">
-    
         <p class="col">Attention erreur :</p>
         <p class="text-right">
             <button class="col" (click)="closeToast()">❌</button>
         </p>
-
-
     </div>
-
     <div id="toats-bottom" class="col">
-    
         <p>Le champ à mal été remplie blabla</p>
-
     </div>
-
-
 </div>
