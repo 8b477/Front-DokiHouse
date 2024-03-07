@@ -1,17 +1,53 @@
 <h1>Profil {{ name }}</h1>
 
-<section>
-    <h2>Infos compte</h2>
-    <p>Nom : {{ name }} <button>Change</button> </p> 
-    <p>Email : {{ email }}</p> 
-    <p>Role : {{ role }}</p> 
-</section>
+
+
+
+<p>Email : {{ email }}</p>
+<p>Role : {{ role }}</p>
+
 
 <section>
     <h2>Avatar</h2>
-    <img src= "{{ avatar }}" alt="avatar" height="100px" width="100px">
+    <img src="{{ avatar }}" alt="avatar" height="100px" width="100px">
 </section>
-<!-- 
-<div>
-{{avatar}}
-</div> -->
+
+<div class="container-fluid text-center">
+    <div class="row justify-content-center border border-primary-subtle">
+        <h2>Infos compte</h2>
+
+        <div class="col-4 border border-primary">
+            <div class="input-group mb-3">
+                <span class="input-group-text">
+                    <label for="change-name">{{ name }} :</label>
+                </span>
+                <input id="change-name" type="text" class="form-control" placeholder="Nouveau nom">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-sm">
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Pseudo</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="input-group mb-3">
+
+            <span class="input-group-text">
+                <label for="change-name">{{ name }} :</label>
+            </span>
+            <input id="change-name" type="text" class="form-control" placeholder="Nouveau nom">
+
+            <td>
+                <button class="btn btn-primary">send</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+</div>

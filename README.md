@@ -34,3 +34,4 @@
 
 - [X] Fixer, supprimer l'affichage de la bordure au clique sur une card, dans la partie profil-menu.
 - [] Ajouter une taille et faire une présentation pour la page de profil account.
+- [] Ajouter une class pour géré le responsive pour l'affichage de la gallery et des blog.
