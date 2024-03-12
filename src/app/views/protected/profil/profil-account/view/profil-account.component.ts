@@ -75,7 +75,14 @@ const name = this.controlName.value
 
 // IN PROGRESS
 checkActualPasswd(){
-  this.http.post()
+const passwd = this.controlPasswd.value as string
+  this.http.post('https://localhost:7043/api/User/CheckPasswd',{"passwd" : passwd.toString()}).subscribe(({
+    next : (data) => console.log(data),
+    error : (err) => console.error(err)
+  }))
+  console.log("-----------------------");
+  console.log("-----------------------");
+  console.log(passwd);
 }
 
 
