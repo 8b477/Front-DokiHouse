@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormErrorInfoComponent } from "../../../../../shared/components/form-error-info/view/form-error-info.component";
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
 
 @Component({
@@ -74,16 +74,18 @@ const name = this.controlName.value
 
 
 // IN PROGRESS
-checkActualPasswd(){
-const passwd = this.controlPasswd.value as string
-  this.http.post('https://localhost:7043/api/User/CheckPasswd',{"passwd" : passwd.toString()}).subscribe(({
-    next : (data) => console.log(data),
-    error : (err) => console.error(err)
-  }))
-  console.log("-----------------------");
-  console.log("-----------------------");
-  console.log(passwd);
+checkActualPasswd() {
+  const passwd = this.controlPasswd.value;
+
+  this.http.post<boolean>('https://localhost:7043/api/User/CheckPasswd', { passwd }
+  ).subscribe({
+    next: (data) => {this.IsValidActualPasswd = data
+    console.log(data);
+    },
+    error: (err) => console.error(err)
+  });
 }
+
 
 
 // updatePass(){
