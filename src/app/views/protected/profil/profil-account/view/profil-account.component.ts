@@ -1,7 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormErrorInfoComponent } from "../../../../../shared/components/form-error-info/view/form-error-info.component";
-import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+import { NgClass } from '@angular/common';
 
 
 @Component({
@@ -9,7 +10,7 @@ import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/htt
     standalone: true,
     templateUrl: './profil-account.component.html',
     styleUrl: './profil-account.component.scss',
-    imports: [ReactiveFormsModule, FormErrorInfoComponent]
+    imports: [ReactiveFormsModule, FormErrorInfoComponent, NgClass]
 })
 export class ProfilAccountComponent implements OnInit {
 
@@ -24,11 +25,16 @@ export class ProfilAccountComponent implements OnInit {
 IsValidActualPasswd : boolean = false
 
 controlName! : FormControl
-controlPasswd! : FormControl
+controlPasswdActual! : FormControl
+controlPasswdNew! : FormControl
 controlEmail! : FormControl
+
+passwordVisible : boolean = false
+
 ngOnInit(): void {
   this.controlName = new FormControl('', [Validators.minLength(3), Validators.required])
-  this.controlPasswd = new FormControl('', [Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,15}'), Validators.required])
+  this.controlPasswdActual = new FormControl('', [Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,15}'), Validators.required])
+  this.controlPasswdNew = new FormControl('', [Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,15}'), Validators.required])
   this.controlEmail = new FormControl('', [Validators.email, Validators.required])
 }
 
@@ -73,30 +79,44 @@ const name = this.controlName.value
 }
 
 
-// IN PROGRESS
 checkActualPasswd() {
-  const passwd = this.controlPasswd.value;
+  const passwd = this.controlPasswdActual.value;
 
   this.http.post<boolean>('https://localhost:7043/api/User/CheckPasswd', { passwd }
   ).subscribe({
-    next: (data) => {this.IsValidActualPasswd = data
-    console.log(data);
+    next: (data) => 
+    {
+      this.IsValidActualPasswd = data
+      console.log(data);
     },
+    error: (err) =>{
+    console.log("***********");
+     console.error(err)
+    console.log("***********");
+    }
+  });
+}
+
+
+updatePass() {
+  const passwdNew = this.controlPasswdNew.value;
+
+  this.http.put('https://localhost:7043/api/User/Pass', { passwdNew }
+  ).subscribe({
+    next: (responce) => console.log(responce),
     error: (err) => console.error(err)
   });
 }
 
 
 
-// updatePass(){
-// const passwd = this.controlPasswd.value
-//   this.http.put('https://localhost:7043/api/User/Pass', {passwd}).subscribe(({
-//     next : (responce) => console.log(responce)
-//   }))
-// }
-
 debug(){
 console.log(this.controlName.value)
+}
+
+
+togglePasswordVisibility(){
+  this.passwordVisible = !this.passwordVisible
 }
 
 

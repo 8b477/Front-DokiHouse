@@ -37,7 +37,7 @@
         <tbody>
 
 
-  @if (controlPasswd.invalid && controlPasswd.touched)
+  @if (controlPasswdActual.invalid && controlPasswdActual.touched)
             {
                 <app-form-error-info 
                     [tooltipText]="'Le mot de passe doit contenir 8caractères, 1majuscule, 1minuscule, 1chiffre et 1caractère spécial'"
@@ -45,22 +45,45 @@
                 </app-form-error-info>
             }
 
+  @if (controlPasswdNew.invalid && controlPasswdNew.touched)
+            {
+                <app-form-error-info 
+                    [tooltipText]="'Le mot de passe doit contenir 8caractères, 1majuscule, 1minuscule, 1chiffre et 1caractère spécial'"
+                    [errorMessage]="'Le nouveau mot de passe n\'est pas correct !'">
+                </app-form-error-info>
+            }
 
             <tr class="input-group mb-3" style="margin-left: 0;">
                 <td class="col justify-content-center">
-                    <input [formControl]="controlPasswd" id="actual-passwd" type="password" class="form-control text-center"
-                        placeholder="Mot de passe actuel">
+
+
+@if(!IsValidActualPasswd){
+    <input [formControl]="controlPasswdActual" id="actual-passwd" type="password" class="form-control text-center" placeholder="Mot de passe actuel">
+}@else {
+    <input id="actual-passwd" type="password" class="form-control text-center" placeholder="Mot de passe actuelle vaildé !" readonly disabled>
+}
+
+
                 </td>
                 <td class="col justify-content-center">
-                    <input [formControl]="controlPasswd" id="new-passwd" type="password" class="form-control text-center"
-                        placeholder="Nouveau mot de passe">
+<input [formControl]="controlPasswdNew" id="new-passwd" type="{{ passwordVisible ? 'text' : 'password' }}" class="form-control text-center"
+    placeholder="Nouveau mot de passe">
+
+
+<button (click)="togglePasswordVisibility()">
+  <i class="fa" [ngClass]="{'fa-eye': !passwordVisible, 'fa-eye-slash': passwordVisible}"></i>
+</button>
+
+
                 </td>
                 <td class="col text-center d-grid gap-2">
-                @if(!IsValidActualPasswd){    
-                    <button class="btn btn-primary" (click)="checkActualPasswd()">Vérification du mot de passe actuel</button>
-                }@else{
-                    <button class="btn btn-primary">Valide ton nouveau mot de passe</button>
-                }
+  
+                    @if(!IsValidActualPasswd){    
+                        <button class="btn btn-success" (click)="checkActualPasswd()">Vérification du mot de passe actuel</button>
+                    }@else{
+                        <button class="btn btn-warning" (click)="updatePass()">Valide ton nouveau mot de passe</button>
+                    }
+
                 </td>
             </tr>
         </tbody>
