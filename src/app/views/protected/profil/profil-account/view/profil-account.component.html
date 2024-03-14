@@ -5,7 +5,7 @@
                 <th scope="col">Nom</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="row">
 
             @if (controlName.invalid && controlName.touched)
             {
@@ -16,25 +16,25 @@
             }
 
             <tr class="input-group mb-3" style="margin-left: 0;">
-                <td class="col" for="change-name" (click)="activeFocusInput()">
+                <td class="col-4" for="change-name" (click)="activeFocusInput()">
                     <span class="input-group-text justify-content-center">
                         <label for="change-name">{{ name }} :</label>
                     </span>
                 </td>
-                <td class="col justify-content-center">
+                <td class="col-4 justify-content-center">
                     <input [formControl]="controlName" id="change-name" type="text" class="form-control text-center" placeholder="Nouveau pseudo" required>
                 </td>
-                <td class="col text-center d-grid gap-2">
+                <td class="col-4 text-center d-grid gap-2">
                     <button class="btn btn-primary" (click)="updateName()">Change</button>
                 </td>
             </tr>
         </tbody>
         <thead>
             <tr class="text-center">
-                <th scope="col">Mot de passe</th>
+                <th>Mot de passe</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="row">
 
 
   @if (controlPasswdActual.invalid && controlPasswdActual.touched)
@@ -54,28 +54,55 @@
             }
 
             <tr class="input-group mb-3" style="margin-left: 0;">
+                <td class="col-4 justify-content-center">
+
+<div class="row">
+
+    <div class="col-10">
+                    @if(!IsValidActualPasswd){
+
+                        <input [formControl]="controlPasswdActual" id="actual-passwd" type="{{ passwordActualVisible ? 'text' : 'password' }}" class="form-control text-center" placeholder="Mot de passe actuel">
+
+                    }@else {
+                        <input id="actual-passwd" type="password" class="form-control text-center" placeholder="Mot de passe actuelle vaildé !" readonly disabled>
+                    }
+
+    </div>
+
+    <div class="col-2">
+
+                    <button (click)="togglePasswordActualVisibility()">
+                    <i class="fa" [ngClass]="{'fa-eye': !passwordActualVisible, 'fa-eye-slash': passwordActualVisible}"></i>
+                    </button>
+    </div>
+
+</div>
+                </td>
+
+
                 <td class="col justify-content-center">
 
+<div class="row">
+    <div class="col-10">
+    @if(!IsValidActualPasswd){
+        <input id="new-passwd" type="password" class="form-control text-center" placeholder="Nouveau mot de passe" disabled required>
 
-@if(!IsValidActualPasswd){
-    <input [formControl]="controlPasswdActual" id="actual-passwd" type="password" class="form-control text-center" placeholder="Mot de passe actuel">
-}@else {
-    <input id="actual-passwd" type="password" class="form-control text-center" placeholder="Mot de passe actuelle vaildé !" readonly disabled>
-}
+    
+    }@else {
+        <input [formControl]="controlPasswdNew" id="new-passwd" type="{{ passwordNewVisible ? 'text' : 'password' }}" class="form-control text-center" placeholder="Nouveau mot de passe">
 
+    }
+    </div>
 
+    <div class="col-2">
+                    <button (click)="togglePasswordNewVisibility()">
+                    <i class="fa" [ngClass]="{'fa-eye': !passwordNewVisible, 'fa-eye-slash': passwordNewVisible}"></i>
+                    </button>
+    </div>
+</div>
                 </td>
-                <td class="col justify-content-center">
-<input [formControl]="controlPasswdNew" id="new-passwd" type="{{ passwordVisible ? 'text' : 'password' }}" class="form-control text-center"
-    placeholder="Nouveau mot de passe">
 
 
-<button (click)="togglePasswordVisibility()">
-  <i class="fa" [ngClass]="{'fa-eye': !passwordVisible, 'fa-eye-slash': passwordVisible}"></i>
-</button>
-
-
-                </td>
                 <td class="col text-center d-grid gap-2">
   
                     @if(!IsValidActualPasswd){    
@@ -85,7 +112,11 @@
                     }
 
                 </td>
+
+
             </tr>
+
+
         </tbody>
         <thead>
             <tr class="text-center">

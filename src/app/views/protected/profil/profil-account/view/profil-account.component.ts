@@ -29,7 +29,8 @@ controlPasswdActual! : FormControl
 controlPasswdNew! : FormControl
 controlEmail! : FormControl
 
-passwordVisible : boolean = false
+passwordActualVisible : boolean = false
+passwordNewVisible : boolean = false
 
 ngOnInit(): void {
   this.controlName = new FormControl('', [Validators.minLength(3), Validators.required])
@@ -85,27 +86,19 @@ checkActualPasswd() {
   this.http.post<boolean>('https://localhost:7043/api/User/CheckPasswd', { passwd }
   ).subscribe({
     next: (data) => 
-    {
       this.IsValidActualPasswd = data
-      console.log(data);
-    },
-    error: (err) =>{
-    console.log("***********");
-     console.error(err)
-    console.log("***********");
-    }
   });
 }
 
+userUpdatePass: UpdatePasswd | undefined 
 
 updatePass() {
   const passwdNew = this.controlPasswdNew.value;
+  this.userUpdatePass = {passwd : passwdNew, passConfirm : passwdNew}
 
-  this.http.put('https://localhost:7043/api/User/Pass', { passwdNew }
-  ).subscribe({
-    next: (responce) => console.log(responce),
-    error: (err) => console.error(err)
-  });
+  this.http.put('https://localhost:7043/api/User/Pass', this.userUpdatePass).subscribe(({
+    next : (result) => console.log(result)
+  }))
 }
 
 
@@ -115,10 +108,19 @@ console.log(this.controlName.value)
 }
 
 
-togglePasswordVisibility(){
-  this.passwordVisible = !this.passwordVisible
+togglePasswordActualVisibility(){
+  this.passwordActualVisible = !this.passwordActualVisible
 }
 
+togglePasswordNewVisibility(){
+  this.passwordNewVisible = !this.passwordNewVisible
+}
 
 }
 
+export interface UpdatePasswd{
+
+  passwd : string 
+  passConfirm : string
+
+}

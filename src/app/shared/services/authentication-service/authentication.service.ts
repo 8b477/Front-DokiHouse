@@ -57,9 +57,7 @@ export class AuthenticationService {
             return true;
             }),
             catchError(error => {
-              let displayError : any = JSON.stringify(error)
-              console.log('Error trigger in LOGIN method => \n' + displayError)
-
+              console.error(error)
               return of(false)
             })
           )
