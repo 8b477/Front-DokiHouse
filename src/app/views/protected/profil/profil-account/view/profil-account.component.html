@@ -61,7 +61,7 @@
     <div class="col-10">
                     @if(!IsValidActualPasswd){
 
-                        <input [formControl]="controlPasswdActual" id="actual-passwd" type="{{ passwordActualVisible ? 'text' : 'password' }}" class="form-control text-center" placeholder="Mot de passe actuel">
+                        <input [formControl]="controlPasswdActual" id="actual-passwd" type="{{ passwordActualVisible ? 'text' : 'password' }}" class="form-control text-center" placeholder="Mot de passe actuel" autocomplete="off">
 
                     }@else {
                         <input id="actual-passwd" type="password" class="form-control text-center" placeholder="Mot de passe actuelle vaildé !" readonly disabled>
@@ -89,7 +89,7 @@
 
     
     }@else {
-        <input [formControl]="controlPasswdNew" id="new-passwd" type="{{ passwordNewVisible ? 'text' : 'password' }}" class="form-control text-center" placeholder="Nouveau mot de passe">
+        <input [formControl]="controlPasswdNew" id="new-passwd" type="{{ passwordNewVisible ? 'text' : 'password' }}" class="form-control text-center" placeholder="Nouveau mot de passe" autocomplete="off">
 
     }
     </div>
@@ -126,25 +126,38 @@
         <tbody>
 
 
-  @if (controlEmail.invalid && controlEmail.touched)
-            {
-                <app-form-error-info 
-                    [tooltipText]="'L\'adresse mail n\'est pas valide 😧'"
-                    [errorMessage]="'Mail invalide ! '">
-                </app-form-error-info>
-            }
-
-
             <tr class="input-group mb-3" style="margin-left: 0;">
+
+@if(!emailIsValid){
                 <td class="col justify-content-center">
-                    <input id="actual-mail" type="email" class="form-control text-center" placeholder="Mail actuel">
+                    <input [formControl]="controlEmailActual" id="actual-mail" type="email" class="form-control text-center" placeholder="Mail actuel" autocomplete="off">
                 </td>
+}@else {
                 <td class="col justify-content-center">
-                    <input [formControl]="controlEmail" id="new-mail" type="email" class="form-control text-center" placeholder="Nouveau mail">
+                    <input id="actual-mail" type="email" class="form-control text-center" placeholder="Mail actuel" disable readonly>
                 </td>
+}
+
+@if(emailIsValid){
+                <td class="col justify-content-center">
+                    <input [formControl]="controlEmailNew" id="new-mail" type="email" class="form-control text-center" placeholder="Nouveau mail" autocomplete="off">
+                </td>
+}@else {
+                <td class="col justify-content-center">
+                    <input id="new-mail" type="email" class="form-control text-center" placeholder="Nouveau mail" readonly disabled>
+                </td>
+}
+
+@if(!emailIsValid){
                 <td class="col text-center d-grid gap-2">
-                    <button class="btn btn-primary">Change</button>
+                    <button (click)="checkMail()" class="btn btn-success">Vérification du mail actuel</button>
                 </td>
+}@else {
+                <td class="col text-center d-grid gap-2">
+                    <button (click)="checkMail()" class="btn btn-warning">Valider le changement de mail</button>
+                </td>
+}
+
             </tr>
         </tbody>
     </table>

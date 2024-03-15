@@ -1,7 +1,7 @@
 import { jwtDecode } from 'jwt-decode';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject, catchError, map, of } from 'rxjs';
+import { Observable, Subject, map } from 'rxjs';
 import { UserLoginModel } from '../../../API/Models/userModels/userLoginModel/UserLoginModel';
 import { UserConnectedModel } from '../../../API/Models/userModels/userConnectedModel/UserConnectedModel';
 
@@ -55,10 +55,6 @@ export class AuthenticationService {
             this.emitValueSubjectUser()
             
             return true;
-            }),
-            catchError(error => {
-              console.error(error)
-              return of(false)
             })
           )
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, booleanAttribute, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormErrorInfoComponent } from "../../../../../shared/components/form-error-info/view/form-error-info.component";
 import { HttpClient } from '@angular/common/http';
@@ -27,16 +27,20 @@ IsValidActualPasswd : boolean = false
 controlName! : FormControl
 controlPasswdActual! : FormControl
 controlPasswdNew! : FormControl
-controlEmail! : FormControl
+controlEmailActual! : FormControl
+controlEmailNew! : FormControl
 
 passwordActualVisible : boolean = false
 passwordNewVisible : boolean = false
+
+emailIsValid : boolean = false;
 
 ngOnInit(): void {
   this.controlName = new FormControl('', [Validators.minLength(3), Validators.required])
   this.controlPasswdActual = new FormControl('', [Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,15}'), Validators.required])
   this.controlPasswdNew = new FormControl('', [Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,15}'), Validators.required])
-  this.controlEmail = new FormControl('', [Validators.email, Validators.required])
+  this.controlEmailActual = new FormControl('', [Validators.email, Validators.required])
+  this.controlEmailNew = new FormControl('', [Validators.email, Validators.required])
 }
 
 
@@ -102,9 +106,23 @@ updatePass() {
 }
 
 
+checkMail() {
+  const mailNew = this.controlEmailNew.value;
+
+  this.http.post<boolean>('https://localhost:7043/api/User/CheckMails', {mailNew}).subscribe(({
+    next : (result) =>{
+     console.log(result)
+     this.emailIsValid = result
+    }
+  }))
+}
+
+
 
 debug(){
-console.log(this.controlName.value)
+console.log("*********************")
+console.log(this.emailIsValid);
+console.log("*********************")
 }
 
 
