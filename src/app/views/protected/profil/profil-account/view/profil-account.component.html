@@ -1,28 +1,26 @@
-<div class="container-md mx-auto position-relative" style="height: 55vh;">
+<div class="container-md mx-auto position-relative" 
+     style="height: 55vh;"
+    >
     <table class="table position-absolute top-50 start-50 translate-middle">
         <thead>
             <tr class="text-center">
-                <th scope="col">Nom</th>
+                <th>Nom</th>
             </tr>
         </thead>
         <tbody class="row">
-
-            @if (controlName.invalid && controlName.touched)
-            {
-                <app-form-error-info 
-                    [tooltipText]="'Le nom doit être de minimum 3 caractères 🙃'"
-                    [errorMessage]="'Le nom est pas correct ! '">
-                </app-form-error-info>
-            }
-
             <tr class="input-group mb-3" style="margin-left: 0;">
                 <td class="col-4" for="change-name" (click)="activeFocusInput()">
                     <span class="input-group-text justify-content-center">
-                        <label for="change-name">{{ name }} :</label>
+                        <label for="change-name">Nom actuel : {{ name }}</label>
                     </span>
                 </td>
                 <td class="col-4 justify-content-center">
-                    <input [formControl]="controlName" id="change-name" type="text" class="form-control text-center" placeholder="Nouveau pseudo" required>
+                    <input  id="change-name" class="form-control text-center"
+                            [formControl]="controlName"  
+                            type="text"
+                            placeholder="Nouveau pseudo" 
+                            readonly
+                        >
                 </td>
                 <td class="col-4 text-center d-grid gap-2">
                     <button class="btn btn-primary" (click)="updateName()">Change</button>
@@ -35,88 +33,77 @@
             </tr>
         </thead>
         <tbody class="row">
-
-
-  @if (controlPasswdActual.invalid && controlPasswdActual.touched)
-            {
-                <app-form-error-info 
-                    [tooltipText]="'Le mot de passe doit contenir 8caractères, 1majuscule, 1minuscule, 1chiffre et 1caractère spécial'"
-                    [errorMessage]="'Le nouveau mot de passe n\'est pas correct !'">
-                </app-form-error-info>
-            }
-
-  @if (controlPasswdNew.invalid && controlPasswdNew.touched)
-            {
-                <app-form-error-info 
-                    [tooltipText]="'Le mot de passe doit contenir 8caractères, 1majuscule, 1minuscule, 1chiffre et 1caractère spécial'"
-                    [errorMessage]="'Le nouveau mot de passe n\'est pas correct !'">
-                </app-form-error-info>
-            }
-
             <tr class="input-group mb-3" style="margin-left: 0;">
                 <td class="col-4 justify-content-center">
+                    <div class="row">
+                        <div class="col-10">
 
-<div class="row">
+                            @if(!IsValidActualPasswd){
+                                <input [formControl]="controlPasswdActual" id="actual-passwd"
+                                       type="{{ passwordActualVisible ? 'text' : 'password' }}"
+                                       class="form-control text-center" 
+                                       placeholder="Mot de passe actuel" 
+                                       autocomplete="off"
+                                    >
+                            }
+                            @else {
+                                <input id="actual-passwd" type="password" class="form-control text-center"
+                                       placeholder="Mot de passe actuelle vaildé !"
+                                       readonly 
+                                       disabled
+                                    >
+                            }
 
-    <div class="col-10">
-                    @if(!IsValidActualPasswd){
-
-                        <input [formControl]="controlPasswdActual" id="actual-passwd" type="{{ passwordActualVisible ? 'text' : 'password' }}" class="form-control text-center" placeholder="Mot de passe actuel" autocomplete="off">
-
-                    }@else {
-                        <input id="actual-passwd" type="password" class="form-control text-center" placeholder="Mot de passe actuelle vaildé !" readonly disabled>
-                    }
-
-    </div>
-
-    <div class="col-2">
-
-                    <button (click)="togglePasswordActualVisibility()">
-                    <i class="fa" [ngClass]="{'fa-eye': !passwordActualVisible, 'fa-eye-slash': passwordActualVisible}"></i>
-                    </button>
-    </div>
-
-</div>
+                        </div>
+                        <div class="col-2">
+                            <button (click)="togglePasswordActualVisibility()">
+                                <i  class="fa" 
+                                    [ngClass]="{'fa-eye': !passwordActualVisible, 'fa-eye-slash': passwordActualVisible}">
+                                </i>
+                            </button>
+                        </div>
+                    </div>
                 </td>
-
-
                 <td class="col justify-content-center">
+                    <div class="row">
+                        <div class="col-10">
 
-<div class="row">
-    <div class="col-10">
-    @if(!IsValidActualPasswd){
-        <input id="new-passwd" type="password" class="form-control text-center" placeholder="Nouveau mot de passe" disabled required>
+                            @if(!IsValidActualPasswd){
+                                <input  id="new-passwd" class="form-control text-center"
+                                        type="password"
+                                        placeholder="Valide d'abord ton mot de passe !"
+                                        disabled 
+                                        autocomplete="off"
+                                    >
+                            }
+                            @else {
+                                <input  id="new-passwd" class="form-control text-center"
+                                        [formControl]="controlPasswdNew" 
+                                        type="{{ passwordNewVisible ? 'text' : 'password' }}" 
+                                        placeholder="Nouveau mot de passe"
+                                        autocomplete="off"
+                                    >
+                            }
 
-    
-    }@else {
-        <input [formControl]="controlPasswdNew" id="new-passwd" type="{{ passwordNewVisible ? 'text' : 'password' }}" class="form-control text-center" placeholder="Nouveau mot de passe" autocomplete="off">
-
-    }
-    </div>
-
-    <div class="col-2">
-                    <button (click)="togglePasswordNewVisibility()">
-                    <i class="fa" [ngClass]="{'fa-eye': !passwordNewVisible, 'fa-eye-slash': passwordNewVisible}"></i>
-                    </button>
-    </div>
-</div>
+                        </div>
+                        <div class="col-2">
+                            <button (click)="togglePasswordNewVisibility()">
+                                <i class="fa" [ngClass]="{'fa-eye': !passwordNewVisible, 'fa-eye-slash': passwordNewVisible}"></i>
+                            </button>
+                        </div>
+                    </div>
                 </td>
-
-
                 <td class="col text-center d-grid gap-2">
-  
-                    @if(!IsValidActualPasswd){    
+
+                    @if(!IsValidActualPasswd){
                         <button class="btn btn-success" (click)="checkActualPasswd()">Vérification du mot de passe actuel</button>
-                    }@else{
+                    }
+                    @else{
                         <button class="btn btn-warning" (click)="updatePass()">Valide ton nouveau mot de passe</button>
                     }
 
                 </td>
-
-
             </tr>
-
-
         </tbody>
         <thead>
             <tr class="text-center">
@@ -124,44 +111,59 @@
             </tr>
         </thead>
         <tbody>
-
-
             <tr class="input-group mb-3" style="margin-left: 0;">
 
-@if(!emailIsValid){
-                <td class="col justify-content-center">
-                    <input [formControl]="controlEmailActual" id="actual-mail" type="email" class="form-control text-center" placeholder="Mail actuel" autocomplete="off">
-                </td>
-}@else {
-                <td class="col justify-content-center">
-                    <input id="actual-mail" type="email" class="form-control text-center" placeholder="Mail actuel" disable readonly>
-                </td>
-}
-
-@if(emailIsValid){
-                <td class="col justify-content-center">
-                    <input [formControl]="controlEmailNew" id="new-mail" type="email" class="form-control text-center" placeholder="Nouveau mail" autocomplete="off">
-                </td>
-}@else {
-                <td class="col justify-content-center">
-                    <input id="new-mail" type="email" class="form-control text-center" placeholder="Nouveau mail" readonly disabled>
-                </td>
-}
-
-@if(!emailIsValid){
-                <td class="col text-center d-grid gap-2">
-                    <button (click)="checkMail()" class="btn btn-success">Vérification du mail actuel</button>
-                </td>
-}@else {
-                <td class="col text-center d-grid gap-2">
-                    <button (click)="checkMail()" class="btn btn-warning">Valider le changement de mail</button>
-                </td>
-}
+                @if(!emailIsValid){
+                    <td class="col justify-content-center">
+                        <input  id="actual-mail" class="form-control text-center"
+                                [formControl]="controlEmailActual"
+                                type="email"
+                                placeholder="Entre ton mail actuel" 
+                                autocomplete="off"
+                            >
+                    </td>
+                    <td class="col justify-content-center">
+                        <input  id="new-mail" class="form-control text-center"
+                                type="email"  
+                                placeholder="Valide d'abord ton email"
+                                disabled
+                            >
+                    </td>
+                    <td class="col text-center d-grid gap-2">
+                        <button (click)="checkMail()" class="btn btn-success">Vérification du mail actuel</button>
+                    </td>
+                }
+                @else {
+                    <td class="col justify-content-center">
+                        <input  id="actual-mail" class="form-control text-center"
+                                type="email" 
+                                placeholder="Mail actuel vérifié !"
+                                disabled
+                            >
+                    </td>
+                    <td class="col justify-content-center">
+                        <input  id="new-mail" type="email" class="form-control text-center"
+                                [formControl]="controlEmailNew"                       
+                                placeholder="Nouveau mail"
+                                autocomplete="off"
+                            >
+                    </td>
+                    <td class="col text-center d-grid gap-2">
+                        <button (click)="debug()" class="btn btn-warning">Valider le changement de mail</button>
+                    </td>
+                }
 
             </tr>
         </tbody>
     </table>
 </div>
+
+
+
+
+
+
+
 
 
 

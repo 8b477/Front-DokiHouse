@@ -1,4 +1,4 @@
-import { Component, OnInit, booleanAttribute, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormErrorInfoComponent } from "../../../../../shared/components/form-error-info/view/form-error-info.component";
 import { HttpClient } from '@angular/common/http';
@@ -41,6 +41,8 @@ ngOnInit(): void {
   this.controlPasswdNew = new FormControl('', [Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,15}'), Validators.required])
   this.controlEmailActual = new FormControl('', [Validators.email, Validators.required])
   this.controlEmailNew = new FormControl('', [Validators.email, Validators.required])
+
+  console.log(this.emailIsValid)
 }
 
 
@@ -107,21 +109,27 @@ updatePass() {
 
 
 checkMail() {
-  const mailNew = this.controlEmailNew.value;
-
-  this.http.post<boolean>('https://localhost:7043/api/User/CheckMails', {mailNew}).subscribe(({
-    next : (result) =>{
-     console.log(result)
-     this.emailIsValid = result
+  const data = this.controlEmailActual.value
+  const options = {
+    headers: {
+      'Content-Type': 'application/json'
     }
-  }))
+  };
+
+  this.http.post<boolean>('https://localhost:7043/api/User/CheckMail', JSON.stringify(data), options)
+    .subscribe(result => {
+      console.log(result);
+      this.emailIsValid = result;
+    });
 }
+
+
 
 
 
 debug(){
 console.log("*********************")
-console.log(this.emailIsValid);
+console.log(this.controlEmailActual.value);
 console.log("*********************")
 }
 
