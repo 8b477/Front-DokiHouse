@@ -39,15 +39,16 @@
                         <div class="col-10">
 
                             @if(!IsValidActualPasswd){
-                                <input [formControl]="controlPasswdActual" id="actual-passwd"
+                                <input id="actual-passwd" class="form-control text-center" 
+                                       [formControl]="controlPasswdActual"
                                        type="{{ passwordActualVisible ? 'text' : 'password' }}"
-                                       class="form-control text-center" 
                                        placeholder="Mot de passe actuel" 
                                        autocomplete="off"
                                     >
                             }
                             @else {
-                                <input id="actual-passwd" type="password" class="form-control text-center"
+                                <input id="actual-passwd" class="form-control text-center"
+                                       type="password"
                                        placeholder="Mot de passe actuelle vaildé !"
                                        readonly 
                                        disabled
