@@ -36,4 +36,5 @@
 - [] Ajouter une taille et faire une présentation pour la page de profil account.
 - [] Ajouter une class pour géré le responsive pour l'affichage de la gallery et des blog.
 - [] Ajuster l'affichage du component form-error-info debug responsive.
-- [] Ajouter un trunc sur la description d'une image pour éviter le dépassement de la carte, faire l'action dans    CardBonsaiComponent.ts
+- [] Ajouter un trunc sur la description d'une image pour éviter le dépassement de la carte, faire l'action dans    CardBonsaiComponent.ts.
+- [] Ajouter des paramètre d'entrée pour le composant bonsai-card, lui passer un objet BonsaiData, cette objet BonsaiData pourrat ainsi etre afficher différement BonsaiData Owner par ex ou BonsaiData All (public).
