@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { DatePipe,  NgClass,  NgFor, NgIf } from '@angular/common';
 
 import { GalleryServiceService } from '../../../service/gallery-service.service';
@@ -15,6 +15,7 @@ import { MOCKUP_DATA } from '../../../../../../mocks/fakeDataGallery/DATAGALLERY
 })
 export class CardBonsaiComponent {
 
+    @Input() data : BonsaiData[] = [] 
 
     // VARIABLE
     dataFromAPI    : BonsaiData[] | undefined
