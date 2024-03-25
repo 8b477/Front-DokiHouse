@@ -7,8 +7,7 @@
   border-radius: 20px;
   box-shadow: 5px 5px 8px #1b1b1b, -5px -5px 8px #272727;
   transition: 0.4s;
-  cursor: pointer;
-
+  position: relative;
   &:hover {
     translate: 0 -10px;
   }
@@ -24,7 +23,7 @@
     font-size: 18px;
     font-weight: 600;
     color: #b2eccf;
-    margin: 15px 0 0 10px;
+    text-align: center;
 }
 
   .card-body {
@@ -37,17 +36,34 @@
 }
 
   .footer {
-    position: initial;
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
     font-size: 13px;
     color: #b3b3b3;
     width: 100%;
+    padding-top: 0.4rem;
 
-    .by-name {
-      font-weight: 700;
-    }
+      p{
+        color: blanchedalmond;
+
+      }
+      span{
+        color: lightblue;
+      }
   }
 }
-
+  .more-details{
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    width: 100%;
+    border-radius: 0 0 9px 9px;
+    &:hover{
+      background-color: lightblue;
+      color: hotpink;
+    }
+  }
 
 .bg-text{
     background-color: black !important;
@@ -56,11 +72,6 @@
 
 ul{
     list-style-type: none;
-}
-
-.min-w{
-    min-height: 300px;
-    min-width: 300px;
 }
 
 .flex-center{
