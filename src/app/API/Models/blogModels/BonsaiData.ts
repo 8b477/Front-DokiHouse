@@ -1,5 +1,6 @@
 import { BonsaiPicture } from "./BonsaiPicture";
 
+
 export interface BonsaiData {
     idBonsai: number;
     idUser: number;
