@@ -1,0 +1,14 @@
+
+<button type="button" class="btn btn-primary" id="liveToastBtn" (click)="sendChangement()">Show live toast</button>
+
+<div id="toast-wrapper">
+    <div id="toats-head">
+        <p class="col">Attention erreur :</p>
+        <p class="text-right">
+            <button class="col" (click)="closeToast()">❌</button>
+        </p>
+    </div>
+    <div id="toats-bottom" class="col">
+        <p>Le champ à mal été remplie blabla</p>
+    </div>
+</div>

@@ -57,7 +57,7 @@
 
                         </div>
                         <div class="col-2">
-                            <button (click)="togglePasswordActualVisibility()">
+                            <button class="border-none" (click)="togglePasswordActualVisibility()">
                                 <i  class="fa" 
                                     [ngClass]="{'fa-eye': !passwordActualVisible, 'fa-eye-slash': passwordActualVisible}">
                                 </i>
@@ -88,7 +88,7 @@
 
                         </div>
                         <div class="col-2">
-                            <button (click)="togglePasswordNewVisibility()">
+                            <button class="border-none" (click)="togglePasswordNewVisibility()">
                                 <i class="fa" [ngClass]="{'fa-eye': !passwordNewVisible, 'fa-eye-slash': passwordNewVisible}"></i>
                             </button>
                         </div>
@@ -167,20 +167,3 @@
 
 
 
-
-<button type="button" class="btn btn-primary" id="liveToastBtn" (click)="sendChangement()">Show live toast</button>
-
-<div id="toast-wrapper">
-    <div id="toats-head">
-        <p class="col">Attention erreur :</p>
-        <p class="text-right">
-            <button class="col" (click)="closeToast()">❌</button>
-        </p>
-    </div>
-    <div id="toats-bottom" class="col">
-        <p>Le champ à mal été remplie blabla</p>
-    </div>
-</div>
-
-
-<button (click)="debug()">DEBUG</button>

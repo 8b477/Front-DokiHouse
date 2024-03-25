@@ -52,29 +52,6 @@ ngOnInit(): void {
  
 
 
-  sendChangement()
-  {
-        const toastLiveExample  = document.getElementById('toast-wrapper')
-
-        if(toastLiveExample !== null)
-        {
-          toastLiveExample.style.display = 'block'
-          toastLiveExample.style.opacity = '1'
-        }
-  }
-
-closeToast(){
-  const toastLiveExample  = document.getElementById('toast-wrapper')
-
-        if(toastLiveExample !== null)
-        {
-          toastLiveExample.style.opacity = '0'
-          setTimeout(()=>{
-            toastLiveExample.style.display = 'none'
-          },500)
-
-        }
-}
 
 
 
