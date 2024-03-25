@@ -1,14 +1,13 @@
 .card {
-  padding: 20px;
-  width: 330px;
-  min-height: 400px;
-  max-height: 550px;
-  margin: 2rem;
-  background: radial-gradient(circle, rgb(96 38 63) 0%, rgba(148,187,233,1) 100%);
-  border-radius: 20px;
-  box-shadow: 5px 5px 8px #1b1b1b, -5px -5px 8px #272727;
-  transition: 0.4s;
-  cursor: pointer;
+    padding: 0.6rem;
+    min-height: 476px;
+    max-height: 476px;
+    margin: 2rem;
+    background: radial-gradient( circle, rgb(96, 38, 63) 0%, rgb(148, 187, 233) 100%);
+    border-radius: 20px;
+    box-shadow: 5px 5px 8px #1b1b1b, -5px -5px 8px #272727;
+    transition: 0.4s;
+    cursor: pointer;
 
   &:hover {
     translate: 0 -10px;
@@ -25,30 +24,24 @@
     font-size: 18px;
     font-weight: 600;
     color: #b2eccf;
-    margin: 15px 0 0 10px;
 }
 
-  .card-body {
-    margin: 13px 0 0 10px;
+  .cardBlog-body {
+    overflow-y: auto;
     color: rgb(184, 184, 184);
     font-size: 15px;
-    max-height: 200px;
-    overflow-y: auto;
-    text-overflow: ellipsis;
 }
 
   .footer {
-    float: right;
-    margin: 28px 0 0 18px;
     font-size: 13px;
     color: #b3b3b3;
+    margin-top: 0.8rem;
 
     .by-name {
       font-weight: 700;
     }
   }
 }
-
 
 
 
