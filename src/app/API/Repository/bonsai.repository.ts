@@ -23,6 +23,8 @@ export class BonsaiRepository extends BonsaiGateway{
         return this.httpClient.get<BonsaiData[]>(`${this.baseUrl}Bonsai/GetAllBonsaiAndPicture`);
     }
 
-
+    override getAllBonsaiUser(): Observable<BonsaiData[]> {
+        return this.httpClient.get<BonsaiData[]>(`${this.baseUrl}Bonsai/Owned`);
+    }
 
 }

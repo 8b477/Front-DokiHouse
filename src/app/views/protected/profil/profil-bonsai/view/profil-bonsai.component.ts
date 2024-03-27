@@ -15,8 +15,8 @@ export class ProfilBonsaiComponent {
 
 
     data : BonsaiData[] = []
-    fakeData : BonsaiData[]   = MOCKUP_DATA
-    currentIndex   : { [key: number]: number } = {}
+    fakeData : BonsaiData[] = MOCKUP_DATA
+    currentIndex : { [key: number]: number } = {}
 
     constructor(private serviceGallery : GalleryServiceService) {}
 
