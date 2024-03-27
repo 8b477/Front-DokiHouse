@@ -3,7 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { AuthenticationService } from '../authentication-service/authentication.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { UserRepository } from '../../../API/Repository/user.repository';
+import { UserRepository } from '../../../API/repository/user.repository';
 import { UserModel } from '../../../API/models/userModels/UserModel';
 import { UserCreateModel } from '../../../API/models/userModels/userCreateModel/UserCreateModel';
 
