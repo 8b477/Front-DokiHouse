@@ -39,3 +39,4 @@
 - [] Ajouter un trunc sur la description d'une image pour éviter le dépassement de la carte, faire l'action dans    CardBonsaiComponent.ts.
 - [] Ajouter des paramètre d'entrée pour le composant bonsai-card, lui passer un objet BonsaiData, cette objet BonsaiData pourrat ainsi etre afficher différement BonsaiData Owner par ex ou BonsaiData All (public).
 - [] Ajouter une redirection si le user tente de navigué a une url ou un token d'identification est nécessaire le rediriger vers le home ou autre.
+- [] Refacto tout les services 1.call api, 2.gestion erreur, 3.display data
