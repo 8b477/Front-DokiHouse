@@ -32,7 +32,7 @@
 
 ### DEBUG ✍🏻
 
-- [X] Fixer, supprimer l'affichage de la bordure au clique sur une card, dans la partie profil-menu.(opéra)
+- [] Fixer, supprimer l'affichage de la bordure au clique sur une card, dans la partie profil-menu.(opéra)
 - [] Ajouter une taille et faire une présentation pour la page de profil account.
 - [] Ajouter une class pour géré le responsive pour l'affichage de la gallery et des blog.
 - [] Ajuster l'affichage du component form-error-info debug responsive.
