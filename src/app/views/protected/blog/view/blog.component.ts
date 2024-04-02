@@ -17,5 +17,8 @@ export class BlogComponent {
 
   fakeData : Blog[] = DATABLOG
   
+
+
+  
 }
 

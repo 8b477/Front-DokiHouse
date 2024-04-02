@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { DatePipe,  NgClass,  NgFor, NgIf } from '@angular/common';
 
-import { GalleryServiceService } from '../../../service/gallery-service.service';
 import { BonsaiData } from '../../../../../../API/models/blogModels/BonsaiData';
 import { MOCKUP_DATA } from '../../../../../../mocks/fakeDataGallery/DATAGALLERY';
 
@@ -15,54 +14,33 @@ import { MOCKUP_DATA } from '../../../../../../mocks/fakeDataGallery/DATAGALLERY
 })
 export class CardBonsaiComponent {
 
-    @Input() data : BonsaiData[] = [] 
+    @Input() dataFromAPI : BonsaiData[] | [] = []
 
     // VARIABLE
-    dataFromAPI    : BonsaiData[] | undefined
-    dataFromMockup : BonsaiData[]              = MOCKUP_DATA
+    dataFromMockup : BonsaiData[] = MOCKUP_DATA
     currentIndex   : { [key: number]: number } = {}
-
-
-    // CONSTRUCTOR
-    constructor(private serviceBonsai :GalleryServiceService){ }
 
 
     // STATE
     ngOnInit(): void {
-        this.getData()
-        if(typeof this.dataFromAPI === 'undefined'){
-            this.dataFromMockup.forEach(bonsai => 
-            {
-                this.currentIndex[bonsai.idBonsai] = 0 // On s'assure que l'index commence à zéro pour le slider
-            });
+        if(this.dataFromAPI.length === 0)
+        {
+            this.dataFromMockup.forEach(bonsai => { this.currentIndex[bonsai.idBonsai] = 0 });
+        }
+        if(this.dataFromAPI.length !== 0)
+        {
+            this.dataFromAPI.forEach(bonsai => { this.currentIndex[bonsai.idBonsai] = 0 });
         }
     }
 
 
     // METHODS PUBLIC
-    prevSlide(bonsaiId: number, pictureLength: number) {
+    public prevSlide(bonsaiId: number, pictureLength: number) {
         this.currentIndex[bonsaiId] = (this.currentIndex[bonsaiId] - 1 + pictureLength) % pictureLength;
     }
 
-    nextSlide(bonsaiId: number, pictureLength: number) {
+    public nextSlide(bonsaiId: number, pictureLength: number) {
         this.currentIndex[bonsaiId] = (this.currentIndex[bonsaiId] + 1) % pictureLength;
-    }
-
-
-    // METHODS PRIVATE
-   private getData(){
-    this.serviceBonsai.getAllBonsaiAndPicture().subscribe
-        ({
-            next : (data : BonsaiData[]) =>
-            {
-                this.dataFromAPI = data,
-                this.dataFromAPI.forEach(bonsai => 
-                {
-                    this.currentIndex[bonsai.idBonsai] = 0 // On s'assure que l'index commence à zéro pour le slider
-                });
-            },
-            error : (err) => console.error(err) 
-        })
     }
 
 }

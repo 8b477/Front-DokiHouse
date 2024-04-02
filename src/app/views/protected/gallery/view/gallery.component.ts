@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CardBonsaiComponent } from "../components/card-bonsai/view/card-bonsai.component";
 import { BonsaiData } from '../../../../API/models/blogModels/BonsaiData';
-import { GalleryServiceService } from '../service/gallery-service.service';
-import { MOCKUP_DATA } from '../../../../mocks/fakeDataGallery/DATAGALLERY';
+import { BonsaiServiceService } from '../../../../shared/services/bonsai-service/bonsai-service.service';
 
 
 @Component({
@@ -12,27 +11,20 @@ import { MOCKUP_DATA } from '../../../../mocks/fakeDataGallery/DATAGALLERY';
     styleUrl: './gallery.component.scss',
     imports: [CardBonsaiComponent]
 })
-export class GalleryComponent {
+export class GalleryComponent implements OnInit{
 
- data : BonsaiData[] = []
- fakeData : BonsaiData[]   = MOCKUP_DATA
-    currentIndex   : { [key: number]: number } = {}
+    dataFromAPI : BonsaiData[] | [] = []
 
-    constructor(private serviceGallery : GalleryServiceService) {}
+
+    constructor(private bonsaiService : BonsaiServiceService) {}
+ngOnInit(): void {
+    this.getData()
+}
 
    private getData(){
-    this.serviceGallery.getAllBonsaiAndPicture().subscribe
-        ({
-            next : (data : BonsaiData[]) =>
-            {
-                this.data = data,
-                this.data.forEach(bonsai => 
-                {
-                    this.currentIndex[bonsai.idBonsai] = 0 // On s'assure que l'index commence à zéro pour le slider
-                });
-            },
-            error : (err) => console.error(err) 
-        })
-    }
- 
+    this.bonsaiService.getBonsaiUser().subscribe(({
+        next : (data : BonsaiData[] | []) => this.dataFromAPI  = data
+    }))
+}
+
 }

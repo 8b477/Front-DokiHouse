@@ -1,9 +1,10 @@
 import { jwtDecode } from 'jwt-decode';
-import { HttpClient } from '@angular/common/http';
+import { HttpBackend, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, map } from 'rxjs';
-import { UserLoginModel } from '../../../API/Models/userModels/userLoginModel/UserLoginModel';
-import { UserConnectedModel } from '../../../API/Models/userModels/userConnectedModel/UserConnectedModel';
+import { UserLoginModel } from '../../../API/models/userModels/userLoginModel/UserLoginModel';
+import { UserConnectedModel } from '../../../API/models/userModels/userConnectedModel/UserConnectedModel';
+
 
 
 
@@ -13,8 +14,13 @@ import { UserConnectedModel } from '../../../API/Models/userModels/userConnected
 })
 export class AuthenticationService {
 
+  private http: HttpClient;
+
   // INJECTION
-  constructor(private http : HttpClient){ }
+  constructor(private handler: HttpBackend)
+  { 
+    this.http = new HttpClient(handler)
+  }
 
 
   // PRIVATE VARIABLE

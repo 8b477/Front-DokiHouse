@@ -4,7 +4,7 @@ import { UserCreateModel } from "../models/userModels/userCreateModel/UserCreate
 import { HttpClient } from "@angular/common/http";
 import { inject } from "@angular/core";
 import { environment } from "../../../environments/environment";
-import { UserGateway } from "../Interfaces/user.getaway";
+import { UserGateway } from "../interfaces/user.getaway";
 import { UserModel } from "../models/userModels/UserModel";
 
 
