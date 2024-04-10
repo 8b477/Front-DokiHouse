@@ -1,5 +1,7 @@
 <p>create-bonsai works!</p>
 
-<input type="text" placeholder="titre">
-<input type="text" placeholder="description">
+<input formControlName="title" type="text" placeholder="titre">
+<input formControlName="description" type="text" placeholder="description">
 <input type="image" placeholder="image">
+
+<button (click)="sendModel()" class="btn btn-primary">Ajouter</button>
