@@ -40,3 +40,51 @@
 - [] Ajouter des paramètre d'entrée pour le composant bonsai-card, lui passer un objet BonsaiData, cette objet BonsaiData pourrat ainsi etre afficher différement BonsaiData Owner par ex ou BonsaiData All (public).
 - [] Ajouter une redirection si le user tente de navigué a une url ou un token d'identification est nécessaire le rediriger vers le home ou autre.
 - [] Refacto tout les services 1.call api, 2.gestion erreur, 3.display data
+
+------------------ 
+
+### GLOBAL IDEA OF COMPONENTS
+
+
+
+## PROFIL BONSAI COMPONENT 
+
+
+Ne pas faire de redirection pour :
+=> l'ajout,
+=> la suppresion,
+=> la mise à jour
+
+(ajouter un component qui lui vas géré les différentes action sur la même page)
+
+
+## AJOUT BONSAI 
+
+When user click on 'add' button, display one component wich represent the attempt field for create a new Bonsai
+
+
+## UPDATE BONSAI 
+
+Quand le user sélectionne le bouton 'update', celui reste sélectionner et permet attend une sélection d'un Bonsai.
+
+Côté technique:
+- Au clic du bouton update changé son état initial sur 'active'.
+- Active le cursor sur les card qui représente les Bonsai déjà créer par le user.
+- Au clic d'un bonsai présent dans liste permetre modifié les infos du Bonsai sélectionner.
+
+
+
+## GALLERY 
+
+Cette page vas affiché les 21 premier Bonsai stocker en base de donnée (les plus récents) :
+- IMAGES
+- TITRE
+- DESCRIPTION?
+- DATE DE CREATION
+
+
+
+## BLOG 
+
+Cette page vas affiché les 21 premier Blog (les plus récents):
+
