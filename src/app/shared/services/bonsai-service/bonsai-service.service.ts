@@ -1,7 +1,8 @@
-import { Observable, catchError, of, throwError } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { BonsaiRepository } from '../../../API/repository/bonsai.repository';
 import { BonsaiData } from '../../../API/models/blogModels/BonsaiData';
+import { BonsaiModel } from '../../../API/models/bonsaiModels/bonsaiCreateModel';
 
 
 
@@ -31,5 +32,12 @@ export class BonsaiServiceService {
   }
 
 
+  public createBonsai(bonsai : BonsaiModel) : Observable<BonsaiModel>{
+    return this.bonsaiRepo.post(bonsai).pipe(
+      catchError((err) => {
+        return throwError(() => err);
+      })
+    )
+  }
 
 }

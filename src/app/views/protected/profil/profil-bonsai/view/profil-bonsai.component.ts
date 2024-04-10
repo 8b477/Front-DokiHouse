@@ -14,28 +14,22 @@ import { BonsaiServiceService } from '../../../../../shared/services/bonsai-serv
 export class ProfilBonsaiComponent implements OnInit{
 
 
-    data : BonsaiData[] | [] = []
+    dataToDisplay : BonsaiData[] | [] = []
     fakeData : BonsaiData[] = MOCKUP_DATA
     currentIndex : { [key: number]: number } = {}
 
     constructor(private service : BonsaiServiceService) {}
     ngOnInit(): void {
         this.getBonsai()
-        console.log('dans le init : ' + this.data)
     }
 
 
     public getBonsai(){
        this.service.getOwnBonsaiUser().subscribe((
         {
-            next : (data : BonsaiData[] | []) => this.data = data,
-            error : (err) => console.error(err)
+            next : (data : BonsaiData[] | []) => this.dataToDisplay = data,
         }
        ))
     }
-
-public debug(){
-    console.log(this.data)
-}
 
 }

@@ -1,55 +1,51 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-auto d-flex flex-column flex-shrink-0 bg-light rounded-end h-100" style="width: 4.5rem;">
-      <a href="/" class="d-block p-3 link-dark text-decoration-none" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only">
+      <a href="#" class="d-block p-3 link-dark text-decoration-none" title="" data-bs-toggle="tooltip"
+        data-bs-placement="right" data-bs-original-title="Icon-only">
 
-        <svg class="bi" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-        
+        <img src="/assets/img/profil/bonsai/home.svg" alt="home logo">
+
         <span class="visually-hidden">Icon-only</span>
       </a>
       <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
         <li class="nav-item">
-          <a href="#" class="nav-link active py-3 border-bottom" aria-current="page" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Home">
-            <svg class="bi" width="24" height="24" role="img" aria-label="Home"><use xlink:href="#home"></use></svg>
+          <a href="#" class="nav-link active py-3 border-bottom" aria-current="page" title="" data-bs-toggle="tooltip"
+            data-bs-placement="right" data-bs-original-title="Home">
+
+            <img src="/assets/img/profil/bonsai/plus.svg" alt="plus logo">
+
           </a>
         </li>
         <li>
-          <a href="#" class="nav-link py-3 border-bottom" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Dashboard">
-            <svg class="bi" width="24" height="24" role="img" aria-label="Dashboard"><use xlink:href="#speedometer2"></use></svg>
+          <a href="#" class="nav-link py-3 border-bottom" title="" data-bs-toggle="tooltip" data-bs-placement="right"
+            data-bs-original-title="Dashboard">
+
+            <img src="/assets/img/profil/bonsai/update.svg" alt="update logo">
+
           </a>
         </li>
         <li>
-          <a href="#" class="nav-link py-3 border-bottom" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Orders">
-            <svg class="bi" width="24" height="24" role="img" aria-label="Orders"><use xlink:href="#table"></use></svg>
-          </a>
-        </li>
-        <li>
-          <a href="#" class="nav-link py-3 border-bottom" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Products">
-            <svg class="bi" width="24" height="24" role="img" aria-label="Products"><use xlink:href="#grid"></use></svg>
-          </a>
-        </li>
-        <li>
-          <a href="#" class="nav-link py-3 border-bottom" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Customers">
-            <svg class="bi" width="24" height="24" role="img" aria-label="Customers"><use xlink:href="#people-circle"></use></svg>
+          <a href="#" class="nav-link py-3 border-bottom" title="" data-bs-toggle="tooltip" data-bs-placement="right"
+            data-bs-original-title="Orders">
+
+            <img src="/assets/img/profil/bonsai/delete.svg" alt="delete logo">
+
           </a>
         </li>
       </ul>
-      <div class="dropdown border-top">
-        <a href="#" class="d-flex align-items-center justify-content-center p-3 link-dark text-decoration-none">
-          <img src="https://github.com/mdo.png" alt="avatar" width="24" height="24" class="rounded-circle">
-        </a>
-      </div>
     </div>
 
     <div class="col">
       <div class="container">
-        @if(data){
-          <app-card-bonsai [dataFromAPI]="data"/>
+        @if(dataToDisplay){
+          <app-card-bonsai [dataFromAPI]="dataToDisplay" />
         }@else{
           <h1>no content</h1>
-          <button (click)="debug()">Ajoute un bonsai</button>
+          <button class="btn btn-primary">Ajoute un bonsai</button>
         }
       </div>
     </div>
+
   </div>
 </div>

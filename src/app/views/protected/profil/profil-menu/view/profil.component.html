@@ -1,21 +1,37 @@
 
 <div class="container" style="height: 60vh; display: flex; justify-content: center; align-items: center;">
-
    <div class="row">
       <div class="col-3 none-border">
-         <app-card-profil [cardName]="compteName" [cardDescription]="compteDesciption" [cardImage]="compteImage" routerLink="account"/>
+         <app-card-profil 
+            [cardName]="compteName"
+            [cardDescription]="compteDesciption"
+            [cardImage]="compteImage"
+            routerLink="account"
+         />
       </div>
       <div class="col-3">
-         <app-card-profil [cardName]="bonsaiName" [cardDescription]="bonsaiDesciption" [cardImage]="bonsaiImage" routerLink="bonsai"/>
+         <app-card-profil 
+            [cardName]="bonsaiName"
+            [cardDescription]="bonsaiDesciption"
+            [cardImage]="bonsaiImage"
+            routerLink="bonsai"
+         />
       </div>
-   <div class="col-3">
-      <app-card-profil [cardName]="postAndCommentName" [cardDescription]="postAndCommentDesciption"
-         [cardImage]="postAndCommentImage" routerLink="post"/>
-   </div>
-   <div class="col-3">
-      <app-card-profil [cardName]="notificationName" [cardDescription]="notificationDesciption"
-         [cardImage]="notificationImage" routerLink="notification"/>
-   </div>
-
+      <div class="col-3">
+         <app-card-profil 
+            [cardName]="postAndCommentName"
+            [cardDescription]="postAndCommentDesciption"
+            [cardImage]="postAndCommentImage"
+            routerLink="post"
+         />
+      </div>
+      <div class="col-3">
+         <app-card-profil
+            [cardName]="notificationName"
+            [cardDescription]="notificationDesciption"
+            [cardImage]="notificationImage"
+            routerLink="notification"
+         />
+      </div>
    </div>
 </div>

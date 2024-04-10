@@ -22,9 +22,7 @@ export class UserHttpService {
   createUser(model : UserCreateModel)
   {
     return this.userRepo.create(model).subscribe({
-      next : () => { this.route.navigate(['/login']) },
-      error : (error) => { console.log(error) },
-      complete : () => { console.log('Task CreateUser is finished !') },
+      next : () => { this.route.navigate(['/login']) }
     })
   }
 
