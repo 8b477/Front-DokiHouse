@@ -12,9 +12,7 @@
         <li class="nav-item">
           <a href="#" class="nav-link active py-3 border-bottom" aria-current="page" title="" data-bs-toggle="tooltip"
             data-bs-placement="right" data-bs-original-title="Home">
-
             <img src="/assets/img/profil/bonsai/plus.svg" alt="plus logo">
-
           </a>
         </li>
         <li>
@@ -38,7 +36,7 @@
 
     <div class="col">
       <div class="container">
-        @if(dataToDisplay){
+        @if(dataToDisplay.length > 0){
           <app-card-bonsai [dataFromAPI]="dataToDisplay" />
         }@else{
           <h1>no content</h1>
@@ -49,3 +47,7 @@
 
   </div>
 </div>
+
+@if(createActive){
+  <app-create-bonsai/>
+}
