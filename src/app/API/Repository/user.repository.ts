@@ -1,7 +1,7 @@
 import { Observable } from "rxjs";
 
 import { UserCreateModel } from "../models/userModels/userCreateModel/UserCreateModel";
-import { HttpClient } from "@angular/common/http";
+import { HttpBackend, HttpClient } from "@angular/common/http";
 import { inject } from "@angular/core";
 import { environment } from "../../../environments/environment";
 import { UserGateway } from "../interfaces/user.getaway";
@@ -17,11 +17,12 @@ export class UserRepository implements UserGateway{
 
     // INJECTION
     httpClient = inject(HttpClient)
-
+    handler = inject(HttpBackend)
+    httpClientback = new HttpClient(this.handler) // --> For call endpoint AllowAnonymous
 
     // PUBLIC METHODS
     create(model : UserCreateModel): Observable<UserModel> {
-        return this.httpClient.post<UserModel>(`${this.baseUrl}User`, model)
+        return this.httpClientback.post<UserModel>(`${this.baseUrl}User`, model)
     }
 
 

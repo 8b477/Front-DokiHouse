@@ -29,7 +29,7 @@ export class ProfilBonsaiComponent implements OnInit{
     public getBonsai(){
        this.service.getOwnBonsaiUser().subscribe((
         {
-            next : (data : BonsaiData[] | []) =>{ this.dataToDisplay = data; console.log(JSON.stringify(data))}
+            next : (data : BonsaiData[] | []) =>{ this.dataToDisplay = data }
         }
        ))
     }
