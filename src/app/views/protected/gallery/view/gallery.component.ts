@@ -23,7 +23,7 @@ ngOnInit(): void {
 
    private getData(){
     this.bonsaiService.getBonsaiUser().subscribe(({
-        next : (data : BonsaiData[] | []) => this.dataFromAPI  = data
+        next : (data : BonsaiData[] | []) => {this.dataFromAPI  = data; console.log(JSON.stringify(data))}
     }))
 }
 

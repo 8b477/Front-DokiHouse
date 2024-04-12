@@ -34,4 +34,8 @@ export class ProfilBonsaiComponent implements OnInit{
        ))
     }
 
+    public createNewBonsai(){
+        this.createActive = true;
+    }
+
 }

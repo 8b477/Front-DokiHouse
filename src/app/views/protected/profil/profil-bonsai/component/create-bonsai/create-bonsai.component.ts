@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { BonsaiServiceService } from '../../../../../../shared/services/bonsai-service/bonsai-service.service';
 import { BonsaiModel } from '../../../../../../API/models/bonsaiModels/bonsaiCreateModel';
-import { Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-create-bonsai',
   standalone: true,
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './create-bonsai.component.html',
   styleUrl: './create-bonsai.component.scss'
 })
 export class CreateBonsaiComponent implements OnInit{
-  loginForm: any;
-  formBuilder: any;
+  loginForm! : FormGroup;
+  formBuilder!: FormBuilder;
 
   constructor(private bonsaiService : BonsaiServiceService){}
   ngOnInit(): void {
@@ -23,13 +23,11 @@ export class CreateBonsaiComponent implements OnInit{
 
  private buildFormAndValidator() : void 
   {
-    this.loginForm = this.formBuilder.group
-    ({ 
-        'title'   : ['', [Validators.required]],
-        'description' : ['', [Validators.required]]
-    });
+    this.loginForm = new FormGroup({
+      title : new FormControl('', Validators.required),
+      description : new FormControl('', Validators.required)
+    })
   }
-
 
   private createNewBonsai(bonsai : BonsaiModel){
     this.bonsaiService.createBonsai(bonsai).subscribe(({
@@ -47,7 +45,8 @@ export class CreateBonsaiComponent implements OnInit{
       {
         console.error('userModel is not defined')
       }
-  this.createNewBonsai(this.newBonsai);
+  this.createNewBonsai((this.newBonsai));
+  console.log(title + " " + description)
   }
 
 }

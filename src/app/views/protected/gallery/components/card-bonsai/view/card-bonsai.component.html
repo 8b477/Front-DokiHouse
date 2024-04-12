@@ -7,7 +7,7 @@
           <div class="carousel-inner">
             <ng-container *ngFor="let picture of bonsai.bonsaiPicture; let j = index;">
               <div class="carousel-item" [class.active]="j === currentIndex[bonsai.idBonsai]">
-                <img class="d-block w-100 card-image" src="{{ picture.fileName }}" alt="">
+                <img class="d-block card-image" src="{{ picture.fileName }}" alt="">
               </div>
             </ng-container>
           </div>
@@ -37,7 +37,7 @@
           <div class="carousel-inner">
             <ng-container *ngFor="let picture of bonsai.bonsaiPicture; let j = index;">
               <div class="carousel-item" [class.active]="j === currentIndex[bonsai.idBonsai]">
-                <img class="d-block w-100 card-image" src="{{ picture.fileName }}" alt="">
+                <img class="d-block card-image" src="{{ picture.fileName }}" alt="">
               </div>
             </ng-container>
           </div>

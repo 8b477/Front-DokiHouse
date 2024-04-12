@@ -26,7 +26,7 @@ export class BonsaiRepository extends BonsaiGateway{
     }
 
     override post(bonsai : BonsaiModel): Observable<BonsaiModel> {
-        return this.httpClient.post<BonsaiModel>(`${this.baseUrl}/Bonsai`,bonsai);
+        return this.httpClient.post<BonsaiModel>(`${this.baseUrl}Bonsai`,bonsai);
     }
     override update(): Observable<any> {
         throw new Error("Method not implemented.");
