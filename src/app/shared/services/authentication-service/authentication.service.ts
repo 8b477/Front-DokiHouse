@@ -5,10 +5,6 @@ import { Observable, Subject, map } from 'rxjs';
 import { UserLoginModel } from '../../../API/models/userModels/userLoginModel/UserLoginModel';
 import { UserConnectedModel } from '../../../API/models/userModels/userConnectedModel/UserConnectedModel';
 
-
-
-
-
 @Injectable({
   providedIn: 'root'
 })

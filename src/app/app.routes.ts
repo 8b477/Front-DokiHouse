@@ -12,6 +12,7 @@ import { ProfilAccountComponent } from './views/protected/profil/profil-account/
 import { ProfilBonsaiComponent } from './views/protected/profil/profil-bonsai/view/profil-bonsai.component';
 import { ProfilPostComponent } from './views/protected/profil/profil-post/view/profil-post.component';
 import { ProfilNotificationComponent } from './views/protected/profil/profil-notification/view/profil-notification.component';
+import { authenticationGuard } from './shared/guard/authentication.guard';
 
 
 
@@ -20,6 +21,7 @@ export const routes: Routes =
     {
      title : 'Home',
      'path' : '',
+     canActivate : [authenticationGuard],
      component : HomeComponent
     },
     {
