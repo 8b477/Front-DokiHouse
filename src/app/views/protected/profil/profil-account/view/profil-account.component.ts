@@ -1,9 +1,12 @@
+import { UserConnectedModel } from './../../../../../API/models/userModels/userConnectedModel/UserConnectedModel';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormErrorInfoComponent } from "../../../../../shared/components/form-error-info/view/form-error-info.component";
 import { HttpClient } from '@angular/common/http';
 import { NgClass } from '@angular/common';
-import { UpdatePasswd } from '../../../../../API/models/userModels/userUpdatePasswd/UserUpdatePasswd';
+import { UpdatePasswd } from '../../../../../API/models/userModels/userUpdateModels/userUpdatePasswd/UserUpdatePasswd';
+import { UserUpdateName } from '../../../../../API/models/userModels/userUpdateModels/userUpdateName/UserUpdateName';
+import { LocalStorageService } from '../../../../../shared/services/local-storage-service/local-storage.service';
 
 
 @Component({
@@ -15,28 +18,34 @@ import { UpdatePasswd } from '../../../../../API/models/userModels/userUpdatePas
 })
 export class ProfilAccountComponent implements OnInit {
 
+
   //VARIABLES
-  name : string = 'mark';
-  email : string = 'email@test.be';
-  role : string = 'larbin';
+  userUpdatePass!: UpdatePasswd
+  userInfo! : UserConnectedModel
+  name : string = this.userInfo.name
+  role : string = this.userInfo.role;
   avatar : string = `https://api.dicebear.com/7.x/adventurer/svg?seed=${this.name}`;
-  passwd : string = '****';
+
+  passwordActualVisible : boolean = false
+  passwordNewVisible : boolean = false
+  emailIsValid : boolean = false;
+  IsValidActualPasswd : boolean = false;
+  //SERVICES
   http : HttpClient = inject(HttpClient)
+  service : LocalStorageService = inject(LocalStorageService);
 
-  IsValidActualPasswd : boolean = false
 
+
+  //CONTROL BIND
   controlName! : FormControl
   controlPasswdActual! : FormControl
   controlPasswdNew! : FormControl
   controlEmailActual! : FormControl
   controlEmailNew! : FormControl
 
-  passwordActualVisible : boolean = false
-  passwordNewVisible : boolean = false
 
-  emailIsValid : boolean = false;
 
-  userUpdatePass: UpdatePasswd | undefined 
+
   ngOnInit(): void {
     this.controlName = new FormControl('', [Validators.minLength(3), Validators.required])
     this.controlPasswdActual = new FormControl('', [Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,15}'), Validators.required])
@@ -44,7 +53,14 @@ export class ProfilAccountComponent implements OnInit {
     this.controlEmailActual = new FormControl('', [Validators.email, Validators.required])
     this.controlEmailNew = new FormControl('', [Validators.email, Validators.required])
 
-    console.log(this.emailIsValid)
+//Recover info in LocalStorage
+    const idOfUserInLocalStorage = this.service.getIdOfUserInLocalStorage();
+    const nameOfUserInLocalStorage = this.service.getNameOfUserInLocalStorage();
+    const roleOfUserInLocalStorage = this.service.getRoleOfUserInLocalStorage();
+
+//Build User with Infos in LocalStorage
+    this.userInfo = new UserConnectedModel(idOfUserInLocalStorage,nameOfUserInLocalStorage,roleOfUserInLocalStorage);
+
   }
 
 
@@ -55,7 +71,9 @@ export class ProfilAccountComponent implements OnInit {
   
   updateName(){
   const name = this.controlName.value
-    this.http.put('https://localhost:7043/api/User/Name', {name}).subscribe()
+    this.http.put<UserUpdateName>('https://localhost:7043/api/User/Name', {name}).subscribe(({
+      next : (data : UserUpdateName) => this.name = data.name
+    }))
   }
 
 

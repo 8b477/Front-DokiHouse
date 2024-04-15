@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -31,5 +32,28 @@ export class LocalStorageService {
   return localStorage.getItem('tokenRole');
   }
 
+private getAllInfosOfUserInLocalStorage(){
+  if(typeof localStorage !== undefined){
+    const data = localStorage.getItem("userInfo")
+
+    if(data !== null){
+      return JSON.parse(data)
+    }
+  return null;
+  }
+}
+
+getIdOfUserInLocalStorage() : number{
+  return this.getAllInfosOfUserInLocalStorage().id
+}
+
+getNameOfUserInLocalStorage() : string{
+  return this.getAllInfosOfUserInLocalStorage().name
+}
+
+
+getRoleOfUserInLocalStorage() : string{
+  return this.getAllInfosOfUserInLocalStorage().role
+}
 
 }
