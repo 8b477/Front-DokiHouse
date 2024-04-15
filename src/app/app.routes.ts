@@ -21,7 +21,6 @@ export const routes: Routes =
     {
      title : 'Home',
      'path' : '',
-     canActivate : [authenticationGuard],
      component : HomeComponent
     },
     {
@@ -52,6 +51,7 @@ export const routes: Routes =
     {
      title : 'Profil',
      'path' : 'profil',
+     canActivate : [authenticationGuard],
      loadComponent : () => ProfilComponent
     },
 

@@ -17,13 +17,13 @@ export class NavigationComponent implements OnInit{
   route                 : Router                = inject(Router)
 
   // VARIABLE  
-  isConnectedUser : boolean | undefined
+  isConnectedUser : boolean = false
 
 
   // PRIVATE METHODS
   private subScribeOnStatusUser(){
     this.authenticationService.connectedUserSubject.subscribe(
-      (value) => { this.isConnectedUser = value }
+      (value : boolean) => { this.isConnectedUser = value }
     )
   }
 
@@ -31,6 +31,7 @@ export class NavigationComponent implements OnInit{
   // STATE OF COMPONENT
   ngOnInit(): void {   
     this.subScribeOnStatusUser()
+    console.log(this.isConnectedUser);
   }
 
 

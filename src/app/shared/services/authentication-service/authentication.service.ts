@@ -1,7 +1,7 @@
 import { jwtDecode } from 'jwt-decode';
 import { HttpBackend, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject, map } from 'rxjs';
+import { BehaviorSubject, Observable, map } from 'rxjs';
 import { UserLoginModel } from '../../../API/models/userModels/userLoginModel/UserLoginModel';
 import { UserConnectedModel } from '../../../API/models/userModels/userConnectedModel/UserConnectedModel';
 
@@ -24,14 +24,17 @@ export class AuthenticationService {
 
 
   // PUBLIC VARIABLE
-  connectedUserSubject : Subject<boolean | undefined> = new Subject<boolean | undefined>()
+  connectedUserSubject : BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.isConnectedTest)
 
 
 
   // PUBLIC METHODS
-    get isConnectedTest() :boolean{
-      return localStorage.getItem('userInfo') != undefined     
+  get isConnectedTest(): boolean {
+    if (typeof localStorage !== 'undefined' && localStorage.getItem('userInfo')) {
+      return true;
     }
+    return false;
+  }
 
     emitValueSubjectUser(){
       this.connectedUserSubject.next(this.isConnectedTest)
@@ -40,7 +43,6 @@ export class AuthenticationService {
 
   login(model : UserLoginModel) :Observable<boolean>
   {
-
     return this.http.post(this.baseUrl, model, {responseType : 'text'})
           .pipe(
             map((token) => {
