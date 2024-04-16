@@ -33,7 +33,7 @@ export class LocalStorageService {
   }
 
 private getAllInfosOfUserInLocalStorage(){
-  if(typeof localStorage !== undefined){
+  if(typeof localStorage !== undefined && typeof localStorage !== null && typeof localStorage !== 'undefined'){
     const data = localStorage.getItem("userInfo")
 
     if(data !== null){
@@ -43,7 +43,7 @@ private getAllInfosOfUserInLocalStorage(){
   }
 }
 
-getIdOfUserInLocalStorage() : number{
+getIdOfUserInLocalStorage() : string{
   return this.getAllInfosOfUserInLocalStorage().id
 }
 

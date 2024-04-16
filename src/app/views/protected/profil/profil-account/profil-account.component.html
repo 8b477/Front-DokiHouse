@@ -11,7 +11,7 @@
             <tr class="input-group mb-3" style="margin-left: 0;">
                 <td class="col-4" for="change-name" (click)="activeFocusInput()">
                     <span class="input-group-text justify-content-center">
-                        <label for="change-name">Nom actuel : {{ name }}</label>
+                        <label for="change-name">Nom actuel : {{ userInfo.name }}</label>
                     </span>
                 </td>
                 <td class="col-4 justify-content-center">
@@ -149,7 +149,7 @@
                             >
                     </td>
                     <td class="col text-center d-grid gap-2">
-                        <button class="btn btn-warning">Valider le changement de mail</button>
+                        <button class="btn btn-warning" (click)="updateActualMail()">Valider le changement de mail</button>
                     </td>
                 }
 

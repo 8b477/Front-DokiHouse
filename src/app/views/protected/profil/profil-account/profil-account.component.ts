@@ -7,6 +7,8 @@ import { NgClass } from '@angular/common';
 import { UpdatePasswd } from '../../../../API/models/userModels/userUpdateModels/userUpdatePasswd/UserUpdatePasswd';
 import { UserUpdateName } from '../../../../API/models/userModels/userUpdateModels/userUpdateName/UserUpdateName';
 import { LocalStorageService } from '../../../../shared/services/local-storage-service/local-storage.service';
+import { UserCheckMail } from '../../../../API/models/userModels/userCheckMailModel/UserCheckMail';
+import { UserUpdateMail } from '../../../../API/models/userModels/userUpdateModels/userUpdateMail/UserUpdateMail';
 
 
 @Component({
@@ -20,47 +22,50 @@ export class ProfilAccountComponent implements OnInit {
 
 
   //VARIABLES
-  userUpdatePass!: UpdatePasswd
-  userInfo! : UserConnectedModel
-  name : string = this.userInfo.name
-  role : string = this.userInfo.role;
-  avatar : string = `https://api.dicebear.com/7.x/adventurer/svg?seed=${this.name}`;
+  userUpdateMail ! : UserUpdateMail
+  userCheckMail  ! : UserCheckMail
+  userUpdatePass ! : UpdatePasswd
+  userInfo       ! : UserConnectedModel
 
+
+  avatar                : string  = ""
   passwordActualVisible : boolean = false
-  passwordNewVisible : boolean = false
-  emailIsValid : boolean = false;
-  IsValidActualPasswd : boolean = false;
-  //SERVICES
-  http : HttpClient = inject(HttpClient)
-  service : LocalStorageService = inject(LocalStorageService);
+  passwordNewVisible    : boolean = false
+  emailIsValid          : boolean = false
+  IsValidActualPasswd   : boolean = false
 
+
+  //SERVICES
+  http    : HttpClient          = inject(HttpClient)
+  service : LocalStorageService = inject(LocalStorageService)
 
 
   //CONTROL BIND
-  controlName! : FormControl
-  controlPasswdActual! : FormControl
-  controlPasswdNew! : FormControl
-  controlEmailActual! : FormControl
-  controlEmailNew! : FormControl
-
-
+  controlName         ! : FormControl
+  controlPasswdActual ! : FormControl
+  controlPasswdNew    ! : FormControl
+  controlEmailActual  ! : FormControl
+  controlEmailNew     ! : FormControl
 
 
   ngOnInit(): void {
-    this.controlName = new FormControl('', [Validators.minLength(3), Validators.required])
+  //Validators
+    this.controlName         = new FormControl('', [Validators.minLength(3), Validators.required])
     this.controlPasswdActual = new FormControl('', [Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,15}'), Validators.required])
-    this.controlPasswdNew = new FormControl('', [Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,15}'), Validators.required])
-    this.controlEmailActual = new FormControl('', [Validators.email, Validators.required])
-    this.controlEmailNew = new FormControl('', [Validators.email, Validators.required])
+    this.controlPasswdNew    = new FormControl('', [Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,15}'), Validators.required])
+    this.controlEmailActual  = new FormControl('', [Validators.email, Validators.required])
+    this.controlEmailNew     = new FormControl('', [Validators.email, Validators.required])
 
-//Recover info in LocalStorage
-    const idOfUserInLocalStorage = this.service.getIdOfUserInLocalStorage();
-    const nameOfUserInLocalStorage = this.service.getNameOfUserInLocalStorage();
-    const roleOfUserInLocalStorage = this.service.getRoleOfUserInLocalStorage();
+  //Recover info in LocalStorage
+    const idOfUserInLocalStorage   = this.service.getIdOfUserInLocalStorage()
+    const nameOfUserInLocalStorage = this.service.getNameOfUserInLocalStorage()
+    const roleOfUserInLocalStorage = this.service.getRoleOfUserInLocalStorage()
 
-//Build User with Infos in LocalStorage
+  //Build User with Infos in LocalStorage
     this.userInfo = new UserConnectedModel(idOfUserInLocalStorage,nameOfUserInLocalStorage,roleOfUserInLocalStorage);
 
+  //Build avatar with API DICEBEAR
+    this.avatar = `https://api.dicebear.com/7.x/adventurer/svg?seed=${this.userInfo.name}`;
   }
 
 
@@ -72,7 +77,7 @@ export class ProfilAccountComponent implements OnInit {
   updateName(){
   const name = this.controlName.value
     this.http.put<UserUpdateName>('https://localhost:7043/api/User/Name', {name}).subscribe(({
-      next : (data : UserUpdateName) => this.name = data.name
+      next : (data : UserUpdateName) => this.userInfo.name = data.name
     }))
   }
 
@@ -97,16 +102,22 @@ export class ProfilAccountComponent implements OnInit {
 
   checkMail() {
     const data = this.controlEmailActual.value
-    const options = {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
 
-    this.http.post<boolean>('https://localhost:7043/api/User/CheckMail', JSON.stringify(data), options)
+    this.userCheckMail = {value : data}
+
+    this.http.post<boolean>('https://localhost:7043/api/User/CheckMail', this.userCheckMail)
       .subscribe(result => {
         this.emailIsValid = result;
       });
+      console.log(this.userCheckMail);
+   }
+
+
+  updateActualMail(){
+    this.userUpdateMail = new UserUpdateMail(this.controlEmailNew.value)
+    this.http.put<UserUpdateMail>('https://localhost:7043/api/User/Mail', this.userUpdateMail).subscribe(({
+      next : (data : UserUpdateMail) => console.log(data)
+    }))
   }
 
 

@@ -15,15 +15,15 @@ export class GalleryComponent implements OnInit{
 
     dataFromAPI : BonsaiData[] | [] = []
 
-
     constructor(private bonsaiService : BonsaiServiceService) {}
-ngOnInit(): void {
-    this.getData()
-}
+    
+    ngOnInit(): void {
+        this.getData()
+    }
 
    private getData(){
     this.bonsaiService.getBonsaiUser().subscribe(({
-        next : (data : BonsaiData[] | []) => {this.dataFromAPI  = data; console.log(JSON.stringify(data))}
+        next : (data : BonsaiData[] | []) => { this.dataFromAPI  = data; }
     }))
 }
 
