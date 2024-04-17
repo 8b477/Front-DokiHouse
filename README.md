@@ -27,7 +27,7 @@ Assurez-vous d'avoir Git installé sur votre machine.
 2. Utilisez la commande suivante pour cloner le dépôt :
 
 ```bash
-git clone https://github.com/nom-utilisateur/projet-angular.git
+git clone https://github.com/8b477/Front-DokiHouse.git
 ```
 
 ## Installation des dépendances
@@ -35,7 +35,7 @@ git clone https://github.com/nom-utilisateur/projet-angular.git
 1. Accédez au répertoire du projet :
 
 ```bash
-git cd projet-angular
+git cd Front-DokiHouse
 ```
 
 2. Installez les dépendances avec npm :
@@ -52,9 +52,9 @@ Une fois les dépendances installées, lancez l'application avec la commande sui
 git ng serve
 ```
 
-C'est tout ! Votre application Angular devrait être en cours d'exécution localement sur http://localhost:4200/.
+C'est tout ! Votre application Angular devrait être en cours d'exécution localement sur localhost:4200.
 
 Amusez-vous bien ! 🎉
 
 Pour plus d'infos consulte la documentation officiel d'Angular :  
-[Doc Officiel](https://angular.io/cli/serve)
+=> [Doc Officiel](https://angular.io/cli/serve)
