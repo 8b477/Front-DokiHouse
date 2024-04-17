@@ -1,4 +1,4 @@
-# 🌳 Projet DokiHouse 🌱
+# 🌳 Projet DokiHouse 🌱 (*in progress*)
 
 ## Présentation du projet 🌿
 
