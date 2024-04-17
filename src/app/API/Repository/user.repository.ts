@@ -44,8 +44,8 @@ export class UserRepository implements UserGateway{
         return this.httpClient.post<boolean>(this.baseUrl + 'User/CheckPasswd', { passwd })
     }
 
-    checkMail(mail   : UserCheckMail  ) : Observable<boolean>{
-        return this.httpClient.post<boolean>(this.baseUrl + 'User/CheckMail', { mail })
+    checkMail(mail : UserCheckMail) : Observable<boolean>{
+        return this.httpClient.post<boolean>(this.baseUrl + 'User/CheckMail', mail)
     }
 
 

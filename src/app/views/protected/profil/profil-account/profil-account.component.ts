@@ -53,11 +53,11 @@ export class ProfilAccountComponent implements OnInit {
 
   ngOnInit(): void {
   // Validators
-    this.controlName         = new FormControl('', [Validators.minLength(3), Validators.required])
-    this.controlPasswdActual = new FormControl('', [Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,15}'), Validators.required])
-    this.controlPasswdNew    = new FormControl('', [Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,15}'), Validators.required])
-    this.controlEmailActual  = new FormControl('', [Validators.email, Validators.required])
-    this.controlEmailNew     = new FormControl('', [Validators.email, Validators.required])
+    this.controlName         = new FormControl(null, [Validators.minLength(3), Validators.required])
+    this.controlPasswdActual = new FormControl(null, [Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,15}'), Validators.required])
+    this.controlPasswdNew    = new FormControl(null, [Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,15}'), Validators.required])
+    this.controlEmailActual  = new FormControl(null, [Validators.email, Validators.required])
+    this.controlEmailNew     = new FormControl(null, [Validators.email, Validators.required])
 
   // Recover info in LocalStorage
     const idOfUserInLocalStorage   = this.serviceLocalStorage.getIdOfUserInLocalStorage()
@@ -89,13 +89,13 @@ export class ProfilAccountComponent implements OnInit {
     const name = this.controlName.value
 
     this.serviceUser.updateUserName(name).subscribe(({
-      next : (data) =>{
+      next : (data) => {
         this.userInfo.name = data.name
-        if(typeof data.name !== undefined){ ////////////-----------> A CHECK
-            this.nameUpdateSuccess = true
+        this.serviceLocalStorage.setNameOfUserInLocalStorage(data.name)
+        if(data.name !== "")
+          this.nameUpdateSuccess = true
         }
-      } 
-    }))
+      }))
   }
 
   updatePass() {
@@ -103,7 +103,10 @@ export class ProfilAccountComponent implements OnInit {
     this.userUpdatePass = {passwd : passwdNew, passConfirm : passwdNew}
 
     this.serviceUser.updateUserPasswd(this.userUpdatePass)
-                    .subscribe(result => this.passwordUpdateSuccess = result )
+                    .subscribe(result => 
+                    {
+                     this.passwordUpdateSuccess = result
+                    })
   }
 
   updateActualMail(){
@@ -112,9 +115,8 @@ export class ProfilAccountComponent implements OnInit {
     this.serviceUser.updateUserMail(this.userUpdateMail)
     .subscribe(({
       next : (result) => {
-        if(typeof result !== undefined){ ////////////-----------> A CHECK
-          this.emailUpdateSuccess = true
-        }
+          if(result.email !== "")
+            this.emailUpdateSuccess = true
       }
     }))
   }
