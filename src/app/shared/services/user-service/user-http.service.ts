@@ -1,15 +1,14 @@
-
 import { Injectable, inject } from '@angular/core';
 import { AuthenticationService } from '../authentication-service/authentication.service';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, catchError } from 'rxjs';
 import { UserRepository } from '../../../API/repository/user.repository';
-import { UserModel } from '../../../API/models/userModels/UserModel';
 import { UserCreateModel } from '../../../API/models/userModels/userCreateModel/UserCreateModel';
 import { UserUpdateName } from '../../../API/models/userModels/userUpdateModels/userUpdateName/UserUpdateName';
 import { UpdatePasswd } from '../../../API/models/userModels/userUpdateModels/userUpdatePasswd/UserUpdatePasswd';
 import { UserCheckMail } from '../../../API/models/userModels/userCheckMailModel/UserCheckMail';
 import { UserUpdateMail } from '../../../API/models/userModels/userUpdateModels/userUpdateMail/UserUpdateMail';
+import { HandlerErrorService } from '../authentication-service/handler-error.service';
 
 @Injectable({
   providedIn: 'any'
@@ -17,49 +16,54 @@ import { UserUpdateMail } from '../../../API/models/userModels/userUpdateModels/
 export class UserHttpService {
 
   // INJECTION
-  userRepo   = inject(UserRepository)
-  serviceLog = inject(AuthenticationService)
-  route      = inject(Router)
+  route         = inject(Router)
+  userRepo      = inject(UserRepository)
+  handlerErrors = inject(HandlerErrorService)
+  serviceLog    = inject(AuthenticationService)
 
 
-// GET
-  getProfil(){
-      return this.userRepo.getById()
+  // GET
+  getProfil() {
+    return this.userRepo.getById()
   }
 
 
-// POST
-  createUser(model : UserCreateModel)
-  {
+  // POST
+  createUser(model: UserCreateModel) {
     return this.userRepo.create(model).subscribe({
-      next : () => { this.route.navigate(['/login']) }
+      next: () => { this.route.navigate(['/login']) }
     })
   }
 
-  checkPasswd(passwd : string){
-    return this.userRepo.checkPasswd(passwd)
+  checkPasswd(passwd: string) {
+    return this.userRepo.checkPasswd(passwd).pipe(
+      catchError((error) => this.handlerErrors.handleValidationErrors(error)))
   }
 
-  checkMail(mail : UserCheckMail){
-    return this.userRepo.checkMail(mail)
+  checkMail(mail: UserCheckMail) {
+    return this.userRepo.checkMail(mail).pipe(
+      catchError((error) => this.handlerErrors.handleValidationErrors(error)))
   }
 
 
-// PUT
-  updateUserName(name: UserUpdateName){
-    return this.userRepo.updateName(name)
+  // PUT
+  updateUserName(name: UserUpdateName): Observable<any> {
+    return this.userRepo.updateName(name).pipe(
+      catchError((error) => this.handlerErrors.handleValidationErrors(error)))
   }
 
-  updateUserPasswd(model: UpdatePasswd){
-    return this.userRepo.updatePasswd(model)
+
+  updateUserPasswd(model: UpdatePasswd) {
+    return this.userRepo.updatePasswd(model).pipe(
+      catchError(error => this.handlerErrors.handleValidationErrors(error)))
   }
 
-  updateUserMail(mail: UserUpdateMail){
-    return this.userRepo.updateEmail(mail)
+  updateUserMail(mail: UserUpdateMail) {
+    return this.userRepo.updateEmail(mail).pipe(
+      catchError((error) => this.handlerErrors.handleValidationErrors(error)))
   }
 
-// DELETE
-
+  // DELETE
 
 }
 

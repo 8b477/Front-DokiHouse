@@ -9,6 +9,8 @@ import { LocalStorageService } from '../../../../shared/services/local-storage-s
 import { UserCheckMail } from '../../../../API/models/userModels/userCheckMailModel/UserCheckMail';
 import { UserUpdateMail } from '../../../../API/models/userModels/userUpdateModels/userUpdateMail/UserUpdateMail';
 import { UserHttpService } from '../../../../shared/services/user-service/user-http.service';
+import { ToastComponent } from "../../../../shared/components/toast/toast.component";
+import { UserUpdateName } from '../../../../API/models/userModels/userUpdateModels/userUpdateName/UserUpdateName';
 
 
 @Component({
@@ -16,7 +18,7 @@ import { UserHttpService } from '../../../../shared/services/user-service/user-h
     standalone: true,
     templateUrl: './profil-account.component.html',
     styleUrl: './profil-account.component.scss',
-    imports: [ReactiveFormsModule, FormErrorInfoComponent, NgClass]
+    imports: [ReactiveFormsModule, FormErrorInfoComponent, NgClass, ToastComponent]
 })
 export class ProfilAccountComponent implements OnInit {
 
@@ -38,11 +40,6 @@ export class ProfilAccountComponent implements OnInit {
   IsValidActualPasswd   : boolean = false
 
 
-  // SERVICES
-  http                : HttpClient          = inject(HttpClient)
-  serviceUser         : UserHttpService     = inject(UserHttpService)
-  serviceLocalStorage : LocalStorageService = inject(LocalStorageService)
-
   // CONTROL BIND
   controlName         ! : FormControl
   controlPasswdActual ! : FormControl
@@ -51,9 +48,23 @@ export class ProfilAccountComponent implements OnInit {
   controlEmailNew     ! : FormControl
 
 
+  // SERVICES
+  http                : HttpClient          = inject(HttpClient)
+  serviceUser         : UserHttpService     = inject(UserHttpService)
+  serviceLocalStorage : LocalStorageService = inject(LocalStorageService)
+  toast                : ToastComponent      = inject(ToastComponent)
+
+  
+  // ERROR
+  errorUpdateName   : string[] = []
+  errorCheckMail    : string[] = []
+  errorUpdateMail   : string[] = []
+  errorCheckPasswd  : string[] = []
+  errorUpdatePasswd : string[] = []
+
   ngOnInit(): void {
   // Validators
-    this.controlName         = new FormControl(null, [Validators.minLength(3), Validators.required])
+    this.controlName         = new FormControl(null, [Validators.minLength(1), Validators.required])
     this.controlPasswdActual = new FormControl(null, [Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,15}'), Validators.required])
     this.controlPasswdNew    = new FormControl(null, [Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,15}'), Validators.required])
     this.controlEmailActual  = new FormControl(null, [Validators.email, Validators.required])
@@ -70,6 +81,16 @@ export class ProfilAccountComponent implements OnInit {
   // Build avatar with API DICEBEAR
     this.avatar = `https://api.dicebear.com/7.x/adventurer/svg?seed=${this.userInfo.name}`;
   }
+
+
+// PRIVATE METHODS
+private displayErrors(errors : string[], arrayErrors : string[]){
+  errors.forEach(message => {
+            console.error(message)
+            arrayErrors.push(message)
+          });
+}
+
 
  // Utils
   activeFocusInput(): void{
@@ -88,37 +109,34 @@ export class ProfilAccountComponent implements OnInit {
   updateName(){
     const name = this.controlName.value
 
-    this.serviceUser.updateUserName(name).subscribe(({
-      next : (data) => {
-        this.userInfo.name = data.name
-        this.serviceLocalStorage.setNameOfUserInLocalStorage(data.name)
-        if(data.name !== "")
+    this.serviceUser.updateUserName(name).subscribe({
+      next : (data : UserUpdateName) => {
+          this.userInfo.name = data.name
+          this.serviceLocalStorage.setNameOfUserInLocalStorage(data.name)
           this.nameUpdateSuccess = true
-        }
-      }))
+        },
+      error : (err : string[]) => this.displayErrors(err, this.errorUpdateName)
+      })
   }
 
   updatePass() {
-    const passwdNew = this.controlPasswdNew.value;
+    const passwdNew = this.controlPasswdNew.value
     this.userUpdatePass = {passwd : passwdNew, passConfirm : passwdNew}
 
-    this.serviceUser.updateUserPasswd(this.userUpdatePass)
-                    .subscribe(result => 
-                    {
-                     this.passwordUpdateSuccess = result
-                    })
-  }
+    this.serviceUser.updateUserPasswd(this.userUpdatePass).subscribe({
+      next : (result) => this.passwordUpdateSuccess = result,
+      error : (err) => this.displayErrors(err, this.errorUpdatePasswd)
+    })
+}
 
   updateActualMail(){
     this.userUpdateMail = new UserUpdateMail(this.controlEmailNew.value)
 
-    this.serviceUser.updateUserMail(this.userUpdateMail)
-    .subscribe(({
-      next : (result) => {
-          if(result.email !== "")
-            this.emailUpdateSuccess = true
-      }
-    }))
+    this.serviceUser.updateUserMail(this.userUpdateMail).subscribe({
+      next : (result) => this.emailUpdateSuccess = true,
+      error : (err) => this.displayErrors(err, this.errorUpdateMail)
+      
+    })
   }
 
 
@@ -126,17 +144,29 @@ export class ProfilAccountComponent implements OnInit {
   checkActualPasswd() {
     const passwd = this.controlPasswdActual.value;
 
-    this.serviceUser.checkPasswd(passwd)
-                    .subscribe(data => this.IsValidActualPasswd = data)
+    this.serviceUser.checkPasswd(passwd).subscribe(
+      {
+        next : (data) => this.IsValidActualPasswd = data,
+        error : (err : string[]) => this.displayErrors(err, this.errorCheckPasswd)
+      })
   }
+
+
 
   checkMail() {
     const data = this.controlEmailActual.value
-    this.userCheckMail = {value : data}
+    this.userCheckMail = {mail : data}
 
-    this.serviceUser.checkMail(this.userCheckMail)
-                    .subscribe(result => this.emailIsValid = result )
+    this.serviceUser.checkMail(this.userCheckMail).subscribe({
+      next : (result) => this.emailIsValid = result,
+      error : (err) => this.displayErrors(err, this.errorCheckMail)
+    })
    }
+
+
+// test(){
+//   this.toast.sendChangement()
+// }
 
 }
 

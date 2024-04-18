@@ -1,7 +1,7 @@
 export class UserCheckMail{
-  value : string
+  mail : string
 
   constructor(mail : string){
-    this.value = mail
+    this.mail = mail
   }
 }

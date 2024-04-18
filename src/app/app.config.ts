@@ -8,6 +8,7 @@ import { BonsaiRepository } from './API/repository/bonsai.repository';
 import { UserRepository } from './API/repository/user.repository';
 import { authInterceptor } from './shared/interceptors/auth-interceptor/auth.interceptor';
 import { AuthenticationService } from './shared/services/authentication-service/authentication.service';
+import { ToastComponent } from './shared/components/toast/toast.component';
 
 
 
@@ -21,7 +22,8 @@ export const appConfig: ApplicationConfig =
     provideStore(),
     AuthenticationService,
     UserRepository,
-    BonsaiRepository
+    BonsaiRepository,
+    ToastComponent
   ]
 }
 
