@@ -27,11 +27,7 @@ export class ProfilBonsaiComponent implements OnInit{
 
 
     public getBonsai(){
-       this.service.getOwnBonsaiUser().subscribe((
-        {
-            next : (data : BonsaiData[] | []) =>{ this.dataToDisplay = data }
-        }
-       ))
+       this.service.getOwnBonsaiUser().subscribe((data : BonsaiData[] | []) => this.dataToDisplay = data )
     }
 
     public createNewBonsai(){
