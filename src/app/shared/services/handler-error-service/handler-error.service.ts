@@ -18,5 +18,16 @@ export class HandlerErrorService {
     return throwError(() => errors);
   }
   return throwError(() => error);
+  }
+
+  public displayErrors(errors : string[], arrayErrors : string[]){
+  if(errors.length > 0){
+  errors.forEach(message => {
+            console.error(message)
+            arrayErrors.push(message)
+          });
+  }
 }
+
+
 }

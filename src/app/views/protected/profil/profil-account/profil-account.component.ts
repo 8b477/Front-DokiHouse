@@ -11,6 +11,7 @@ import { UserUpdateMail } from '../../../../API/models/userModels/userUpdateMode
 import { UserHttpService } from '../../../../shared/services/user-service/user-http.service';
 import { ToastComponent } from "../../../../shared/components/toast/toast.component";
 import { UserUpdateName } from '../../../../API/models/userModels/userUpdateModels/userUpdateName/UserUpdateName';
+import { HandlerErrorService } from '../../../../shared/services/handler-error-service/handler-error.service';
 
 
 @Component({
@@ -49,10 +50,11 @@ export class ProfilAccountComponent implements OnInit {
 
 
   // SERVICES
-  http                : HttpClient          = inject(HttpClient)
-  serviceUser         : UserHttpService     = inject(UserHttpService)
-  serviceLocalStorage : LocalStorageService = inject(LocalStorageService)
+  http                 : HttpClient          = inject(HttpClient)
   toast                : ToastComponent      = inject(ToastComponent)
+  serviceUser          : UserHttpService     = inject(UserHttpService)
+  serviceLocalStorage  : LocalStorageService = inject(LocalStorageService)
+  serviceHandlerErrors : HandlerErrorService = inject(HandlerErrorService)
 
   
   // ERROR
@@ -83,16 +85,6 @@ export class ProfilAccountComponent implements OnInit {
   }
 
 
-// PRIVATE METHODS
-private displayErrors(errors : string[], arrayErrors : string[]){
-  if(errors.length > 0){
-  errors.forEach(message => {
-            console.error(message)
-            arrayErrors.push(message)
-          });
-  }
-}
-
 
  // Utils
   activeFocusInput(): void{
@@ -118,7 +110,7 @@ private displayErrors(errors : string[], arrayErrors : string[]){
           this.serviceLocalStorage.setNameOfUserInLocalStorage(data.name)
           this.nameUpdateSuccess = true
         },
-      error : (err : string[]) => this.displayErrors(err, this.errorUpdateName)
+      error : (err : string[]) => this.serviceHandlerErrors.displayErrors(err, this.errorUpdateName)
       })
   }
 
@@ -128,7 +120,7 @@ private displayErrors(errors : string[], arrayErrors : string[]){
 
     this.serviceUser.updateUserPasswd(this.userUpdatePass).subscribe({
       next : (result) => this.passwordUpdateSuccess = result,
-      error : (err) => this.displayErrors(err, this.errorUpdatePasswd) 
+      error : (err) => this.serviceHandlerErrors.displayErrors(err, this.errorUpdatePasswd) 
     })
 }
 
@@ -137,7 +129,7 @@ private displayErrors(errors : string[], arrayErrors : string[]){
 
     this.serviceUser.updateUserMail(this.userUpdateMail).subscribe({
       next : (result) => this.emailUpdateSuccess = true,
-      error : (err) => this.displayErrors(err, this.errorUpdateMail)
+      error : (err) => this.serviceHandlerErrors.displayErrors(err, this.errorUpdateMail)
       
     })
   }
@@ -150,7 +142,7 @@ private displayErrors(errors : string[], arrayErrors : string[]){
     this.serviceUser.checkPasswd(passwd).subscribe(
       {
         next : (data) => this.IsValidActualPasswd = data,
-        error : (err : string[]) => this.displayErrors(err, this.errorCheckPasswd)
+        error : (err : string[]) => this.serviceHandlerErrors.displayErrors(err, this.errorCheckPasswd)
       })
   }
 
@@ -162,7 +154,7 @@ private displayErrors(errors : string[], arrayErrors : string[]){
 
     this.serviceUser.checkMail(this.userCheckMail).subscribe({
       next : (result) => this.emailIsValid = result,
-      error : (err) => this.displayErrors(err, this.errorCheckMail)
+      error : (err) => this.serviceHandlerErrors.displayErrors(err, this.errorCheckMail)
     })
    }
 

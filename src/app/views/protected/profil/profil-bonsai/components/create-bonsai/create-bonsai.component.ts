@@ -35,7 +35,8 @@ export class CreateBonsaiComponent implements OnInit{
 
   private createNewBonsai(bonsai : BonsaiModel){
     this.bonsaiService.createBonsai(bonsai).subscribe(({
-      next : (data) => { console.log(data); }
+      next : (data) => console.log(data),
+      error : (err) => 
     }))
   }
 
