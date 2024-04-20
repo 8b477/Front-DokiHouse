@@ -11,15 +11,19 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
   styleUrl: './create-bonsai.component.scss'
 })
 export class CreateBonsaiComponent implements OnInit{
-  loginForm! : FormGroup;
-  formBuilder!: FormBuilder;
+
+  loginForm!  : FormGroup
+  formBuilder!: FormBuilder
+  newBonsai   : BonsaiModel | undefined = undefined;
 
   constructor(private bonsaiService : BonsaiServiceService){}
+
+
   ngOnInit(): void {
     this.buildFormAndValidator()
   }
 
-  newBonsai : BonsaiModel | undefined = undefined;
+
 
  private buildFormAndValidator() : void 
   {
@@ -45,8 +49,7 @@ export class CreateBonsaiComponent implements OnInit{
       {
         console.error('userModel is not defined')
       }
-  this.createNewBonsai((this.newBonsai));
-  console.log(title + " " + description)
+    this.createNewBonsai((this.newBonsai))
   }
 
 }

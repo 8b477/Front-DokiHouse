@@ -166,3 +166,16 @@
 
 <app-toast/>
 
+@if(errorUpdateName.length > 0){
+    @for (item of errorUpdateName; track $index) {
+        <p>{{item}}</p>
+    }
+}
+
+
+@if(errorCheckPasswd.length > 0 && IsValidActualPasswd == false){
+    @for (item of errorCheckPasswd; track $index) {
+        <p>{{item}}</p>
+    }
+}
+

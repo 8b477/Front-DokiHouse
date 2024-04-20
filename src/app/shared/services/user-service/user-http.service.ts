@@ -8,7 +8,7 @@ import { UserUpdateName } from '../../../API/models/userModels/userUpdateModels/
 import { UpdatePasswd } from '../../../API/models/userModels/userUpdateModels/userUpdatePasswd/UserUpdatePasswd';
 import { UserCheckMail } from '../../../API/models/userModels/userCheckMailModel/UserCheckMail';
 import { UserUpdateMail } from '../../../API/models/userModels/userUpdateModels/userUpdateMail/UserUpdateMail';
-import { HandlerErrorService } from '../authentication-service/handler-error.service';
+import { HandlerErrorService } from '../handler-error-service/handler-error.service';
 
 @Injectable({
   providedIn: 'any'

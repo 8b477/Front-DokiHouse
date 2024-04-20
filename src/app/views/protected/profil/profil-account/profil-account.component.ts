@@ -85,10 +85,12 @@ export class ProfilAccountComponent implements OnInit {
 
 // PRIVATE METHODS
 private displayErrors(errors : string[], arrayErrors : string[]){
+  if(errors.length > 0){
   errors.forEach(message => {
             console.error(message)
             arrayErrors.push(message)
           });
+  }
 }
 
 
@@ -104,6 +106,7 @@ private displayErrors(errors : string[], arrayErrors : string[]){
   togglePasswordNewVisibility(){
     this.passwordNewVisible = !this.passwordNewVisible
   }
+
 
   // UPDATE
   updateName(){
@@ -125,7 +128,7 @@ private displayErrors(errors : string[], arrayErrors : string[]){
 
     this.serviceUser.updateUserPasswd(this.userUpdatePass).subscribe({
       next : (result) => this.passwordUpdateSuccess = result,
-      error : (err) => this.displayErrors(err, this.errorUpdatePasswd)
+      error : (err) => this.displayErrors(err, this.errorUpdatePasswd) 
     })
 }
 
