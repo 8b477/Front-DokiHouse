@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BonsaiServiceService } from '../../../../../../shared/services/bonsai-service/bonsai-service.service';
 import { BonsaiModel } from '../../../../../../API/models/bonsaiModels/bonsaiCreateModel';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { HandlerErrorService } from '../../../../../../shared/services/handler-error-service/handler-error.service';
 
 @Component({
   selector: 'app-create-bonsai',
@@ -15,14 +16,17 @@ export class CreateBonsaiComponent implements OnInit{
   loginForm!  : FormGroup
   formBuilder!: FormBuilder
   newBonsai   : BonsaiModel | undefined = undefined;
+  createNewBonsaiErrors : string [] = []
 
-  constructor(private bonsaiService : BonsaiServiceService){}
+  constructor(
+    private bonsaiService : BonsaiServiceService,
+    private serviceHandlerErrors : HandlerErrorService
+  ){}
 
 
   ngOnInit(): void {
     this.buildFormAndValidator()
   }
-
 
 
  private buildFormAndValidator() : void 
@@ -36,7 +40,7 @@ export class CreateBonsaiComponent implements OnInit{
   private createNewBonsai(bonsai : BonsaiModel){
     this.bonsaiService.createBonsai(bonsai).subscribe(({
       next : (data) => console.log(data),
-      error : (err) => 
+      error : (err) => this.serviceHandlerErrors.displayErrors(err, this.createNewBonsaiErrors)
     }))
   }
 

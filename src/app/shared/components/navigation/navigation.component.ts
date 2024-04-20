@@ -31,7 +31,6 @@ export class NavigationComponent implements OnInit{
   // STATE OF COMPONENT
   ngOnInit(): void {   
     this.subScribeOnStatusUser()
-    console.log(this.isConnectedUser);
   }
 
 
