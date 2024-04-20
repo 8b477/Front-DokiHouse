@@ -14,18 +14,22 @@ import { CreateBonsaiComponent } from "./components/create-bonsai/create-bonsai.
 })
 export class ProfilBonsaiComponent implements OnInit{
 
+    // VARIABLE
+    dataToDisplay : BonsaiData[] | []         = []
+    fakeData      : BonsaiData[]              = MOCKUP_DATA
+    currentIndex  : { [key: number]: number } = {}
+    createActive  : boolean                   = false
 
-    dataToDisplay : BonsaiData[] | [] = []
-    fakeData : BonsaiData[] = MOCKUP_DATA
-    currentIndex : { [key: number]: number } = {}
-    createActive : boolean = false
-
+    // INJECTION
     constructor(private service : BonsaiServiceService) {}
+
+
+    // STATE
     ngOnInit(): void {
         this.getBonsai()
     }
 
-
+    // PUBLIC METHODS
     public getBonsai(){
        this.service.getOwnBonsaiUser().subscribe((data : BonsaiData[] | []) => this.dataToDisplay = data )
     }

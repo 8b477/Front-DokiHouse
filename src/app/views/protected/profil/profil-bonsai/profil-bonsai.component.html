@@ -1,36 +1,22 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-auto d-flex flex-column flex-shrink-0 bg-light rounded-end h-100" style="width: 4.5rem;">
-      <a href="#" class="d-block p-3 link-dark text-decoration-none" title="" data-bs-toggle="tooltip"
-        data-bs-placement="right" data-bs-original-title="Icon-only">
-
-        <img src="/assets/img/profil/bonsai/home.svg" alt="home logo">
-
-        <span class="visually-hidden">Icon-only</span>
-      </a>
-      <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
-        <li class="nav-item">
-
+<div id="forced-margin" class="container-fluid">
+  <div id="forced-height" class="row">
+    <div class="col-auto d-flex justify-content-center flex-column bg-light rounded-end h-100">
+      <ul class="nav flex-column justify-content-evenly h-100">
+        <li>
+          <button (click)="createNewBonsai()">
+            <img src="/assets/img/profil/bonsai/home.svg" alt="home logo">
+          </button>
+        </li>
+        <li>
             <button (click)="createNewBonsai()">
               <img src="/assets/img/profil/bonsai/plus.svg" alt="plus logo">
             </button>
-
         </li>
         <li>
-          <a href="#" class="nav-link py-3 border-bottom" title="" data-bs-toggle="tooltip" data-bs-placement="right"
-            data-bs-original-title="Dashboard">
-
             <img src="/assets/img/profil/bonsai/update.svg" alt="update logo">
-
-          </a>
         </li>
         <li>
-          <a href="#" class="nav-link py-3 border-bottom" title="" data-bs-toggle="tooltip" data-bs-placement="right"
-            data-bs-original-title="Orders">
-
             <img src="/assets/img/profil/bonsai/delete.svg" alt="delete logo">
-
-          </a>
         </li>
       </ul>
     </div>

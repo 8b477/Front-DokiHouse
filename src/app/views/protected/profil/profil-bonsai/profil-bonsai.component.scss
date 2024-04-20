@@ -1,4 +1,22 @@
 img{
     height: 50px;
     width: 50px;
+    &:hover{
+        cursor: pointer;
+        background-color: beige;
+        border: dotted grey 1px;
+        border-radius: 24px;
+    }
+}
+
+button{
+    border : none;
+}
+
+#forced-height{
+    height: 500px;
+}
+
+#forced-margin{
+    margin-top: 4rem;
 }
