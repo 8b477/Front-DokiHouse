@@ -1,40 +1,28 @@
 <div id="forced-margin" class="container-fluid">
   <div id="forced-height" class="row">
-    <div class="col-auto d-flex justify-content-center flex-column bg-light rounded-end h-100">
-      <ul class="nav flex-column justify-content-evenly h-100">
-        <li>
-          <button (click)="createNewBonsai()">
-            <img src="/assets/img/profil/bonsai/home.svg" alt="home logo">
-          </button>
-        </li>
-        <li>
-            <button (click)="createNewBonsai()">
-              <img src="/assets/img/profil/bonsai/plus.svg" alt="plus logo">
-            </button>
-        </li>
-        <li>
-            <img src="/assets/img/profil/bonsai/update.svg" alt="update logo">
-        </li>
-        <li>
-            <img src="/assets/img/profil/bonsai/delete.svg" alt="delete logo">
-        </li>
-      </ul>
-    </div>
-
+    <app-side-barre
+      [logoHome]="pathLogoHome"
+      [altHome]="altLogoHome"
+      [isHomeButtonAsClicked]="callRedirectToHome"
+      [logoAdd]="pathLogoAdd"
+      [altAdd]="altLogoAdd"
+      [isAddButtonAsClicked]="callAddBonsaiComponent"
+      [logoUpdate]="pathLogoUpdate"
+      [altUpdate]="altLogoUpdate"
+      [isUpdateButtonAsClicked]="callUpdateBonsaiComponent"
+      [logoDelete]="pathLogoDelete"
+      [altDelete]="altLogoDelete"
+      [isDeleteButtonAsClicked]="callDeleteBonsaiComponent"
+    />
     <div class="col">
-      <div class="container">
         @if(dataToDisplay.length > 0){
           <app-card-bonsai [dataFromAPI]="dataToDisplay" />
         }@else{
-          <h1>no content</h1>
+          <h1>no content</h1> 
           <button class="btn btn-primary">Ajoute un bonsai</button>
         }
-      </div>
     </div>
-
   </div>
 </div>
 
-@if(createActive){
-  <app-create-bonsai/>
-}
+
