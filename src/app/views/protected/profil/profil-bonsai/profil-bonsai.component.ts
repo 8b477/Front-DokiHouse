@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CardBonsaiComponent } from "../../gallery/components/card-bonsai/card-bonsai.component";
 import { BonsaiData } from '../../../../API/models/blogModels/BonsaiData';
 import { MOCKUP_DATA } from '../../../../mocks/fakeDataGallery/DATAGALLERY';
@@ -30,12 +30,17 @@ export class ProfilBonsaiComponent implements OnInit{
     pathLogoUpdate : string = "/assets/img/profil/bonsai/update.svg"
     pathLogoDelete : string = "/assets/img/profil/bonsai/delete.svg"
 
-
     altLogoHome   : string = "logo d'une maison"
     altLogoAdd    : string = "logo d'un plus"
     altLogoUpdate : string = "logo update"
     altLogoDelete : string = "logo d'une poubelle"
 
+    @Output() redirectHome: EventEmitter<void> = new EventEmitter<void>()
+    @Output() addBonsai: EventEmitter<void> = new EventEmitter<void>()
+    @Output() updateBonsai: EventEmitter<void> = new EventEmitter<void>()
+    @Output() deleteBonsai: EventEmitter<void> = new EventEmitter<void>()
+
+    // INJECTION
     isCreateBonsai$ : Observable<boolean>
     isUpdateBonsai$ : Observable<boolean>
     isDeleteBonsai$ : Observable<boolean>
@@ -52,8 +57,6 @@ export class ProfilBonsaiComponent implements OnInit{
         this.isUpdateBonsai$ = this.stateService.getIsUpdateBonsai()
         this.isDeleteBonsai$ = this.stateService.getIsDeleteBonsai()
     }
-
-
     // STATE
     ngOnInit(): void {
         this.getBonsai()
@@ -69,16 +72,30 @@ export class ProfilBonsaiComponent implements OnInit{
     }
 
     public callAddBonsaiComponent(){
-        this.stateService.setIsCreateBonsai(!this.stateService.getIsCreateBonsai().value);
+        this.stateService.setIsCreateBonsai(!this.stateService.getIsCreateBonsai().value)
+
+        if(this.stateService.getIsCreateBonsai().value){
+            this.stateService.setIsUpdateBonsai(false)
+            this.stateService.setIsDeleteBonsai(false)
+        }
     }
 
     public callUpdateBonsaiComponent(){
-        this.stateService.setIsUpdateBonsai(!this.stateService.getIsUpdateBonsai().value);
+        this.stateService.setIsUpdateBonsai(!this.stateService.getIsUpdateBonsai().value)
+
+        if(this.stateService.getIsUpdateBonsai().value){
+            this.stateService.setIsCreateBonsai(false)
+            this.stateService.setIsDeleteBonsai(false)
+        }
     }
 
     public callDeleteBonsaiComponent(){
-        this.stateService.setIsDeleteBonsai(!this.stateService.getIsDeleteBonsai().value);
-    }
+        this.stateService.setIsDeleteBonsai(!this.stateService.getIsDeleteBonsai().value)
 
+        if(this.stateService.getIsDeleteBonsai().value){
+            this.stateService.setIsCreateBonsai(false)
+            this.stateService.setIsUpdateBonsai(false)
+        }
+    }
 
 }
