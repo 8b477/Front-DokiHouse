@@ -3,16 +3,16 @@
 <div class="col-auto p-0">
     <app-side-barre
       [logoHome]="pathLogoHome"
-      [altHome]="altLogoHome"
-      [isHomeButtonAsClicked]="callRedirectToHome"
       [logoAdd]="pathLogoAdd"
-      [altAdd]="altLogoAdd"
-      [isAddButtonAsClicked]="callAddBonsaiComponent"
       [logoUpdate]="pathLogoUpdate"
-      [altUpdate]="altLogoUpdate"
-      [isUpdateButtonAsClicked]="callUpdateBonsaiComponent"
       [logoDelete]="pathLogoDelete"
+      [altHome]="altLogoHome"
+      [altAdd]="altLogoAdd"
+      [altUpdate]="altLogoUpdate"
       [altDelete]="altLogoDelete"
+      [isHomeButtonAsClicked]="callRedirectToHome"
+      [isAddButtonAsClicked]="callAddBonsaiComponent"
+      [isUpdateButtonAsClicked]="callUpdateBonsaiComponent"
       [isDeleteButtonAsClicked]="callDeleteBonsaiComponent"
     />
 </div>
@@ -22,8 +22,7 @@
            @if(dataToDisplay.length > 0){
           <app-card-bonsai [dataFromAPI]="dataToDisplay" />
         }@else{
-          <h1>no content</h1> 
-          <button class="btn btn-primary">Ajoute un bonsai</button>
+          <h1>Pas de Bonsai créer</h1> 
         }
         </div>
        </div>
@@ -32,3 +31,15 @@
 </div>
 
 
+
+@if(isCreateBonsai$ | async){
+  <app-create-bonsai/>
+}
+
+@if(isUpdateBonsai$ | async){
+  <p>Update actived</p>
+}
+
+@if(isDeleteBonsai$ | async){
+  <p>Delete actived</p>
+}

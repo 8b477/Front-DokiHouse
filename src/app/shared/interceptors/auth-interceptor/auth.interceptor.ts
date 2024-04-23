@@ -3,9 +3,9 @@ import { Observable } from 'rxjs';
 
 export const authInterceptor: HttpInterceptorFn = (req : HttpRequest<unknown>, next : HttpHandlerFn) : Observable<HttpEvent<unknown>> => {
 
-  const token = localStorage.getItem('token') ?? ""
+  const token = localStorage.getItem('token') ?? undefined
 
-  if(token !== ""){
+  if(typeof token !== undefined){
     const cloneRequest = req.clone({ headers :req.headers.set('Authorization', `Bearer ${token}`) })
     return next(cloneRequest);
   }

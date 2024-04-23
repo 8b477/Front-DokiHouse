@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { CardBonsaiComponent } from "../../gallery/components/card-bonsai/card-bonsai.component";
 import { BonsaiData } from '../../../../API/models/blogModels/BonsaiData';
@@ -5,13 +6,17 @@ import { MOCKUP_DATA } from '../../../../mocks/fakeDataGallery/DATAGALLERY';
 import { BonsaiServiceService } from '../../../../shared/services/bonsai-service/bonsai-service.service';
 import { CreateBonsaiComponent } from "./components/create-bonsai/create-bonsai.component";
 import { SideBarreComponent } from "../../../../shared/components/side-barre/side-barre.component";
+import { Observable } from 'rxjs';
+import { BonsaiStateService } from './services/bonsai-state-service.service';
+import { AsyncPipe } from '@angular/common';
+
 
 @Component({
     selector: 'app-profil-bonsai',
     standalone: true,
     templateUrl: './profil-bonsai.component.html',
     styleUrl: './profil-bonsai.component.scss',
-    imports: [CardBonsaiComponent, CreateBonsaiComponent, SideBarreComponent]
+    imports: [CardBonsaiComponent, CreateBonsaiComponent, SideBarreComponent, AsyncPipe]
 })
 export class ProfilBonsaiComponent implements OnInit{
 
@@ -31,9 +36,22 @@ export class ProfilBonsaiComponent implements OnInit{
     altLogoUpdate : string = "logo update"
     altLogoDelete : string = "logo d'une poubelle"
 
+    isCreateBonsai$ : Observable<boolean>
+    isUpdateBonsai$ : Observable<boolean>
+    isDeleteBonsai$ : Observable<boolean>
 
     // INJECTION
-    constructor(private service : BonsaiServiceService) {}
+    constructor
+    (
+        private service      : BonsaiServiceService,
+        private stateService : BonsaiStateService,
+        private routeService : Router
+    ) 
+    {
+        this.isCreateBonsai$ = this.stateService.getIsCreateBonsai()
+        this.isUpdateBonsai$ = this.stateService.getIsUpdateBonsai()
+        this.isDeleteBonsai$ = this.stateService.getIsDeleteBonsai()
+    }
 
 
     // STATE
@@ -47,21 +65,20 @@ export class ProfilBonsaiComponent implements OnInit{
     }
 
     public callRedirectToHome(){
-        console.log('Welcome back home');
+        this.routeService.navigateByUrl('/profil')
     }
 
     public callAddBonsaiComponent(){
-        console.log('component add bonsai');
+        this.stateService.setIsCreateBonsai(!this.stateService.getIsCreateBonsai().value);
     }
 
     public callUpdateBonsaiComponent(){
-        console.log('component update bonsai');
+        this.stateService.setIsUpdateBonsai(!this.stateService.getIsUpdateBonsai().value);
     }
 
     public callDeleteBonsaiComponent(){
-        console.log('component delete bonsai');
+        this.stateService.setIsDeleteBonsai(!this.stateService.getIsDeleteBonsai().value);
     }
-
 
 
 }
