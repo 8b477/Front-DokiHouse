@@ -19,11 +19,19 @@
     <div class="col">
        <div class="row">
         <div class="col-12">
-           @if(dataToDisplay.length > 0){
-          <app-card-bonsai [dataFromAPI]="dataToDisplay" />
-        }@else{
-          <h1>Pas de Bonsai créer</h1> 
-        }
+
+          @if(dataToDisplay.length > 0){
+            <app-card-bonsai [dataFromAPI]="dataToDisplay" />
+          }
+
+          @if(!isCreateBonsai$ && dataToDisplay.length === 0){
+              <p>No content</p>
+          }
+
+          @if(isCreateBonsai$ | async){
+            <app-create-bonsai/>
+          }
+
         </div>
        </div>
     </div>
@@ -32,9 +40,6 @@
 
 
 
-@if(isCreateBonsai$ | async){
-  <app-create-bonsai/>
-}
 
 @if(isUpdateBonsai$ | async){
   <p>Update actived</p>

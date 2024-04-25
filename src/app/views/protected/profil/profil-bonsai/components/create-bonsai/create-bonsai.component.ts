@@ -3,6 +3,7 @@ import { BonsaiServiceService } from '../../../../../../shared/services/bonsai-s
 import { BonsaiModel } from '../../../../../../API/models/bonsaiModels/bonsaiCreateModel';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HandlerErrorService } from '../../../../../../shared/services/handler-error-service/handler-error.service';
+import { BonsaiAsCreated } from '../../../../../../API/models/bonsaiModels/bonsaiAsCreatedModel';
 
 @Component({
   selector: 'app-create-bonsai',
@@ -17,6 +18,8 @@ export class CreateBonsaiComponent implements OnInit{
   formBuilder!: FormBuilder
   newBonsai   : BonsaiModel | undefined = undefined;
   createNewBonsaiErrors : string [] = []
+  idBonsai : number = 0
+
 
   constructor(
     private bonsaiService : BonsaiServiceService,
@@ -33,16 +36,39 @@ export class CreateBonsaiComponent implements OnInit{
   {
     this.loginForm = new FormGroup({
       title : new FormControl('', Validators.required),
-      description : new FormControl('', Validators.required)
+      description : new FormControl('', Validators.required),
+      fileToAdd : new FormControl('', Validators.required)
     })
   }
 
+
+
   private createNewBonsai(bonsai : BonsaiModel){
     this.bonsaiService.createBonsai(bonsai).subscribe(({
-      next : (data) => console.log(data),
+      next : (data : BonsaiAsCreated) => {
+        if(data.id)
+          this.idBonsai = data.id
+          this.testSendImg()
+      },
       error : (err) => this.serviceHandlerErrors.displayErrors(err, this.createNewBonsaiErrors)
     }))
   }
+
+public testSendImg(){
+  const imgInput = document.getElementById('fileInput') as HTMLInputElement;
+  const imgFile = imgInput.files ? imgInput.files[0] : null;
+  if (imgFile) {
+    this.bonsaiService.addPicture(imgFile, this.idBonsai).subscribe({
+      next : (data) => {
+        console.log("*********");
+        console.log(data)
+        console.log("*********");
+      },
+      error : (err) => console.error(err)
+    });
+  }
+}
+
 
   sendModel(){
     const title  = this.loginForm.controls['title'].value
@@ -57,5 +83,25 @@ export class CreateBonsaiComponent implements OnInit{
     this.createNewBonsai((this.newBonsai))
   }
 
+
+// Display img to upload by User
+  previewImage(event: any): void {
+    const previewImage: HTMLImageElement = document.getElementById('previewImage') as HTMLImageElement;
+    const file: File | undefined = event.target.files?.[0];
+
+    if (file) {
+      previewImage.style.display = 'block';
+      const reader: FileReader = new FileReader();
+      reader.onload = function(e: ProgressEvent<FileReader>) {
+        if (e.target?.result) {
+          previewImage.setAttribute('src', e.target.result.toString());
+        }
+      }
+      reader.readAsDataURL(file);
+    } else {
+      previewImage.style.display = 'none';
+    }
+  }
 }
+
 

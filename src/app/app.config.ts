@@ -9,6 +9,7 @@ import { UserRepository } from './API/repository/user.repository';
 import { authInterceptor } from './shared/interceptors/auth-interceptor/auth.interceptor';
 import { AuthenticationService } from './shared/services/authentication-service/authentication.service';
 import { ToastComponent } from './shared/components/toast/toast.component';
+import { PictureRepository } from './API/repository/picture.repository';
 
 
 
@@ -23,6 +24,7 @@ export const appConfig: ApplicationConfig =
     AuthenticationService,
     UserRepository,
     BonsaiRepository,
+    PictureRepository,
     ToastComponent
   ]
 }

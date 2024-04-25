@@ -1,8 +1,13 @@
-
-<div [formGroup]="loginForm">
-    <input formControlName="title" type="text" placeholder="titre">
-    <input formControlName="description" type="text" placeholder="description">
-    <input type="file" placeholder="image">
+<div class="row" [formGroup]="loginForm">
+    <div class="card">
+        <input class="card-title" formControlName="title" type="text" placeholder="titre">
+        <div class="d-block card-image">
+            <input formControlName="fileToAdd" type="file" id="fileInput" accept="image/*" (change)="previewImage($event)">
+            <img src="" id="previewImage" alt="Image Preview">
+        </div>
+        <input formControlName="description" type="text" placeholder="description">
+        <div class="footer">
+            <button (click)="sendModel()" class="btn btn-primary more-details">Ajouter</button>
+        </div>
+    </div>
 </div>
-
-<button (click)="sendModel()" class="btn btn-primary">Ajouter</button>

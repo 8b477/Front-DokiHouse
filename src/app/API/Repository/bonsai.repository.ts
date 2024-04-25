@@ -5,6 +5,7 @@ import { inject } from "@angular/core";
 import { environment } from "../../../environments/environment";
 import { BonsaiData } from "../models/blogModels/BonsaiData";
 import { BonsaiModel } from "../models/bonsaiModels/bonsaiCreateModel";
+import { BonsaiAsCreated } from "../models/bonsaiModels/bonsaiAsCreatedModel";
 
 export class BonsaiRepository extends BonsaiGateway{
 
@@ -25,8 +26,8 @@ export class BonsaiRepository extends BonsaiGateway{
         return this.httpClient.get<BonsaiData[]>(`${this.baseUrl}Bonsai/GetOwnBonsaiAndPicture`);
     }
 
-    override post(bonsai : BonsaiModel): Observable<BonsaiModel> {
-        return this.httpClient.post<BonsaiModel>(`${this.baseUrl}Bonsai`,bonsai);
+    override post(bonsai : BonsaiModel): Observable<BonsaiAsCreated> {
+        return this.httpClient.post<BonsaiAsCreated>(`${this.baseUrl}Bonsai`,bonsai);
     }
     override update(): Observable<any> {
         throw new Error("Method not implemented.");
