@@ -14,33 +14,33 @@ import { BonsaiAsCreated } from '../../../../../../API/models/bonsaiModels/bonsa
 })
 export class CreateBonsaiComponent implements OnInit{
 
-  loginForm!  : FormGroup
-  formBuilder!: FormBuilder
-  newBonsai   : BonsaiModel | undefined = undefined;
-  createNewBonsaiErrors : string [] = []
-  idBonsai : number = 0
+// VARIABLE
+  loginForm!            : FormGroup
+  formBuilder!          : FormBuilder
+  newBonsai             : BonsaiModel | undefined = undefined;
+  createNewBonsaiErrors : string []               = []
+  idBonsai              : number                  = 0
 
-
+// INJECTION
   constructor(
-    private bonsaiService : BonsaiServiceService,
+    private bonsaiService        : BonsaiServiceService,
     private serviceHandlerErrors : HandlerErrorService
   ){}
 
-
+// STATE
   ngOnInit(): void {
     this.buildFormAndValidator()
   }
 
-
+// PRIVATE METHODS
  private buildFormAndValidator() : void 
   {
     this.loginForm = new FormGroup({
-      title : new FormControl('', Validators.required),
+      title       : new FormControl('', Validators.required),
       description : new FormControl('', Validators.required),
-      fileToAdd : new FormControl('', Validators.required)
+      fileToAdd   : new FormControl('', Validators.required)
     })
   }
-
 
 
   private createNewBonsai(bonsai : BonsaiModel){
@@ -48,38 +48,30 @@ export class CreateBonsaiComponent implements OnInit{
       next : (data : BonsaiAsCreated) => {
         if(data.id)
           this.idBonsai = data.id
-          this.testSendImg()
+          this.sendImg()
       },
       error : (err) => this.serviceHandlerErrors.displayErrors(err, this.createNewBonsaiErrors)
     }))
   }
 
-public testSendImg(){
-  const imgInput = document.getElementById('fileInput') as HTMLInputElement;
-  const imgFile = imgInput.files ? imgInput.files[0] : null;
-  if (imgFile) {
-    this.bonsaiService.addPicture(imgFile, this.idBonsai).subscribe({
-      next : (data) => {
-        console.log("*********");
-        console.log(data)
-        console.log("*********");
-      },
-      error : (err) => console.error(err)
-    });
+
+// PUBLIC METHODS
+  public sendImg(){
+    const imgInput = document.getElementById('fileInput') as HTMLInputElement;
+    const imgFile  = imgInput.files ? imgInput.files[0] : null;
+
+    if (imgFile) {
+      this.bonsaiService.addPicture(imgFile, this.idBonsai).subscribe()
+    }
   }
-}
 
 
-  sendModel(){
-    const title  = this.loginForm.controls['title'].value
+ public sendModel(){
+    const title = this.loginForm.controls['title'].value
     const description = this.loginForm.controls['description'].value
 
-    this.newBonsai = { name : title, description : description}
+    this.newBonsai = { name : title, description : description }
 
-      if(this.newBonsai.name == undefined || this.newBonsai.description == undefined)
-      {
-        console.error('userModel is not defined')
-      }
     this.createNewBonsai((this.newBonsai))
   }
 
@@ -91,17 +83,18 @@ public testSendImg(){
 
     if (file) {
       previewImage.style.display = 'block';
-      const reader: FileReader = new FileReader();
+      const reader: FileReader = new FileReader()
       reader.onload = function(e: ProgressEvent<FileReader>) {
         if (e.target?.result) {
-          previewImage.setAttribute('src', e.target.result.toString());
+          previewImage.setAttribute('src', e.target.result.toString())
         }
       }
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(file)
     } else {
-      previewImage.style.display = 'none';
+      previewImage.style.display = 'none'
     }
   }
+
 }
 
 
