@@ -9,6 +9,7 @@ import { SideBarreComponent } from "../../../../shared/components/side-barre/sid
 import { Observable } from 'rxjs';
 import { BonsaiStateService } from './services/bonsai-state-service.service';
 import { AsyncPipe } from '@angular/common';
+import { ToastComponent } from "../../../../shared/components/toast/toast.component";
 
 
 @Component({
@@ -16,7 +17,7 @@ import { AsyncPipe } from '@angular/common';
     standalone: true,
     templateUrl: './profil-bonsai.component.html',
     styleUrl: './profil-bonsai.component.scss',
-    imports: [CardBonsaiComponent, CreateBonsaiComponent, SideBarreComponent, AsyncPipe]
+    imports: [CardBonsaiComponent, CreateBonsaiComponent, SideBarreComponent, AsyncPipe, ToastComponent]
 })
 export class ProfilBonsaiComponent implements OnInit{
 
@@ -40,10 +41,10 @@ export class ProfilBonsaiComponent implements OnInit{
     @Output() updateBonsai: EventEmitter<void> = new EventEmitter<void>()
     @Output() deleteBonsai: EventEmitter<void> = new EventEmitter<void>()
 
-    // INJECTION
     isCreateBonsai$ : Observable<boolean>
     isUpdateBonsai$ : Observable<boolean>
     isDeleteBonsai$ : Observable<boolean>
+
 
     // INJECTION
     constructor
@@ -57,45 +58,63 @@ export class ProfilBonsaiComponent implements OnInit{
         this.isUpdateBonsai$ = this.stateService.getIsUpdateBonsai()
         this.isDeleteBonsai$ = this.stateService.getIsDeleteBonsai()
     }
+
+
     // STATE
     ngOnInit(): void {
         this.getBonsai()
     }
 
-    // PUBLIC METHODS
-    public getBonsai(){
-       this.service.getOwnBonsaiUser().subscribe((data : BonsaiData[] | []) => this.dataToDisplay = data )
+
+    // PRIVATE METHODS
+    private getBonsai(){
+       this.service.getOwnBonsaiUser().subscribe((data : BonsaiData[] | []) => {
+            this.dataToDisplay = data
+            // if(data.length > 0){
+            //     data.forEach((bonsai : BonsaiData, index : number) => {
+            //        this.dataToDisplay[index].idBonsai = bonsai.idBonsai
+            //     });      
+            // }
+       } )
     }
 
+
+    // PUBLIC METHODS
     public callRedirectToHome(){
-        this.routeService.navigateByUrl('/profil')
+        this.routeService.navigateByUrl('/profil/bonsai')
     }
 
     public callAddBonsaiComponent(){
         this.stateService.setIsCreateBonsai(!this.stateService.getIsCreateBonsai().value)
-
-        if(this.stateService.getIsCreateBonsai().value){
-            this.stateService.setIsUpdateBonsai(false)
-            this.stateService.setIsDeleteBonsai(false)
-        }
     }
 
     public callUpdateBonsaiComponent(){
         this.stateService.setIsUpdateBonsai(!this.stateService.getIsUpdateBonsai().value)
-
-        if(this.stateService.getIsUpdateBonsai().value){
-            this.stateService.setIsCreateBonsai(false)
-            this.stateService.setIsDeleteBonsai(false)
-        }
     }
 
     public callDeleteBonsaiComponent(){
         this.stateService.setIsDeleteBonsai(!this.stateService.getIsDeleteBonsai().value)
-
-        if(this.stateService.getIsDeleteBonsai().value){
-            this.stateService.setIsCreateBonsai(false)
-            this.stateService.setIsUpdateBonsai(false)
         }
+    
+
+    public onCardClicked(event : BonsaiData){
+        // console.log("log event in profil-bonsai (parent)",event);
+        // debugger
+        // if(this.isUpdateBonsai$){
+        //     const modalUpdate = document.getElementById('modalUpdate')
+        //     const paraph = document.getElementById('test')
+        //     if(modalUpdate){
+        //         modalUpdate.style.display = 'block'
+        //         if(paraph){
+        //             paraph.innerText = event.bonsaiDescription
+        //         }
+        //     }
+        // }
+    }
+
+    public debuggerTools(){
+        console.log(this.stateService.getIsUpdateBonsai().value);
     }
 
 }
+

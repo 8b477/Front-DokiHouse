@@ -1,7 +1,7 @@
 @if(dataFromAPI.length > 0){
   <div class="row">
-    <div *ngFor="let bonsai of dataFromAPI; index as i;" class="col-4">
-      <div class="card">
+    <div *ngFor="let bonsai of dataFromAPI; index as i;" class="col-3">
+      <div class="card" (click)="onClickCard(bonsai)">
         <p class="card-title">Title : {{ bonsai.bonsaiName }}</p>
         <div id="carouselExampleControls{{bonsai.idBonsai}}" class="carousel slide" data-ride="carousel">
           <div class="carousel-inner">
@@ -30,8 +30,8 @@
 @else {
 <h1>MOCKUP</h1>
   <div class="row">
-    <div *ngFor="let bonsai of dataFromMockup; index as i;" class="col-4">
-      <div class="card">
+    <div *ngFor="let bonsai of dataFromMockup; index as i;" class="col-3">
+    <div class="card" (click)="onClickCard(bonsai)">
         <p class="card-title">Title : {{ bonsai.bonsaiName }}</p>
         <div id="carouselExampleControls{{bonsai.idBonsai}}" class="carousel slide" data-ride="carousel">
           <div class="carousel-inner">

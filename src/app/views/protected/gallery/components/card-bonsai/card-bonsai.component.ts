@@ -1,8 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { DatePipe,  NgClass,  NgFor, NgIf } from '@angular/common';
-
 import { BonsaiData } from '../../../../../API/models/blogModels/BonsaiData';
 import { MOCKUP_DATA } from '../../../../../mocks/fakeDataGallery/DATAGALLERY';
+import { Observable } from 'rxjs';
+import { BonsaiStateService } from '../../../profil/profil-bonsai/services/bonsai-state-service.service';
 
 
 @Component({
@@ -12,13 +13,29 @@ import { MOCKUP_DATA } from '../../../../../mocks/fakeDataGallery/DATAGALLERY';
   styleUrls   : ['./card-bonsai.component.scss'],
   imports     : [DatePipe, NgIf, NgFor, NgClass]
 })
-export class CardBonsaiComponent {
+export class CardBonsaiComponent implements OnInit{
 
+    // INPUT
     @Input() dataFromAPI : BonsaiData[] | [] = []
 
+
+    // OUTPUT
+    @Output() cardClicked = new EventEmitter<BonsaiData>();
+
+
     // VARIABLE
-    dataFromMockup : BonsaiData[] = MOCKUP_DATA
+    dataFromMockup : BonsaiData[]              = MOCKUP_DATA
     currentIndex   : { [key: number]: number } = {}
+
+
+    // OBSERVABLE
+    isUpdateBonsai$ : Observable<boolean>
+
+
+    // INJECTION
+    constructor(private bonsaiStateService : BonsaiStateService){
+            this.isUpdateBonsai$ = this.bonsaiStateService.getIsUpdateBonsai()
+    }
 
 
     // STATE
@@ -35,6 +52,7 @@ export class CardBonsaiComponent {
 
 
     // METHODS PUBLIC
+    // Manage index image for slider
     public prevSlide(bonsaiId: number, pictureLength: number) {
         this.currentIndex[bonsaiId] = (this.currentIndex[bonsaiId] - 1 + pictureLength) % pictureLength;
     }
@@ -43,5 +61,21 @@ export class CardBonsaiComponent {
         this.currentIndex[bonsaiId] = (this.currentIndex[bonsaiId] + 1) % pictureLength;
     }
 
-}
+    public onClickCard(bonsai : BonsaiData){
+        this.cardClicked.emit(bonsai);
 
+        if(this.bonsaiStateService.getIsUpdateBonsai().value){
+        const modal = document.getElementById("myModal");
+            if(modal){
+                modal.style.display = "block";
+            }
+
+        window.onclick = function(event) {
+            if (event.target == modal && modal !== null) {
+                modal.style.display = "none";
+                }
+            }
+        }
+    }
+
+}

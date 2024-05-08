@@ -1,50 +1,55 @@
 <div id="forced-margin" class="container-fluid">
-  <div id="forced-height" class="row">
-<div class="col-auto p-0">
-    <app-side-barre
-      [logoHome]="pathLogoHome"
-      [logoAdd]="pathLogoAdd"
-      [logoUpdate]="pathLogoUpdate"
-      [logoDelete]="pathLogoDelete"
-      [altHome]="altLogoHome"
-      [altAdd]="altLogoAdd"
-      [altUpdate]="altLogoUpdate"
-      [altDelete]="altLogoDelete"
-      [isHomeButtonAsClicked]="callRedirectToHome"
-      [isAddButtonAsClicked]="callAddBonsaiComponent"
-      [isUpdateButtonAsClicked]="callUpdateBonsaiComponent"
-      [isDeleteButtonAsClicked]="callDeleteBonsaiComponent"
-    />
-</div>
-    <div class="col">
-       <div class="row">
-        <div class="col-12">
-
-          @if(dataToDisplay.length > 0){
-            <app-card-bonsai [dataFromAPI]="dataToDisplay" />
-          }
-
-          @if(!isCreateBonsai$ && dataToDisplay.length === 0){
-              <p>No content</p>
-          }
-
-          @if(isCreateBonsai$ | async){
-            <app-create-bonsai/>
-          }
-
+  <div class="row">
+    <div id="sidebar" class="col-auto p-0">
+          <ul class="nav flex-column justify-content-evenly">
+              <li>
+                  <button>
+                      <img src="{{pathLogoHome}}" alt="{{altLogoHome}}">
+                  </button>
+              </li>
+              <li>
+                  <button type="button" data-bs-toggle="modal" data-bs-target="#modalCreate">
+                      <img src="{{pathLogoAdd}}" alt="{{altLogoAdd}}">
+                  </button>
+              </li>
+              <li>
+                  <button type="button" (click)="callUpdateBonsaiComponent()">
+                      <img src="{{pathLogoUpdate}}" alt="{{altLogoUpdate}}">
+                  </button>
+              </li>
+              <li>
+                  <button type="button" data-bs-toggle="modal" data-bs-target="#modalDelete">
+                      <img src="{{pathLogoDelete}}" alt="{{altLogoDelete}}">
+                  </button>
+              </li>
+          </ul>
+    </div>
+        <div id="marginLeft">
+          <app-card-bonsai [dataFromAPI]="dataToDisplay" (cardClicked)="onCardClicked($event)"/>
         </div>
-       </div>
+  </div>
+</div>
+
+
+<!-- MODAL -->
+<div class="modal fade" id="modalCreate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div id="bg-glass" class="modal-content d-flex align-items-center">
+          <app-create-bonsai/>
     </div>
   </div>
 </div>
 
 
 
+<!-- Need to add animation for de display ('boostrap' is not working) -->
+<div id="myModal" class="modal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div id="bg-glass" class="modal-content d-flex align-items-center">
+          <app-create-bonsai/> <!--did to pass infos card clicked-->
+    </div>
+  </div>
+</div>
 
-@if(isUpdateBonsai$ | async){
-  <p>Update actived</p>
-}
 
-@if(isDeleteBonsai$ | async){
-  <p>Delete actived</p>
-}
+<button class="btn btn-success" (click)="debuggerTools()">debug tools</button>

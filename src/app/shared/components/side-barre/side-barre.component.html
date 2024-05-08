@@ -1,7 +1,7 @@
 <div id="forced-size" class="col d-flex justify-content-center flex-column bg-light rounded-end h-100">
     <ul class="nav flex-column justify-content-evenly h-100">
         <li>
-            <button (click)="executeHomeFunction()" [routerLink]="['/profil']"  >
+            <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <img src="{{logoHome}}" alt="{{altHome}}">
             </button>
         </li>
@@ -23,3 +23,12 @@
     </ul>
 </div>
 
+
+<div class="modal fade" id="modalId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div id="bg-glass" class="modal-content d-flex align-items-center">
+      <!-- Contenu de la modal ici -->
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>
