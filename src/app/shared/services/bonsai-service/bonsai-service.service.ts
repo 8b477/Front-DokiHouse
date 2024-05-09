@@ -1,10 +1,9 @@
-import { Observable, catchError, throwError } from 'rxjs';
-import { Injectable, inject } from '@angular/core';
+import { Observable, catchError } from 'rxjs';
+import { Injectable } from '@angular/core';
 import { BonsaiRepository } from '../../../API/repository/bonsai.repository';
 import { BonsaiData } from '../../../API/models/blogModels/BonsaiData';
 import { BonsaiModel } from '../../../API/models/bonsaiModels/bonsaiCreateModel';
 import { HandlerErrorService } from '../handler-error-service/handler-error.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BonsaiAsCreated } from '../../../API/models/bonsaiModels/bonsaiAsCreatedModel';
 import { PictureRepository } from '../../../API/repository/picture.repository';
 
@@ -46,6 +45,12 @@ export class BonsaiServiceService {
     )
   }
 
+
+  public updateBonsai(bonsaiId : number, bonsaiToUpdate : BonsaiModel){
+    return this.bonsaiRepo.update(bonsaiId, bonsaiToUpdate).pipe(
+      catchError((error) => this.serviceHandlerError.handleValidationErrors(error))
+    )
+  }
 
 }
   

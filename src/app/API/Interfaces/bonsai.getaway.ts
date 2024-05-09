@@ -6,7 +6,7 @@ export abstract class BonsaiGateway{
 
     abstract get()     : Observable<BonsaiData[]>;
     abstract getById() : Observable<BonsaiData[]>;
-    abstract update()  : Observable<any>;
+    abstract update(idBonsai : number, bonsaiToUpdate : BonsaiModel)  : Observable<any>;
     abstract delete()  : Observable<any>;
     abstract post(bonsai : BonsaiModel) : Observable<BonsaiModel>;
 }

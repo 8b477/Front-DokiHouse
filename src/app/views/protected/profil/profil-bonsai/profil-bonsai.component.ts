@@ -10,6 +10,8 @@ import { Observable } from 'rxjs';
 import { BonsaiStateService } from './services/bonsai-state-service.service';
 import { AsyncPipe } from '@angular/common';
 import { ToastComponent } from "../../../../shared/components/toast/toast.component";
+import { UpdateBonsaiComponent } from "./components/update-bonsai/update-bonsai.component";
+import { BonsaiPicture } from '../../../../API/models/blogModels/BonsaiPicture';
 
 
 @Component({
@@ -17,13 +19,12 @@ import { ToastComponent } from "../../../../shared/components/toast/toast.compon
     standalone: true,
     templateUrl: './profil-bonsai.component.html',
     styleUrl: './profil-bonsai.component.scss',
-    imports: [CardBonsaiComponent, CreateBonsaiComponent, SideBarreComponent, AsyncPipe, ToastComponent]
+    imports: [CardBonsaiComponent, CreateBonsaiComponent, SideBarreComponent, AsyncPipe, ToastComponent, UpdateBonsaiComponent]
 })
 export class ProfilBonsaiComponent implements OnInit{
 
     // VARIABLE
     dataToDisplay : BonsaiData[] | []         = []
-    fakeData      : BonsaiData[]              = MOCKUP_DATA
     currentIndex  : { [key: number]: number } = {}
 
     pathLogoHome   : string = "/assets/img/profil/bonsai/home.svg"
@@ -36,8 +37,13 @@ export class ProfilBonsaiComponent implements OnInit{
     altLogoUpdate : string = "logo update"
     altLogoDelete : string = "logo d'une poubelle"
 
+    titleBonsai       : string          = ""
+    descriptionBonsai : string          = ""
+    idBonsai          : number          = 0
+    imageArray        : BonsaiPicture[] = []
+
     @Output() redirectHome: EventEmitter<void> = new EventEmitter<void>()
-    @Output() addBonsai: EventEmitter<void> = new EventEmitter<void>()
+    @Output() addBonsai   : EventEmitter<void> = new EventEmitter<void>()
     @Output() updateBonsai: EventEmitter<void> = new EventEmitter<void>()
     @Output() deleteBonsai: EventEmitter<void> = new EventEmitter<void>()
 
@@ -70,11 +76,6 @@ export class ProfilBonsaiComponent implements OnInit{
     private getBonsai(){
        this.service.getOwnBonsaiUser().subscribe((data : BonsaiData[] | []) => {
             this.dataToDisplay = data
-            // if(data.length > 0){
-            //     data.forEach((bonsai : BonsaiData, index : number) => {
-            //        this.dataToDisplay[index].idBonsai = bonsai.idBonsai
-            //     });      
-            // }
        } )
     }
 
@@ -95,21 +96,13 @@ export class ProfilBonsaiComponent implements OnInit{
     public callDeleteBonsaiComponent(){
         this.stateService.setIsDeleteBonsai(!this.stateService.getIsDeleteBonsai().value)
         }
-    
 
-    public onCardClicked(event : BonsaiData){
-        // console.log("log event in profil-bonsai (parent)",event);
-        // debugger
-        // if(this.isUpdateBonsai$){
-        //     const modalUpdate = document.getElementById('modalUpdate')
-        //     const paraph = document.getElementById('test')
-        //     if(modalUpdate){
-        //         modalUpdate.style.display = 'block'
-        //         if(paraph){
-        //             paraph.innerText = event.bonsaiDescription
-        //         }
-        //     }
-        // }
+    public onCardClicked(event : BonsaiData){ 
+        this.titleBonsai = event.bonsaiName
+        this.descriptionBonsai = event.bonsaiDescription
+        this.idBonsai = event.idBonsai
+        if(this.imageArray)
+            this.imageArray = event.bonsaiPicture
     }
 
     public debuggerTools(){
@@ -117,4 +110,3 @@ export class ProfilBonsaiComponent implements OnInit{
     }
 
 }
-

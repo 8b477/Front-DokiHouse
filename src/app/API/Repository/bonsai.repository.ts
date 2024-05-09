@@ -10,12 +10,12 @@ import { BonsaiAsCreated } from "../models/bonsaiModels/bonsaiAsCreatedModel";
 export class BonsaiRepository extends BonsaiGateway{
 
     //VARIABLES
-    baseUrl = environment.apiUrl
+    private baseUrl = environment.apiUrl
 
     // INJECTION
-    httpClient = inject(HttpClient)
-    handler = inject(HttpBackend)
-    httpClientback = new HttpClient(this.handler) // --> For call endpoint AllowAnonymous
+    private httpClient = inject(HttpClient)
+    private handler = inject(HttpBackend)
+    private httpClientback = new HttpClient(this.handler) // --> For call endpoint AllowAnonymous
 
     // PUBLIC METHODS
     override get(): Observable<BonsaiData[]> {
@@ -29,9 +29,11 @@ export class BonsaiRepository extends BonsaiGateway{
     override post(bonsai : BonsaiModel): Observable<BonsaiAsCreated> {
         return this.httpClient.post<BonsaiAsCreated>(`${this.baseUrl}Bonsai`,bonsai);
     }
-    override update(): Observable<any> {
-        throw new Error("Method not implemented.");
+
+    override update(idBonsai : number, bonsaiToUpdate : BonsaiModel): Observable<any> {
+        return this.httpClient.put(this.baseUrl + "Bonsai/" + idBonsai, bonsaiToUpdate);
     }
+
     override delete(): Observable<any> {
         throw new Error("Method not implemented.");
     }
