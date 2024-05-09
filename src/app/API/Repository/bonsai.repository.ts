@@ -34,8 +34,8 @@ export class BonsaiRepository extends BonsaiGateway{
         return this.httpClient.put(this.baseUrl + "Bonsai/" + idBonsai, bonsaiToUpdate);
     }
 
-    override delete(): Observable<any> {
-        throw new Error("Method not implemented.");
+    override delete(idBonsai : number): Observable<any> {
+        return this.httpClient.delete(this.baseUrl + 'Bonsai/' + idBonsai);
     }
 
 

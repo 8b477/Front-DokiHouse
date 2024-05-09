@@ -27,14 +27,13 @@ export class CardBonsaiComponent implements OnInit{
     dataFromMockup : BonsaiData[]              = MOCKUP_DATA
     currentIndex   : { [key: number]: number } = {}
 
-
     // OBSERVABLE
     isUpdateBonsai$ : Observable<boolean>
 
 
     // INJECTION
     constructor(private bonsaiStateService : BonsaiStateService){
-            this.isUpdateBonsai$ = this.bonsaiStateService.getIsUpdateBonsai()
+        this.isUpdateBonsai$ = this.bonsaiStateService.getIsUpdateBonsai()
     }
 
 
@@ -61,9 +60,11 @@ export class CardBonsaiComponent implements OnInit{
         this.currentIndex[bonsaiId] = (this.currentIndex[bonsaiId] + 1) % pictureLength;
     }
 
+
+
     public onClickCard(bonsai : BonsaiData){
         this.cardClicked.emit(bonsai);
-
+        //If STATE OF UPDATEBONSAI IS TRUE
         if(this.bonsaiStateService.getIsUpdateBonsai().value){
         const modal = document.getElementById("myModal");
             if(modal){

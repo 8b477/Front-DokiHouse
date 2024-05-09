@@ -12,6 +12,8 @@ import { AsyncPipe } from '@angular/common';
 import { ToastComponent } from "../../../../shared/components/toast/toast.component";
 import { UpdateBonsaiComponent } from "./components/update-bonsai/update-bonsai.component";
 import { BonsaiPicture } from '../../../../API/models/blogModels/BonsaiPicture';
+import { HandlerErrorService } from '../../../../shared/services/handler-error-service/handler-error.service';
+import { HttpResponse } from '@angular/common/http';
 
 
 @Component({
@@ -41,6 +43,7 @@ export class ProfilBonsaiComponent implements OnInit{
     descriptionBonsai : string          = ""
     idBonsai          : number          = 0
     imageArray        : BonsaiPicture[] = []
+    errorBonsai       : string[]        = []
 
     @Output() redirectHome: EventEmitter<void> = new EventEmitter<void>()
     @Output() addBonsai   : EventEmitter<void> = new EventEmitter<void>()
@@ -56,8 +59,10 @@ export class ProfilBonsaiComponent implements OnInit{
     constructor
     (
         private service      : BonsaiServiceService,
-        private stateService : BonsaiStateService,
-        private routeService : Router
+        private stateService : BonsaiStateService  ,
+        private errorService : HandlerErrorService ,
+        private bonsaiService: BonsaiServiceService,
+        private routeService : Router              ,
     ) 
     {
         this.isCreateBonsai$ = this.stateService.getIsCreateBonsai()
@@ -87,15 +92,30 @@ export class ProfilBonsaiComponent implements OnInit{
 
     public callAddBonsaiComponent(){
         this.stateService.setIsCreateBonsai(!this.stateService.getIsCreateBonsai().value)
+
+        if(this.stateService.getIsCreateBonsai().value){
+            this.stateService.setIsUpdateBonsai(false)
+            this.stateService.setIsDeleteBonsai(false)
+        }
     }
 
     public callUpdateBonsaiComponent(){
         this.stateService.setIsUpdateBonsai(!this.stateService.getIsUpdateBonsai().value)
+
+        if(this.stateService.getIsUpdateBonsai().value){
+            this.stateService.setIsCreateBonsai(false)
+            this.stateService.setIsDeleteBonsai(false)
+        }
     }
 
     public callDeleteBonsaiComponent(){
         this.stateService.setIsDeleteBonsai(!this.stateService.getIsDeleteBonsai().value)
+
+        if(this.stateService.getIsDeleteBonsai().value){
+            this.stateService.setIsCreateBonsai(false)
+            this.stateService.setIsUpdateBonsai(false)
         }
+    }
 
     public onCardClicked(event : BonsaiData){ 
         this.titleBonsai = event.bonsaiName
@@ -103,6 +123,21 @@ export class ProfilBonsaiComponent implements OnInit{
         this.idBonsai = event.idBonsai
         if(this.imageArray)
             this.imageArray = event.bonsaiPicture
+
+        if (this.stateService.getIsDeleteBonsai().value) {
+        //Remove to display but not call DB
+            const indexToDelete = this.dataToDisplay.findIndex(item => item.idBonsai === this.idBonsai);
+            if (indexToDelete !== -1) {
+                this.dataToDisplay.splice(indexToDelete, 1);
+            }      
+        }
+        //---------------------------------
+        //If STATE OF DELETEBONSAI IS TRUE
+        if(this.stateService.getIsDeleteBonsai().value){
+            this.bonsaiService.deleteBonsai(this.idBonsai).subscribe(
+                (err) => this.errorService.displayErrors(err, this.errorBonsai)
+            )
+        }       
     }
 
     public debuggerTools(){

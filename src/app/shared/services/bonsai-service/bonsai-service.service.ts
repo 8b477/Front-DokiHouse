@@ -52,5 +52,12 @@ export class BonsaiServiceService {
     )
   }
 
+  public deleteBonsai(idBonsai :number){
+    return this.bonsaiRepo.delete(idBonsai).pipe(
+      catchError((error) => this.serviceHandlerError.handleValidationErrors(error))
+    )
+  }
+
+
 }
   

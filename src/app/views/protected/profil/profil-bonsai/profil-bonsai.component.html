@@ -18,7 +18,7 @@
                   </button>
               </li>
               <li>
-                  <button type="button" data-bs-toggle="modal" data-bs-target="#modalDelete">
+                  <button type="button" (click)="callDeleteBonsaiComponent()">
                       <img src="{{pathLogoDelete}}" alt="{{altLogoDelete}}">
                   </button>
               </li>
@@ -53,3 +53,9 @@
 
 
 <button class="btn btn-success" (click)="debuggerTools()">debug tools</button>
+
+@if(errorBonsai.length > 0){
+  @for(error of errorBonsai; track $index){
+    <p>{{error}}</p>
+  }
+}
