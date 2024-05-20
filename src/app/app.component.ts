@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { NavigationComponent } from './shared/components/navigation/navigation.component';
-
+import { PrimeNGConfig } from 'primeng/api';
 
 
 @Component({
@@ -12,4 +12,15 @@ import { NavigationComponent } from './shared/components/navigation/navigation.c
     styleUrl    : './app.component.scss',
     imports     : [CommonModule, RouterOutlet, RouterLink, NavigationComponent]
 })
-export class AppComponent{ title = 'DokiHouse' }
+export class AppComponent implements OnInit{
+
+    title = 'DokiHouse'
+
+
+    constructor(private primeNG : PrimeNGConfig){}
+
+    public ngOnInit(): void {
+        this.primeNG.ripple = true;
+    }
+
+}

@@ -1,3 +1,4 @@
+import { TestComponent } from './shared/test/test.component';
 import { Routes } from '@angular/router';
 
 import { HomeComponent } from './views/public/home/home.component';
@@ -62,11 +63,17 @@ export const routes: Routes =
       { path : 'notification', loadComponent : () => ProfilNotificationComponent },
     ] },
 
-
+    {
+      title : 'test',
+      'path' : 'test',
+      component : TestComponent 
+    },
 
     {
      title : 'NotFound',
      'path' : '**',
      loadComponent : () => NotFoundComponent
     },
+
+
 ];

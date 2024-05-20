@@ -1,4 +1,23 @@
-@if(dataFromAPI.length > 0){
+@if (onDataReady() | async) {
+	<ngb-carousel>
+  @for (item of dataPicture; track $index) {
+		<ng-template ngbSlide>
+			<div class="picsum-img-wrapper">
+				<img [src]="item.fileName" alt="Random{{item.idPicture}}" />
+			</div>
+			<div class="carousel-caption">
+				<h3>{{item.fileName}}</h3>
+				<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+			</div>
+		</ng-template>
+  }
+	</ngb-carousel>
+}
+
+<button (click)="debuggerTest()">debugg</button>
+<button (click)="forceForeach()">debugg2</button>
+
+<!-- @if(dataFromAPI.length > 0){
   <div class="row">
     <div *ngFor="let bonsai of dataFromAPI; index as i;" class="col-3">
       <div class="card" (click)="onClickCard(bonsai)">
@@ -6,17 +25,17 @@
         <div id="carouselExampleControls{{bonsai.idBonsai}}" class="carousel slide" data-ride="carousel">
           <div class="carousel-inner">
             <ng-container *ngFor="let picture of bonsai.bonsaiPicture; let j = index;">
-              <div class="carousel-item" [class.active]="j === currentIndex[bonsai.idBonsai]">
-                <img class="d-block card-image" src="{{ picture.fileName }}" alt="">
+              <div class="carousel-item" [ngClass]="{'active' : j === currentIndex[bonsai.idBonsai] }">
+                <img class="d-block card-image" src="{{picture.fileName}}" alt="">
               </div>
             </ng-container>
           </div>
-          <button class="carousel-control-prev" type="button"
-            (click)="prevSlide(bonsai.idBonsai, bonsai.bonsaiPicture.length)">
+          <button class="carousel-control-prev" type="button" [attr.data-bs-target]="'#carouselExample' + bonsai.idBonsai"
+            (click)="prevSlide(bonsai.idBonsai)">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           </button>
-          <button class="carousel-control-next" type="button"
-            (click)="nextSlide(bonsai.idBonsai, bonsai.bonsaiPicture.length)">
+          <button class="carousel-control-next" type="button" [attr.data-bs-target]="'#carouselExample' + bonsai.idBonsai"
+            (click)="nextSlide(bonsai.idBonsai)">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
           </button>
         </div>
@@ -36,17 +55,17 @@
         <div id="carouselExampleControls{{bonsai.idBonsai}}" class="carousel slide" data-ride="carousel">
           <div class="carousel-inner">
             <ng-container *ngFor="let picture of bonsai.bonsaiPicture; let j = index;">
-              <div class="carousel-item" [class.active]="j === currentIndex[bonsai.idBonsai]">
+              <div class="carousel-item" [ngClass]="{'active' : j === currentIndex[bonsai.idBonsai] }">
                 <img class="d-block card-image" src="{{ picture.fileName }}" alt="">
               </div>
             </ng-container>
           </div>
-          <button class="carousel-control-prev" type="button"
-            (click)="prevSlide(bonsai.idBonsai, bonsai.bonsaiPicture.length)">
+          <button class="carousel-control-prev" type="button" [attr.data-bs-target]="'#carouselExample' + bonsai.idBonsai"
+            (click)="prevSlide(bonsai.idBonsai)">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           </button>
-          <button class="carousel-control-next" type="button"
-            (click)="nextSlide(bonsai.idBonsai, bonsai.bonsaiPicture.length)">
+          <button class="carousel-control-next" type="button" [attr.data-bs-target]="'#carouselExample' + bonsai.idBonsai"
+            (click)="nextSlide(bonsai.idBonsai)">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
           </button>
         </div>
@@ -58,4 +77,4 @@
       </div>
     </div>
   </div>
-}
+} -->

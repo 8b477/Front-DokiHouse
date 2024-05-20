@@ -50,7 +50,9 @@ export class CreateBonsaiComponent implements OnInit{
           this.idBonsai = data.id
           this.sendImg()
       },
-      error : (err) => this.serviceHandlerErrors.displayErrors(err, this.createNewBonsaiErrors)
+      error : (err) => {
+      this.serviceHandlerErrors.displayErrors(err, this.createNewBonsaiErrors)
+      }
     }))
   }
 

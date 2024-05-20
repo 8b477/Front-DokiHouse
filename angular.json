@@ -30,14 +30,14 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/primeicons/primeicons.css",
               "node_modules/animate.css/animate.min.css",
+              "node_modules/primeflex/primeflex.css",
               "src/styles.scss"
             ],
-            "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js"
-            ],
+            "scripts": [],
             "server": "src/main.server.ts",
             "prerender": true,
             "ssr": {
@@ -70,12 +70,16 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "liveReload": true
+          },
           "configurations": {
             "production": {
               "buildTarget": "Front-DokiHouse:build:production"
             },
             "development": {
-              "buildTarget": "Front-DokiHouse:build:development"
+              "buildTarget": "Front-DokiHouse:build:development",
+              "liveReload": true
             }
           },
           "defaultConfiguration": "development"

@@ -25,9 +25,9 @@ export class HandlerErrorService {
   errors.forEach(message => {
             console.error(message)
             arrayErrors.push(message)
-          });
+      });
+    }
   }
-}
 
 
 }

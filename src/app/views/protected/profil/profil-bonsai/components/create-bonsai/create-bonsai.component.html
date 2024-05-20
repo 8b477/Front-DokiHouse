@@ -11,3 +11,11 @@
         </div>
     </div>
 </div>
+
+@if(createNewBonsaiErrors.length > 0){
+    
+    @for(error of createNewBonsaiErrors; track $index){
+        <p>{{error}}</p>
+    }
+    
+}

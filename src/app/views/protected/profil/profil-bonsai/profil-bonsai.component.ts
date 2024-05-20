@@ -137,7 +137,8 @@ export class ProfilBonsaiComponent implements OnInit{
             this.bonsaiService.deleteBonsai(this.idBonsai).subscribe(
                 (err) => this.errorService.displayErrors(err, this.errorBonsai)
             )
-        }       
+        } 
+        console.log(event)
     }
 
     public debuggerTools(){
