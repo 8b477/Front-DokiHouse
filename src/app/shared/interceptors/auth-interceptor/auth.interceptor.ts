@@ -1,16 +1,20 @@
 import { HttpEvent, HttpHandlerFn, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-export const authInterceptor: HttpInterceptorFn = (req : HttpRequest<unknown>, next : HttpHandlerFn) : Observable<HttpEvent<unknown>> => {
+export const authInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> => {
 
-  const token = localStorage.getItem('token') ?? undefined
+  let token: string | null = null;
 
-  if(typeof token !== undefined){
-    const cloneRequest = req.clone({ headers :req.headers.set('Authorization', `Bearer ${token}`) })
+  // Vérifier si `localStorage` est disponible
+  if (typeof localStorage !== 'undefined') {
+    token = localStorage.getItem('token');
+  }
+
+  if (token) {
+    const cloneRequest = req.clone({ headers: req.headers.set('Authorization', `Bearer ${token}`) });
+    return next(cloneRequest);
+  } else {
+    const cloneRequest = req.clone({ headers: req.headers.set('Authorization', `Bearer`) });
     return next(cloneRequest);
   }
-  else{
-    const cloneRequest = req.clone({ headers :req.headers.set('Authorization', `Bearer`) })
-    return next(cloneRequest)
-  }
-}
+};
