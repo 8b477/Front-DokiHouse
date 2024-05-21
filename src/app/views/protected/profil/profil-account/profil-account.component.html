@@ -1,181 +1,64 @@
-<div class="container-md mx-auto position-relative" 
-     style="height: 55vh;"
-    >
-    <table class="table position-absolute top-50 start-50 translate-middle">
-        <thead>
-            <tr class="text-center">
-                <th>Nom</th>
-            </tr>
-        </thead>
-        <tbody class="row">
-            <tr class="input-group mb-3" style="margin-left: 0;">
-                <td class="col-4" for="change-name" (click)="activeFocusInput()">
-                    <span class="input-group-text justify-content-center">
-                        <label for="change-name">Nom actuel : {{ userInfo.name }}</label>
-                    </span>
-                </td>
-                <td class="col-4 justify-content-center">
-                    <input  id="change-name" class="form-control text-center"
-                            [formControl]="controlName"  
-                            type="text"
-                            placeholder="Nouveau pseudo"                         
-                        >
-                </td>
-                <td class="col-4 text-center d-grid gap-2">
-                    <button class="btn btn-primary" (click)="updateName()">Change</button>
-                </td>
-            </tr>
-        </tbody>
-        <thead>
-            <tr class="text-center">
-                <th>Mot de passe</th>
-            </tr>
-        </thead>
-        <tbody class="row">
-            <tr class="input-group mb-3" style="margin-left: 0;">
-                <td class="col-4 justify-content-center">
-                    <div class="row">
-                        <div class="col-10">
+<div class="flex align-items-stretch justify-content-center flex-wrap mt-8 mx-auto w-5">
 
-                            @if(!IsValidActualPasswd){
-                                <input id="actual-passwd" class="form-control text-center" 
-                                       [formControl]="controlPasswdActual"
-                                       type="{{ passwordActualVisible ? 'text' : 'password' }}"
-                                       placeholder="Mot de passe actuel" 
-                                       autocomplete="off"
-                                    >
-                            }
-                            @else {
-                                <input id="actual-passwd" class="form-control text-center"
-                                       type="password"
-                                       placeholder="Mot de passe actuelle vaildé !"
-                                       readonly 
-                                       disabled
-                                    >
-                            }
+    <div class="formgrid grid align-items-end">
+        <div class="field col-5">
+            <label for="name">Nom actuel :</label>
+            <input id="name" type="text"
+                class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full h-2rem"
+                disabled value="{{ userInfo.name }}" (onClick)="activeFocusInput()">
+        </div>
+        <div class="field col-5">
+            <label for="new-name">Nouveau nom :</label>
+            <input id="new-name" type="text"
+                class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full h-2rem">
+        </div>
+        <div class="field col-2">
+            <button pButton class="h-2rem" label="Valider" icon="pi pi-check" (onClick)="updateName()"></button>
+        </div>
+    </div>
 
-                        </div>
-                        <div class="col-2">
-                            <button class="border-none" (click)="togglePasswordActualVisibility()">
-                                <i  class="fa" 
-                                    [ngClass]="{'fa-eye': !passwordActualVisible, 'fa-eye-slash': passwordActualVisible}">
-                                </i>
-                            </button>
-                        </div>
-                    </div>
-                </td>
-                <td class="col justify-content-center">
-                    <div class="row">
-                        <div class="col-10">
+    <div class="formgrid grid align-items-end">
+        <div class="field col-5">
+            <label for="mail-actual">Mail actuel :</label>
+            <input id="mail-actual" type="email"
+                class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full h-2rem">
+        </div>
+        <div class="field col-5">
+            <label for="new-mail">Nouveau mail :</label>
+            <input id="new-mai" type="email"
+                class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full h-2rem">
+        </div>
+        <div class="field col-2">
+            <button pButton class="h-2rem" label="Valider" icon="pi pi-check" (onClick)="updateActualMail()"></button>
+        </div>
+    </div>
 
-                            @if(!IsValidActualPasswd){
-                                <input  id="new-passwd" class="form-control text-center"
-                                        type="password"
-                                        placeholder="Valide d'abord ton mot de passe !"
-                                        disabled 
-                                        autocomplete="off"
-                                    >
-                            }
-                            @else {
-                                <input  id="new-passwd" class="form-control text-center"
-                                        [formControl]="controlPasswdNew" 
-                                        type="{{ passwordNewVisible ? 'text' : 'password' }}" 
-                                        placeholder="Nouveau mot de passe"
-                                        autocomplete="off"
-                                    >
-                            }
 
-                        </div>
-                        <div class="col-2">
-                            <button class="border-none" (click)="togglePasswordNewVisibility()">
-                                <i class="fa" [ngClass]="{'fa-eye': !passwordNewVisible, 'fa-eye-slash': passwordNewVisible}"></i>
-                            </button>
-                        </div>
-                    </div>
-                </td>
-                <td class="col text-center d-grid gap-2">
-
-                    @if(!IsValidActualPasswd){
-                        <button class="btn btn-success" (click)="checkActualPasswd()">Vérification du mot de passe actuel</button>
-                    }
-                    @else{
-                        <button class="btn btn-warning" (click)="updatePass()">Valide ton nouveau mot de passe</button>
-                    }
-
-                </td>
-            </tr>
-        </tbody>
-        <thead>
-            <tr class="text-center">
-                <th scope="col">Email</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="input-group mb-3" style="margin-left: 0;">
-
-                @if(!emailIsValid){
-                    <td class="col justify-content-center">
-                        <input  id="actual-mail" class="form-control text-center"
-                                [formControl]="controlEmailActual"
-                                type="email"
-                                placeholder="Entre ton mail actuel" 
-                                autocomplete="off"
-                            >
-                    </td>
-                    <td class="col justify-content-center">
-                        <input  id="new-mail" class="form-control text-center"
-                                type="email"  
-                                placeholder="Valide d'abord ton email"
-                                disabled
-                            >
-                    </td>
-                    <td class="col text-center d-grid gap-2">
-                        <button (click)="checkMail()" class="btn btn-success">Vérification du mail actuel</button>
-                    </td>
-                }
-                @else {
-                    <td class="col justify-content-center">
-                        <input  id="actual-mail" class="form-control text-center"
-                                type="email" 
-                                placeholder="Mail actuel vérifié !"
-                                disabled
-                            >
-                    </td>
-                    <td class="col justify-content-center">
-                        <input  id="new-mail" type="email" class="form-control text-center"
-                                [formControl]="controlEmailNew"                       
-                                placeholder="Nouveau mail"
-                                autocomplete="off"
-                            >
-                    </td>
-                    <td class="col text-center d-grid gap-2">
-                        <button class="btn btn-warning" (click)="updateActualMail()">Valider le changement de mail</button>
-                    </td>
-                }
-
-            </tr>
-        </tbody>
-    </table>
+    <div class="formgrid grid align-items-end">
+        <div class="field col-5">
+            <label for="actual-pass">Mot de passe actuel :</label>
+            <p-password id="actual-pass" styleClass="h-2rem" [formControl]="controlPasswdActual" [toggleMask]="true" inputStyleClass="block w-19rem"></p-password>
+        </div>
+        <div class="field col-5">
+            <label for="new-pass">Nouveau mot de passe :</label>
+            <p-password id="new-pass" styleClass="h-2rem" [formControl]="controlPasswdNew" [toggleMask]="true" inputStyleClass="block w-19rem"></p-password>
+        </div>
+        <div class="field col-2">
+            <button pButton class="h-2rem" label="Valider" icon="pi pi-check" (onClick)="updateName()"></button>
+        </div>
+    </div>
+    
+    <div class="formgrid grid align-content-center">
+        <div class="field col">
+            <input type="text"
+                class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary h-2rem block w-19rem"
+                disabled value="Change ton nom pour changer l'image"
+            >
+        </div>
+    </div>
+        <div class="field col ml-3">
+            <p-image src="/assets/img/bonsai-1.png" alt="Image" width="50px"></p-image>
+        </div>
 </div>
 
-
-
-
-
-<!-- <button class="btn btn-danger" (click)="test()">test</button> -->
-
-<app-toast/>
-
-@if(errorUpdateName.length > 0){
-    @for (item of errorUpdateName; track $index) {
-        <p>{{item}}</p>
-    }
-}
-
-
-@if(errorCheckPasswd.length > 0 && IsValidActualPasswd == false){
-    @for (item of errorCheckPasswd; track $index) {
-        <p>{{item}}</p>
-    }
-}
 

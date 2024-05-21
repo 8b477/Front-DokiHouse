@@ -1,10 +1,10 @@
 
 
-  <div class="container text-center animate__animated animate__slideInUp">
-    <div class="row">
+  <div class="animate__animated animate__slideInUp">
+    <div class="grid">
       @for (blog of fakeData; track $index) 
       {
-        <div class="col-4">
+        <div class="col-3">
           <app-card-blog
             [cardBlogPicture]="blog.cardPictureBonsai"
             [cardBlogTextTitle]="blog.cardTextTitle"

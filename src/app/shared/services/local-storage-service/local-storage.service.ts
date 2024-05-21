@@ -31,7 +31,7 @@ export class LocalStorageService {
 
 // GET
   getLocalStorageToken() : string | null{
-  return localStorage.getItem('token');
+    return localStorage.getItem('token');
   }
 
   getLocalStorageTokenId() : string | null{
@@ -46,17 +46,19 @@ export class LocalStorageService {
   return localStorage.getItem('tokenRole');
   }
 
-  getIdOfUserInLocalStorage() : string{
-    return this.getAllInfosOfUserInLocalStorage().id
+  getIdOfUserInLocalStorage(): string | null {
+    const userInfo = this.getAllInfosOfUserInLocalStorage();
+    return userInfo && userInfo.id ? userInfo.id : null;
   }
 
-  getNameOfUserInLocalStorage() : string{
-    return this.getAllInfosOfUserInLocalStorage().name
+  getNameOfUserInLocalStorage(): string {
+    const userInfo = this.getAllInfosOfUserInLocalStorage();
+    return userInfo && userInfo.name ? userInfo.name : '';
   }
 
-
-  getRoleOfUserInLocalStorage() : string{
-    return this.getAllInfosOfUserInLocalStorage().role
+  getRoleOfUserInLocalStorage(): string {
+    const userInfo = this.getAllInfosOfUserInLocalStorage();
+    return userInfo && userInfo.role ? userInfo.role : '';
   }
 
 }

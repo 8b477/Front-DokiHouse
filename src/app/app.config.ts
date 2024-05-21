@@ -11,6 +11,7 @@ import { AuthenticationService } from './shared/services/authentication-service/
 import { ToastComponent } from './shared/components/toast/toast.component';
 import { PictureRepository } from './API/repository/picture.repository';
 import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
+import { NgModel } from '@angular/forms';
 
 
 
@@ -23,6 +24,7 @@ export const appConfig: ApplicationConfig =
     provideClientHydration(),
     provideStore(),
     provideAnimations(),
+    NgModel,
     BrowserModule,
     BrowserAnimationsModule,
     AuthenticationService,

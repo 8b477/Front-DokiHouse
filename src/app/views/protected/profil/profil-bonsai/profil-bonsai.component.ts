@@ -2,7 +2,6 @@ import { Router } from '@angular/router';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CardBonsaiComponent } from "../../gallery/components/card-bonsai/card-bonsai.component";
 import { BonsaiData } from '../../../../API/models/blogModels/BonsaiData';
-import { MOCKUP_DATA } from '../../../../mocks/fakeDataGallery/DATAGALLERY';
 import { BonsaiServiceService } from '../../../../shared/services/bonsai-service/bonsai-service.service';
 import { CreateBonsaiComponent } from "./components/create-bonsai/create-bonsai.component";
 import { SideBarreComponent } from "../../../../shared/components/side-barre/side-barre.component";
@@ -13,7 +12,7 @@ import { ToastComponent } from "../../../../shared/components/toast/toast.compon
 import { UpdateBonsaiComponent } from "./components/update-bonsai/update-bonsai.component";
 import { BonsaiPicture } from '../../../../API/models/blogModels/BonsaiPicture';
 import { HandlerErrorService } from '../../../../shared/services/handler-error-service/handler-error.service';
-import { HttpResponse } from '@angular/common/http';
+import { DialogModule } from 'primeng/dialog';
 
 
 @Component({
@@ -21,7 +20,7 @@ import { HttpResponse } from '@angular/common/http';
     standalone: true,
     templateUrl: './profil-bonsai.component.html',
     styleUrl: './profil-bonsai.component.scss',
-    imports: [CardBonsaiComponent, CreateBonsaiComponent, SideBarreComponent, AsyncPipe, ToastComponent, UpdateBonsaiComponent]
+    imports: [CardBonsaiComponent, CreateBonsaiComponent, SideBarreComponent, AsyncPipe, ToastComponent, UpdateBonsaiComponent, DialogModule]
 })
 export class ProfilBonsaiComponent implements OnInit{
 
@@ -54,6 +53,8 @@ export class ProfilBonsaiComponent implements OnInit{
     isUpdateBonsai$ : Observable<boolean>
     isDeleteBonsai$ : Observable<boolean>
 
+    isVisibleCreate : boolean = false
+    isVisibleUpdate : boolean = false
 
     // INJECTION
     constructor
@@ -143,6 +144,11 @@ export class ProfilBonsaiComponent implements OnInit{
 
     public debuggerTools(){
         console.log(this.stateService.getIsUpdateBonsai().value);
+    }
+
+
+    public showModalCreate(){
+    this.isVisibleCreate = !this.isVisibleCreate
     }
 
 }

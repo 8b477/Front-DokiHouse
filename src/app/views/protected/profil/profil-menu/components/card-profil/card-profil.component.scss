@@ -4,7 +4,6 @@
   width: 190px;
   height: 254px;
   transition: 200ms;
-  margin-top: 4rem;
 }
 
 .container:active {
@@ -22,7 +21,6 @@
   border-radius: 20px;
   transition: 700ms;
   background: linear-gradient(82deg,  rgba(226, 57, 131, 0.6116071428571429) 16%, rgba(222, 120, 25, 0.28667717086834727) 51%, rgba(181, 255, 0, 0.5891981792717087) 100%)!important;
-
 }
 
 .subtitle {
@@ -357,13 +355,6 @@ img{
 width: 100%;
 }
 
-.text-center{
-    text-align: center;
-}
 .bg-gradient{
   background: linear-gradient(82deg,  rgba(226, 57, 131, 0.6116071428571429) 16%, rgba(222, 120, 25, 0.28667717086834727) 51%, rgba(181, 255, 0, 0.5891981792717087) 100%)!important;
-}
-
-.max-size{
-  height: 300px !important;
 }

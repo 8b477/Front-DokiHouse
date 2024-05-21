@@ -1,10 +1,9 @@
 
 <div class="container" style="height: 60vh; display: flex; justify-content: center; align-items: center;">
-   <div class="row">
-      <div class="col-3 none-border">
+   <div class="grid">
+      <div class="col-3" style="border: none;">
          <app-card-profil 
             [cardName]="compteName"
-            [cardDescription]="compteDesciption"
             [cardImage]="compteImage"
             routerLink="account"
          />
@@ -12,7 +11,6 @@
       <div class="col-3">
          <app-card-profil 
             [cardName]="bonsaiName"
-            [cardDescription]="bonsaiDesciption"
             [cardImage]="bonsaiImage"
             routerLink="bonsai"
          />
@@ -20,7 +18,6 @@
       <div class="col-3">
          <app-card-profil 
             [cardName]="postAndCommentName"
-            [cardDescription]="postAndCommentDesciption"
             [cardImage]="postAndCommentImage"
             routerLink="post"
          />
@@ -28,7 +25,6 @@
       <div class="col-3">
          <app-card-profil
             [cardName]="notificationName"
-            [cardDescription]="notificationDesciption"
             [cardImage]="notificationImage"
             routerLink="notification"
          />

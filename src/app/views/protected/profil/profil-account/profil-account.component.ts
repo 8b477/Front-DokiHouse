@@ -1,6 +1,6 @@
 import { UserConnectedModel } from '../../../../API/models/userModels/userConnectedModel/UserConnectedModel';
 import { Component, OnInit, inject } from '@angular/core';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormErrorInfoComponent } from "../../../../shared/components/form-error-info/form-error-info.component";
 import { HttpClient } from '@angular/common/http';
 import { NgClass } from '@angular/common';
@@ -12,14 +12,17 @@ import { UserHttpService } from '../../../../shared/services/user-service/user-h
 import { ToastComponent } from "../../../../shared/components/toast/toast.component";
 import { UserUpdateName } from '../../../../API/models/userModels/userUpdateModels/userUpdateName/UserUpdateName';
 import { HandlerErrorService } from '../../../../shared/services/handler-error-service/handler-error.service';
-
+import {InputTextModule} from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { PasswordModule } from 'primeng/password';
+import {ImageModule} from 'primeng/image';
 
 @Component({
     selector: 'app-profil-account',
     standalone: true,
     templateUrl: './profil-account.component.html',
     styleUrl: './profil-account.component.scss',
-    imports: [ReactiveFormsModule, FormErrorInfoComponent, NgClass, ToastComponent]
+    imports: [ReactiveFormsModule,FormsModule, FormErrorInfoComponent, NgClass, ToastComponent, InputTextModule, ButtonModule, PasswordModule, ImageModule]
 })
 export class ProfilAccountComponent implements OnInit {
 
@@ -77,18 +80,22 @@ export class ProfilAccountComponent implements OnInit {
     const nameOfUserInLocalStorage = this.serviceLocalStorage.getNameOfUserInLocalStorage()
     const roleOfUserInLocalStorage = this.serviceLocalStorage.getRoleOfUserInLocalStorage()
 
-  // Build User with Infos in LocalStorage
-    this.userInfo = new UserConnectedModel(idOfUserInLocalStorage,nameOfUserInLocalStorage,roleOfUserInLocalStorage);
+    if (idOfUserInLocalStorage && nameOfUserInLocalStorage && roleOfUserInLocalStorage) {
+      // Build User with Infos in LocalStorage
+      this.userInfo = new UserConnectedModel(idOfUserInLocalStorage, nameOfUserInLocalStorage, roleOfUserInLocalStorage);
 
-  // Build avatar with API DICEBEAR
-    this.avatar = `https://api.dicebear.com/7.x/adventurer/svg?seed=${this.userInfo.name}`;
+      // Build avatar with API DICEBEAR
+      this.avatar = `https://api.dicebear.com/7.x/adventurer/svg?seed=${this.userInfo.name}`;
+    } else {
+      console.error('User information is incomplete in local storage');
+    }
   }
 
 
 
  // Utils
   activeFocusInput(): void{
-    document.getElementById('change-name')?.focus();
+    document.getElementById('new-name')?.focus();
   }
   
   togglePasswordActualVisibility(){
