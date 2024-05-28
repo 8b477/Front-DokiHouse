@@ -21,57 +21,56 @@ export const routes: Routes =
 [
     {
      title : 'Home',
-     'path' : '',
+     path : '',
      component : HomeComponent
     },
     {
      title : 'Login',
-    'path' : 'login',
+     path : 'login',
      loadComponent : () => LoginComponent
     },
     {
      title : 'SignUp',
-     'path' : 'signup',
+     path : 'signup',
      loadComponent : () => SignUpComponent
     },
     {
      title : 'Support',
-     'path' : 'support',
+    path : 'support',
      loadComponent : () => SupportComponent
      },
     { 
      title : 'Blog',
-    'path' : 'blog',
+     path : 'blog',
       loadComponent : () => BlogComponent 
     },
     {
      title : 'Gallery',
-    'path' : 'gallery',
+     path : 'gallery',
       loadComponent : () => GalleryComponent
     },
     {
      title : 'Profil',
-     'path' : 'profil',
+     path : 'profil',
      canActivate : [authenticationGuard],
-     loadComponent : () => ProfilComponent
+     canActivateChild : [authenticationGuard],
+     loadComponent : () => ProfilComponent,
+     children:[
+        { path : 'account', loadComponent : () => ProfilAccountComponent },
+        { path : 'bonsai', loadComponent : () => ProfilBonsaiComponent },
+        { path : 'post', loadComponent : () => ProfilPostComponent },
+        { path : 'notification', loadComponent : () => ProfilNotificationComponent },
+      ] 
     },
-
-    { path: 'profil', children:[
-      { path : 'account', loadComponent : () => ProfilAccountComponent },
-      { path : 'bonsai', loadComponent : () => ProfilBonsaiComponent },
-      { path : 'post', loadComponent : () => ProfilPostComponent },
-      { path : 'notification', loadComponent : () => ProfilNotificationComponent },
-    ] },
-
     {
       title : 'test',
-      'path' : 'test',
+      path : 'test',
       component : TestComponent 
     },
 
     {
      title : 'NotFound',
-     'path' : '**',
+     path : '**',
      loadComponent : () => NotFoundComponent
     },
 

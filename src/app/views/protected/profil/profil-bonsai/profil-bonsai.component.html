@@ -29,21 +29,39 @@
 
 
 <!-- DISPLAY DATA FROM API -->
-<div class="ml-8 mt-8 flex justify-content-evenly align-items-end flex-wrap">
-  @for (bonsai of dataToDisplay; track $index) {
-    <div>
-        <p-card header="{{bonsai.bonsaiName}}" subheader="" [style]="{width: '360px'}" styleClass="p-card-shadow">
-          <ng-template pTemplate="header">
-              <img alt="Card" src="{{bonsai.bonsaiPicture[0].fileName}}">
-          </ng-template>
-          <p>{{bonsai.bonsaiDescription}}</p>
-          <ng-template pTemplate="footer">
-            <p>{{bonsai.createAt}}</p>
-          </ng-template>
-      </p-card>
-    </div>
-  }
-</div>
+@if(dataToDisplay.length > 0){
+  <div class="ml-8 mt-8 flex justify-content-evenly align-items-end flex-wrap">
+    @for (bonsai of dataToDisplay; track $index) {
+      <div>
+          <p-card header="{{bonsai.bonsaiName}}" subheader="" [style]="{width: '360px'}" styleClass="p-card-shadow">
+            <ng-template pTemplate="header">
+                <img alt="Card" src="{{bonsai.bonsaiPicture[0].fileName}}">
+            </ng-template>
+            <p>{{bonsai.bonsaiDescription}}</p>
+            <ng-template pTemplate="footer">
+              <p>{{bonsai.createAt}}</p>
+            </ng-template>
+        </p-card>
+      </div>
+    }
+  </div>
+}@else {
+  <div class="ml-8 mt-8 flex justify-content-evenly align-items-end flex-wrap">
+    @for (bonsai of mockup; track $index) {
+      <div>
+          <p-card header="{{bonsai.bonsaiName}}" subheader="" [style]="{width: '360px'}" styleClass="p-card-shadow">
+            <ng-template pTemplate="header">
+                <img alt="Card" src="{{bonsai.bonsaiPicture[0].fileName}}">
+            </ng-template>
+            <p>{{bonsai.bonsaiDescription}}</p>
+            <ng-template pTemplate="footer">
+              <p>{{bonsai.createAt}}</p>
+            </ng-template>
+        </p-card>
+      </div>
+    }
+  </div>
+}
 
 
 <!-- MODAL -->
