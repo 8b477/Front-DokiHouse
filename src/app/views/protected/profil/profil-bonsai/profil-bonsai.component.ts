@@ -56,6 +56,7 @@ export class ProfilBonsaiComponent implements OnInit{
     isVisibleCreate : boolean = false
     isVisibleUpdate : boolean = false
 
+
     // INJECTION
     constructor
     (
@@ -148,7 +149,18 @@ export class ProfilBonsaiComponent implements OnInit{
 
 
     public showModalCreate(){
-    this.isVisibleCreate = !this.isVisibleCreate
+        const modalToShow = document.getElementById("modal-create-bonsai")
+        if(modalToShow){
+            modalToShow.style.display = 'block'
+        }
     }
+
+    public hiddeModalCreate(event : any){
+        const modalToShow = document.getElementById("modal-create-bonsai")
+        if(modalToShow){
+            modalToShow.style.display = 'none'
+        }
+    }
+
 
 }

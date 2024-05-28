@@ -1,63 +1,40 @@
-<div id="forced-margin" class="p-fluid">
-  <div class="p-grid">
-    <div id="sidebar" class="p-col-fixed p-0">
-      <ul class="p-nav p-flex-column p-jc-evenly">
-        <li>
-          <button>
-            <img src="{{pathLogoHome}}" alt="{{altLogoHome}}">
-          </button>
-        </li>
-        <li>
-          <button type="button" (click)="showModalCreate()">
-            <img src="{{pathLogoAdd}}" alt="{{altLogoAdd}}">
-          </button>
-        </li>
-        <li>
-          <button type="button" (click)="callUpdateBonsaiComponent()">
-            <img src="{{pathLogoUpdate}}" alt="{{altLogoUpdate}}">
-          </button>
-        </li>
-        <li>
-          <button type="button" (click)="callDeleteBonsaiComponent()">
-            <img src="{{pathLogoDelete}}" alt="{{altLogoDelete}}">
-          </button>
-        </li>
-      </ul>
-    </div>
-    <div id="marginLeft">
-      <app-card-bonsai [dataFromAPI]="dataToDisplay" (cardClicked)="onCardClicked($event)"/>
-    </div>
-  </div>
+<div id="translate-y--50" class="fixed top-50 left-0 flex flex-column justify-content-between h-auto">
+  <ul class="list-none p-0 m-0 h-full flex flex-column justify-content-between">
+    <li class="pt-3 pb-3 bg-white">
+      <button type="button" class="bg-white">
+        <img src="{{pathLogoHome}}" alt="{{altLogoHome}}">
+      </button>
+    </li>
+    <li class="pt-3 pb-3 bg-white">
+      <button type="button" class="bg-white" (click)="showModalCreate()">
+        <img src="{{pathLogoAdd}}" alt="{{altLogoAdd}}">
+      </button>
+    </li>
+    <li class="pt-3 pb-3 bg-white">
+      <button type="button" class="bg-white" (click)="callUpdateBonsaiComponent()">
+        <img src="{{pathLogoUpdate}}" alt="{{altLogoUpdate}}">
+      </button>
+    </li>
+    <li class="pt-3 pb-3 bg-white">
+      <button type="button" class="bg-white" (click)="callDeleteBonsaiComponent()">
+        <img src="{{pathLogoDelete}}" alt="{{altLogoDelete}}">
+      </button>
+    </li>
+  </ul>
+</div>
+<div id="marginLeft">
+  <app-card-bonsai [dataFromAPI]="dataToDisplay" (cardClicked)="onCardClicked($event)"/>
 </div>
 
-<!-- MODAL -->
-<p-dialog [(visible)]="isVisibleCreate" [modal]="true" [style]="{width: '50vw'}">
-  <ng-template pTemplate="header">
-    <h4>Create Bonsai</h4>
-  </ng-template>
-  <ng-template pTemplate="content">
-    <app-create-bonsai/>
-  </ng-template>
-</p-dialog>
 
-<!-- MODAL for update -->
-<p-dialog [(visible)]="isVisibleUpdate" [modal]="true" [style]="{width: '50vw'}">
-  <ng-template pTemplate="header">
-    <h4>Update Bonsai</h4>
-  </ng-template>
-  <ng-template pTemplate="content">
-    <app-update-bonsai [idBonsai]="idBonsai" [title]="titleBonsai" [description]="descriptionBonsai" [imgArray]="imageArray"/>
-  </ng-template>
-</p-dialog>
+
+<dialog id="modal-create-bonsai">
+  <button class="modal-btn-close" (click)="hiddeModalCreate($event)">X</button>
+   <app-create-bonsai/>
+</dialog>
 
 
 
-
-
-<button class="p-button p-button-success" (click)="debuggerTools()">debug tools</button>
-
-@if(errorBonsai.length > 0){
-  @for(error of errorBonsai; track $index){
-    <p>{{error}}</p>
-  }
+@if(dataToDisplay.length == 0){
+  <p>No content</p>
 }

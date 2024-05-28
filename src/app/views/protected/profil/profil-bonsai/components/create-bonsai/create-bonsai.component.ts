@@ -4,11 +4,13 @@ import { BonsaiModel } from '../../../../../../API/models/bonsaiModels/bonsaiCre
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HandlerErrorService } from '../../../../../../shared/services/handler-error-service/handler-error.service';
 import { BonsaiAsCreated } from '../../../../../../API/models/bonsaiModels/bonsaiAsCreatedModel';
+import { InputTextModule } from 'primeng/inputtext';
+import { FloatLabelModule } from 'primeng/floatlabel';
 
 @Component({
   selector: 'app-create-bonsai',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, InputTextModule, FloatLabelModule],
   templateUrl: './create-bonsai.component.html',
   styleUrl: './create-bonsai.component.scss'
 })

@@ -23,17 +23,45 @@ button{
   border: 1px solid rgba(255, 255, 255, 0.59);
 }
 
-#sidebar {
-  position: fixed;
-  top: 32%;
-  left: 0; 
-  background-color: #f0f0f0;
-  min-height: 500px;
-  display: flex;
-  justify-content: space-around;
-}
 
 #marginLeft{
     margin-left: 2.2rem;
 }
 
+.custom-dialog {
+    background: rgba(255, 255, 255, 0.13);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(4.8px);
+    border: 1px solid rgba(255, 255, 255, 0.59);
+}
+
+dialog{
+  position: relative;
+  top: 10%;
+  background: rgba(255, 255, 255, 0.13);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(4.8px);
+  border: 1px solid rgba(255, 255, 255, 0.59);
+
+  button{
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 49px;
+    height: 32px;
+    border-top-right-radius: 9px;
+    border: white solid 1px;
+    cursor: pointer;
+  }
+}
+
+.modal-btn-close:hover{
+  background-color: rgb(188, 26, 26);
+  color: white;
+}
+
+#translate-y--50{
+  transform: translateY(-50%)
+}
