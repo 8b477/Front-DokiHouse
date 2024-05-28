@@ -1,40 +1,57 @@
+<!-- SIDE BAR -->
 <div id="translate-y--50" class="fixed top-50 left-0 flex flex-column justify-content-between h-auto">
   <ul class="list-none p-0 m-0 h-full flex flex-column justify-content-between">
     <li class="pt-3 pb-3 bg-white">
-      <button type="button" class="bg-white">
-        <img src="{{pathLogoHome}}" alt="{{altLogoHome}}">
+      <button type="button" class="bg-white border-none">
+        <img class="icons-sidebar" src="{{pathLogoHome}}" alt="{{altLogoHome}}">
       </button>
     </li>
     <li class="pt-3 pb-3 bg-white">
-      <button type="button" class="bg-white" (click)="showModalCreate()">
-        <img src="{{pathLogoAdd}}" alt="{{altLogoAdd}}">
+      <button type="button" class="bg-white border-none" (click)="showModalCreate()">
+        <img class="icons-sidebar" src="{{pathLogoAdd}}" alt="{{altLogoAdd}}">
       </button>
     </li>
     <li class="pt-3 pb-3 bg-white">
-      <button type="button" class="bg-white" (click)="callUpdateBonsaiComponent()">
-        <img src="{{pathLogoUpdate}}" alt="{{altLogoUpdate}}">
+      <button type="button" class="bg-white border-none" (click)="callUpdateBonsaiComponent()">
+        <img class="icons-sidebar" src="{{pathLogoUpdate}}" alt="{{altLogoUpdate}}">
       </button>
     </li>
     <li class="pt-3 pb-3 bg-white">
-      <button type="button" class="bg-white" (click)="callDeleteBonsaiComponent()">
-        <img src="{{pathLogoDelete}}" alt="{{altLogoDelete}}">
+      <button type="button" class="bg-white border-none" (click)="callDeleteBonsaiComponent()">
+        <img class="icons-sidebar" src="{{pathLogoDelete}}" alt="{{altLogoDelete}}">
       </button>
     </li>
   </ul>
 </div>
-<div id="marginLeft">
+<div class="ml-5">
   <app-card-bonsai [dataFromAPI]="dataToDisplay" (cardClicked)="onCardClicked($event)"/>
 </div>
 
 
+<!-- DISPLAY DATA FROM API -->
+<div class="ml-8 mt-8 flex justify-content-evenly align-items-end flex-wrap">
+  @for (bonsai of dataToDisplay; track $index) {
+    <div>
+        <p-card header="{{bonsai.bonsaiName}}" subheader="" [style]="{width: '360px'}" styleClass="p-card-shadow">
+          <ng-template pTemplate="header">
+              <img alt="Card" src="{{bonsai.bonsaiPicture[0].fileName}}">
+          </ng-template>
+          <p>{{bonsai.bonsaiDescription}}</p>
+          <ng-template pTemplate="footer">
+            <p>{{bonsai.createAt}}</p>
+          </ng-template>
+      </p-card>
+    </div>
+  }
+</div>
 
+
+<!-- MODAL -->
 <dialog id="modal-create-bonsai">
   <button class="modal-btn-close" (click)="hiddeModalCreate($event)">X</button>
    <app-create-bonsai/>
 </dialog>
 
 
-
-@if(dataToDisplay.length == 0){
-  <p>No content</p>
-}
+<!-- DEBUG TOOLS -->
+<button (click)="debug()">debugg</button>

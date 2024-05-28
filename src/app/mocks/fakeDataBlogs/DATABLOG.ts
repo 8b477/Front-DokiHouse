@@ -1,4 +1,4 @@
-import { Blog } from "../../API/Models/blogModels/BlogModel";
+import { Blog } from "../../API/models/blogModels/BlogModel";
 
 
 export const DATABLOG: Blog[] = [

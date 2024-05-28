@@ -13,16 +13,20 @@ import { UpdateBonsaiComponent } from "./components/update-bonsai/update-bonsai.
 import { BonsaiPicture } from '../../../../API/models/blogModels/BonsaiPicture';
 import { HandlerErrorService } from '../../../../shared/services/handler-error-service/handler-error.service';
 import { DialogModule } from 'primeng/dialog';
-
+import {CardModule} from 'primeng/card';
+import { MOCKUP_DATA } from '../../../../mocks/fakeDataGallery/DATAGALLERY';
 
 @Component({
     selector: 'app-profil-bonsai',
     standalone: true,
     templateUrl: './profil-bonsai.component.html',
     styleUrl: './profil-bonsai.component.scss',
-    imports: [CardBonsaiComponent, CreateBonsaiComponent, SideBarreComponent, AsyncPipe, ToastComponent, UpdateBonsaiComponent, DialogModule]
+    imports: [CardBonsaiComponent, CreateBonsaiComponent, SideBarreComponent, AsyncPipe, ToastComponent, UpdateBonsaiComponent, DialogModule, CardModule]
 })
 export class ProfilBonsaiComponent implements OnInit{
+
+    // MOCKUP
+    mockup : BonsaiData[] = MOCKUP_DATA
 
     // VARIABLE
     dataToDisplay : BonsaiData[] | []         = []
@@ -163,4 +167,12 @@ export class ProfilBonsaiComponent implements OnInit{
     }
 
 
+
+
+
+public debug(){
+    console.log(this.mockup[0].bonsaiPicture[0].fileName);
+    console.log("**********************");
+    console.log(this.mockup[0].bonsaiPicture);
+}
 }
