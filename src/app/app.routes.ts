@@ -54,14 +54,16 @@ export const routes: Routes =
      path : 'profil',
      canActivate : [authenticationGuard],
      canActivateChild : [authenticationGuard],
-     loadComponent : () => ProfilComponent,
-     children:[
-        { path : 'account', loadComponent : () => ProfilAccountComponent },
-        { path : 'bonsai', loadComponent : () => ProfilBonsaiComponent },
-        { path : 'post', loadComponent : () => ProfilPostComponent },
-        { path : 'notification', loadComponent : () => ProfilNotificationComponent },
-      ] 
+     loadComponent : () => ProfilComponent
     },
+
+    { path: 'profil', children:[
+      { path : 'account', loadComponent : () => ProfilAccountComponent },
+      { path : 'bonsai', loadComponent : () => ProfilBonsaiComponent , canActivate : [authenticationGuard] },
+      { path : 'post', loadComponent : () => ProfilPostComponent },
+      { path : 'notification', loadComponent : () => ProfilNotificationComponent },
+    ] },
+
     {
       title : 'test',
       path : 'test',
