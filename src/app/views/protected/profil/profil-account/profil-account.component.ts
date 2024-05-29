@@ -48,12 +48,10 @@ export class ProfilAccountComponent implements OnInit {
 
 
   avatar                : string  = ""
-  passwordActualVisible : boolean = false
-  passwordNewVisible    : boolean = false
-  passwordUpdateSuccess : boolean = false
   nameUpdateSuccess     : boolean = false
   emailUpdateSuccess    : boolean = false
   emailIsValid          : boolean = false
+  passwordUpdateSuccess : boolean = false
   IsValidActualPasswd   : boolean = false
 
 
@@ -67,63 +65,31 @@ export class ProfilAccountComponent implements OnInit {
 
   // SERVICES
   http                 : HttpClient          = inject(HttpClient)
-  toast                : ToastComponent      = inject(ToastComponent)
   serviceUser          : UserHttpService     = inject(UserHttpService)
   serviceLocalStorage  : LocalStorageService = inject(LocalStorageService)
-  serviceHandlerErrors : HandlerErrorService = inject(HandlerErrorService)
   messageService       : MessageService      = inject(MessageService)
   
-  // ERROR
-  errorUpdateName   : string[] = []
-  errorCheckMail    : string[] = []
-  errorUpdateMail   : string[] = []
-  errorCheckPasswd  : string[] = []
-  errorUpdatePasswd : string[] = []
 
   ngOnInit(): void {
-  // Validators
+
     this.controlName         = new FormControl(null, [Validators.minLength(1), Validators.required])
     this.controlPasswdActual = new FormControl(null, [Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,15}'), Validators.required])
     this.controlPasswdNew    = new FormControl(null, [Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,15}'), Validators.required])
     this.controlEmailActual  = new FormControl(null, [Validators.email, Validators.required])
     this.controlEmailNew     = new FormControl(null, [Validators.email, Validators.required])
 
-  // Ensure that the variable is initialized
-  this.emailIsValid = false
-
-  // Recover info in LocalStorage
     const idOfUserInLocalStorage   = this.serviceLocalStorage.getIdOfUserInLocalStorage()
     const nameOfUserInLocalStorage = this.serviceLocalStorage.getNameOfUserInLocalStorage()
     const roleOfUserInLocalStorage = this.serviceLocalStorage.getRoleOfUserInLocalStorage()
 
     if (idOfUserInLocalStorage && nameOfUserInLocalStorage && roleOfUserInLocalStorage) {
-      // Build User with Infos in LocalStorage
       this.userInfo = new UserConnectedModel(idOfUserInLocalStorage, nameOfUserInLocalStorage, roleOfUserInLocalStorage);
-
-      // Build avatar with API DICEBEAR
       this.avatar = `https://api.dicebear.com/7.x/adventurer/svg?seed=${this.userInfo.name}`;
-    } else {
-      console.error('User information is incomplete in local storage');
     }
   }
 
 
-
- // Utils
-  activeFocusInput(): void{
-    document.getElementById('new-name')?.focus();
-  }
-  
-  togglePasswordActualVisibility(){
-    this.passwordActualVisible = !this.passwordActualVisible
-  }
-
-  togglePasswordNewVisibility(){
-    this.passwordNewVisible = !this.passwordNewVisible
-  }
-
-
-  // UPDATE
+// ===> Public Methods
   updateName(){
     const name = this.controlName.value
     
@@ -138,7 +104,7 @@ export class ProfilAccountComponent implements OnInit {
       })
   }
 
-  updatePass() {
+  updatePass(){
     const passwdNew = this.controlPasswdNew.value
     this.userUpdatePass = {passwd : passwdNew, passConfirm : passwdNew}
 
@@ -150,7 +116,7 @@ export class ProfilAccountComponent implements OnInit {
       },
       error : (err : string) => this.messageService.add({severity : 'error', summary : 'Mot de passe non valide !', detail : err[0]})
     })
-}
+  }
 
   updateActualMail(){
     this.userUpdateMail = new UserUpdateMail(this.controlEmailNew.value)
@@ -164,9 +130,7 @@ export class ProfilAccountComponent implements OnInit {
     })
   }
 
-
-  // CHECK
-  checkActualPasswd() {
+  checkActualPasswd(){
     const passwd = this.controlPasswdActual.value;
 
     this.serviceUser.checkPasswd(passwd).subscribe(
@@ -179,9 +143,7 @@ export class ProfilAccountComponent implements OnInit {
       })
   }
 
-
-
-  checkMail() {
+  checkMail(){
     const data = this.controlEmailActual.value
     this.userCheckMail = {mail : data}
     this.serviceUser.checkMail(this.userCheckMail).subscribe({
@@ -193,8 +155,13 @@ export class ProfilAccountComponent implements OnInit {
        this.messageService.add({ severity : 'error', summary : 'Le mail n\'est pas valide : !', detail : err.error.mail })
       }
     })
-   }
+  }
 
+
+// ===> Utils
+  activeFocusInput(): void{
+    document.getElementById('new-name')?.focus()
+  }
 
 }
 

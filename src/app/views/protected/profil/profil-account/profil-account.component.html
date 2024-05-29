@@ -3,11 +3,11 @@
 <!--=================> NAME SECTION  -->
     <div class="formgrid grid align-items-end">
 
-        <div class="field col-5">
+        <div class="field col-5" (click)="activeFocusInput()">
             <label for="name">Nom actuel :</label>
             <input id="name" type="text"
                 class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full h-2rem"
-                disabled value="{{ userInfo.name }}" (click)="activeFocusInput()">
+                disabled value="{{ userInfo.name }}">
         </div>
 
         <div class="field col-5">
@@ -35,7 +35,7 @@
     
         <div class="field col-5">
             <label for="new-mail">Nouveau mail :</label>
-            <input id="new-mail" type="email" disabled
+            <input id="new-mail" type="text" disabled
                 class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full h-2rem">
         </div>
 
@@ -59,39 +59,38 @@
 
 <!-- =================> PASS SECTION -->
     <div class="formgrid grid align-items-end">
-@if (!IsValidActualPasswd) {
-        <div class="field col-5">
-            <label for="actual-pass">Mot de passe actuel :</label>
-            <p-password id="actual-pass" styleClass="h-2rem" [formControl]="controlPasswdActual" [toggleMask]="true"
-                inputStyleClass="block w-19rem"></p-password>
-        </div>
 
-        <div class="field col-5">
-            <label for="new-pass">Nouveau mot de passe :</label>
-            <p-password id="new-pass" styleClass="h-2rem" disabled
-                inputStyleClass="block w-19rem"></p-password>
-        </div>
+        @if (!IsValidActualPasswd) {
 
-        <div class="field col-2">
-            <button pButton class="h-2rem" label="Valider" icon="pi pi-check" (click)="checkActualPasswd()"></button>
-        </div>
-}@else {
-        <div class="field col-5">
-            <label for="actual-pass">Mot de passe actuel :</label>
-            <p-password id="actual-pass" styleClass="h-2rem" disabled
-                inputStyleClass="block w-19rem"></p-password>
-        </div>
+                <div class="field col">
+                    <label for="actual-pass">Mot de passe actuel :</label>
+                    <p-password id="actual-pass" styleClass="h-2rem" [formControl]="controlPasswdActual" [toggleMask]="true"></p-password>
+                </div>
 
-        <div class="field col-5">
-            <label for="new-pass">Nouveau mot de passe :</label>
-            <p-password id="new-pass" styleClass="h-2rem" [formControl]="controlPasswdNew" [toggleMask]="true"
-                inputStyleClass="block w-19rem"></p-password>
-        </div>
+                <div class="field col">
+                    <label for="new-pass">Nouveau mot de passe :</label>
+                    <p-password id="new-pass" styleClass="h-2rem" disabled></p-password>
+                </div>
 
-        <div class="field col-2">
-            <button pButton class="h-2rem" label="Valider" icon="pi pi-check" (click)="updatePass()"></button>
-        </div>
-}
+                <div class="field col-2">
+                    <button pButton class="h-2rem" label="Valider" icon="pi pi-check" (click)="checkActualPasswd()"></button>
+                </div>
+
+        }@else {
+                <div class="field col-5">
+                    <label for="actual-pass">Mot de passe actuel :</label>
+                    <p-password id="actual-pass" styleClass="h-2rem" disabled></p-password>
+                </div>
+
+                <div class="field col-5">
+                    <label for="new-pass">Nouveau mot de passe :</label>
+                    <p-password id="new-pass" styleClass="h-2rem" [formControl]="controlPasswdNew" [toggleMask]="true"></p-password>
+                </div>
+
+                <div class="field col-2">
+                    <button pButton class="h-2rem" label="Valider" icon="pi pi-check" (click)="updatePass()"></button>
+                </div>
+        }
     </div>
 
 <!-- =================> PICTURE PROFIL SECTION -->
@@ -106,10 +105,11 @@
     </div>
 
     <div class="field col ml-3">
-        <p-image src="/assets/img/bonsai-1.png" alt="Image" width="50px"></p-image>
+        <p-image src="{{avatar}}" alt="Image" width="50px"></p-image>
     </div>
     
 </div>
 
 
+<!-- =================> TOAST -->
 <p-toast position="bottom-center"></p-toast>
