@@ -1,5 +1,6 @@
 <div class="flex align-items-stretch justify-content-center flex-wrap mt-8 mx-auto w-5">
 
+<!--=================> NAME SECTION  -->
     <div class="formgrid grid align-items-end">
 
         <div class="field col-5">
@@ -21,30 +22,63 @@
 
     </div>
 
+<!--=================> MAIL SECTION  -->
     <div class="formgrid grid align-items-end">
 
         <div class="field col-5">
             <label for="mail-actual">Mail actuel :</label>
-            <input id="mail-actual" type="email"
+            <input id="mail-actual" type="email" [formControl]="controlEmailActual" [attr.disabled]="emailIsValid ? true : null"
                 class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full h-2rem">
         </div>
 
+    @if(!emailIsValid){
+    
         <div class="field col-5">
             <label for="new-mail">Nouveau mail :</label>
-            <input id="new-mai" type="email"
+            <input id="new-mail" type="email" disabled
                 class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full h-2rem">
         </div>
 
         <div class="field col-2">
-            <button pButton class="h-2rem" label="Valider" icon="pi pi-check" (onClick)="updateActualMail()"></button>
+            <button pButton class="h-2rem" label="Vérifier" icon="pi pi-check" (click)="checkMail()"></button>
+        </div>
+    }@else {
+
+        <div class="field col-5">
+            <label for="new-mail">Nouveau mail :</label>
+            <input id="new-mail" type="email" [formControl]="controlEmailNew"
+                class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full h-2rem">
         </div>
 
-    </div>
-    <div class="formgrid grid align-items-end">
+        <div class="field col-2">
+            <button pButton class="h-2rem" label="Valider" icon="pi pi-check" (click)="updateActualMail()"></button>
+        </div>
+    }
 
+    </div>
+
+<!-- =================> PASS SECTION -->
+    <div class="formgrid grid align-items-end">
+@if (!IsValidActualPasswd) {
         <div class="field col-5">
             <label for="actual-pass">Mot de passe actuel :</label>
             <p-password id="actual-pass" styleClass="h-2rem" [formControl]="controlPasswdActual" [toggleMask]="true"
+                inputStyleClass="block w-19rem"></p-password>
+        </div>
+
+        <div class="field col-5">
+            <label for="new-pass">Nouveau mot de passe :</label>
+            <p-password id="new-pass" styleClass="h-2rem" disabled
+                inputStyleClass="block w-19rem"></p-password>
+        </div>
+
+        <div class="field col-2">
+            <button pButton class="h-2rem" label="Valider" icon="pi pi-check" (click)="checkActualPasswd()"></button>
+        </div>
+}@else {
+        <div class="field col-5">
+            <label for="actual-pass">Mot de passe actuel :</label>
+            <p-password id="actual-pass" styleClass="h-2rem" disabled
                 inputStyleClass="block w-19rem"></p-password>
         </div>
 
@@ -55,11 +89,12 @@
         </div>
 
         <div class="field col-2">
-            <button pButton class="h-2rem" label="Valider" icon="pi pi-check" (onClick)="updateName()"></button>
+            <button pButton class="h-2rem" label="Valider" icon="pi pi-check" (click)="updatePass()"></button>
         </div>
-
+}
     </div>
 
+<!-- =================> PICTURE PROFIL SECTION -->
     <div class="formgrid grid align-content-center">
 
         <div class="field col">

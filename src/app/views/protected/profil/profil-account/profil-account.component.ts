@@ -2,7 +2,7 @@ import { UserConnectedModel } from '../../../../API/models/userModels/userConnec
 import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormErrorInfoComponent } from "../../../../shared/components/form-error-info/form-error-info.component";
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { NgClass } from '@angular/common';
 import { UpdatePasswd } from '../../../../API/models/userModels/userUpdateModels/userUpdatePasswd/UserUpdatePasswd';
 import { LocalStorageService } from '../../../../shared/services/local-storage-service/local-storage.service';
@@ -88,6 +88,9 @@ export class ProfilAccountComponent implements OnInit {
     this.controlEmailActual  = new FormControl(null, [Validators.email, Validators.required])
     this.controlEmailNew     = new FormControl(null, [Validators.email, Validators.required])
 
+  // Ensure that the variable is initialized
+  this.emailIsValid = false
+
   // Recover info in LocalStorage
     const idOfUserInLocalStorage   = this.serviceLocalStorage.getIdOfUserInLocalStorage()
     const nameOfUserInLocalStorage = this.serviceLocalStorage.getNameOfUserInLocalStorage()
@@ -140,8 +143,12 @@ export class ProfilAccountComponent implements OnInit {
     this.userUpdatePass = {passwd : passwdNew, passConfirm : passwdNew}
 
     this.serviceUser.updateUserPasswd(this.userUpdatePass).subscribe({
-      next : (result) => this.passwordUpdateSuccess = result,
-      error : (err) => this.serviceHandlerErrors.displayErrors(err, this.errorUpdatePasswd) 
+      next : (result) => {
+        this.passwordUpdateSuccess = result
+        this.messageService.add({severity : 'success', summary : 'Mot de passe à jour !', detail : 'le mot de passe à bien été mis à jour'})
+        this.controlPasswdNew.setValue("")
+      },
+      error : (err : string) => this.messageService.add({severity : 'error', summary : 'Mot de passe non valide !', detail : err[0]})
     })
 }
 
@@ -149,9 +156,11 @@ export class ProfilAccountComponent implements OnInit {
     this.userUpdateMail = new UserUpdateMail(this.controlEmailNew.value)
 
     this.serviceUser.updateUserMail(this.userUpdateMail).subscribe({
-      next : (result) => this.emailUpdateSuccess = true,
-      error : (err) => this.serviceHandlerErrors.displayErrors(err, this.errorUpdateMail)
-      
+      next : () => {
+        this.messageService.add({severity : 'success', summary : 'Mail à jour !', detail : 'le mail à bien été mis à jour'})
+        this.emailUpdateSuccess = true
+      },
+      error : (err : HttpErrorResponse) => this.messageService.add({severity : 'error', summary : 'mail non valide', detail : err.error[0]})
     })
   }
 
@@ -162,8 +171,11 @@ export class ProfilAccountComponent implements OnInit {
 
     this.serviceUser.checkPasswd(passwd).subscribe(
       {
-        next : (data) => this.IsValidActualPasswd = data,
-        error : (err : string[]) => this.serviceHandlerErrors.displayErrors(err, this.errorCheckPasswd)
+        next : (data) => {
+          this.IsValidActualPasswd = data
+          this.messageService.add({ severity : 'success', summary : 'Mot de passe validé !', detail : 'le mot de passe est correct'})
+        },
+        error : (err : string) => this.messageService.add({ severity : 'error', summary : 'Vérification échoué', detail : err[0] })
       })
   }
 
@@ -172,10 +184,14 @@ export class ProfilAccountComponent implements OnInit {
   checkMail() {
     const data = this.controlEmailActual.value
     this.userCheckMail = {mail : data}
-
     this.serviceUser.checkMail(this.userCheckMail).subscribe({
-      next : (result) => this.emailIsValid = result,
-      error : (err) => this.serviceHandlerErrors.displayErrors(err, this.errorCheckMail)
+      next : (result) => { 
+        this.emailIsValid = result
+        this.messageService.add({ severity : 'success', summary : 'Changement validé !', detail : 'le mail à été correctement mis à jour' })
+      },
+      error : (err : HttpErrorResponse) => {
+       this.messageService.add({ severity : 'error', summary : 'Le mail n\'est pas valide : !', detail : err.error.mail })
+      }
     })
    }
 
