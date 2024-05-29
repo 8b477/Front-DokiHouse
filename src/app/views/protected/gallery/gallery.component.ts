@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CardBonsaiComponent } from "./components/card-bonsai/card-bonsai.component";
 import { BonsaiData } from '../../../API/models/blogModels/BonsaiData';
 import { BonsaiServiceService } from '../../../shared/services/bonsai-service/bonsai-service.service';
+import {CardModule} from 'primeng/card';
 
 
 @Component({
@@ -9,7 +10,7 @@ import { BonsaiServiceService } from '../../../shared/services/bonsai-service/bo
     standalone: true,
     templateUrl: './gallery.component.html',
     styleUrl: './gallery.component.scss',
-    imports: [CardBonsaiComponent]
+    imports: [CardBonsaiComponent, CardModule]
 })
 export class GalleryComponent implements OnInit{
 
@@ -26,5 +27,9 @@ export class GalleryComponent implements OnInit{
         next : (data : BonsaiData[] | []) => { this.dataFromAPI  = data; }
     }))
 }
+
+    public debugg(){
+        console.log(this.dataFromAPI[0].bonsaiPicture[0].fileName);
+    }
 
 }
