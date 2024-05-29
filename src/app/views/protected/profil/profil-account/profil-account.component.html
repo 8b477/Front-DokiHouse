@@ -1,64 +1,77 @@
 <div class="flex align-items-stretch justify-content-center flex-wrap mt-8 mx-auto w-5">
 
     <div class="formgrid grid align-items-end">
+
         <div class="field col-5">
             <label for="name">Nom actuel :</label>
             <input id="name" type="text"
                 class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full h-2rem"
-                disabled value="{{ userInfo.name }}" (onClick)="activeFocusInput()">
+                disabled value="{{ userInfo.name }}" (click)="activeFocusInput()">
         </div>
+
         <div class="field col-5">
             <label for="new-name">Nouveau nom :</label>
             <input id="new-name" type="text"
                 class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full h-2rem">
         </div>
+
         <div class="field col-2">
-            <button pButton class="h-2rem" label="Valider" icon="pi pi-check" (onClick)="updateName()"></button>
+            <button pButton class="h-2rem" label="Valider" icon="pi pi-check" (click)="updateName()"></button>
         </div>
+
     </div>
 
     <div class="formgrid grid align-items-end">
+
         <div class="field col-5">
             <label for="mail-actual">Mail actuel :</label>
             <input id="mail-actual" type="email"
                 class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full h-2rem">
         </div>
+
         <div class="field col-5">
             <label for="new-mail">Nouveau mail :</label>
             <input id="new-mai" type="email"
                 class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full h-2rem">
         </div>
+
         <div class="field col-2">
             <button pButton class="h-2rem" label="Valider" icon="pi pi-check" (onClick)="updateActualMail()"></button>
         </div>
+
     </div>
-
-
     <div class="formgrid grid align-items-end">
+
         <div class="field col-5">
             <label for="actual-pass">Mot de passe actuel :</label>
-            <p-password id="actual-pass" styleClass="h-2rem" [formControl]="controlPasswdActual" [toggleMask]="true" inputStyleClass="block w-19rem"></p-password>
+            <p-password id="actual-pass" styleClass="h-2rem" [formControl]="controlPasswdActual" [toggleMask]="true"
+                inputStyleClass="block w-19rem"></p-password>
         </div>
+
         <div class="field col-5">
             <label for="new-pass">Nouveau mot de passe :</label>
-            <p-password id="new-pass" styleClass="h-2rem" [formControl]="controlPasswdNew" [toggleMask]="true" inputStyleClass="block w-19rem"></p-password>
+            <p-password id="new-pass" styleClass="h-2rem" [formControl]="controlPasswdNew" [toggleMask]="true"
+                inputStyleClass="block w-19rem"></p-password>
         </div>
+
         <div class="field col-2">
             <button pButton class="h-2rem" label="Valider" icon="pi pi-check" (onClick)="updateName()"></button>
         </div>
+
     </div>
-    
+
     <div class="formgrid grid align-content-center">
+
         <div class="field col">
             <input type="text"
                 class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary h-2rem block w-19rem"
-                disabled value="Change ton nom pour changer l'image"
-            >
+                disabled value="Change ton nom pour changer l'image">
         </div>
+
     </div>
-        <div class="field col ml-3">
-            <p-image src="/assets/img/bonsai-1.png" alt="Image" width="50px"></p-image>
-        </div>
+
+    <div class="field col ml-3">
+        <p-image src="/assets/img/bonsai-1.png" alt="Image" width="50px"></p-image>
+    </div>
+    
 </div>
-
-
