@@ -12,6 +12,7 @@ import { ToastComponent } from './shared/components/toast/toast.component';
 import { PictureRepository } from './API/repository/picture.repository';
 import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
 import { NgModel } from '@angular/forms';
+import { MessageService } from 'primeng/api';
 
 
 
@@ -31,7 +32,8 @@ export const appConfig: ApplicationConfig =
     UserRepository,
     BonsaiRepository,
     PictureRepository,
-    ToastComponent
+    ToastComponent,
+    MessageService
   ]
 }
 

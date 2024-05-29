@@ -16,13 +16,26 @@ import {InputTextModule} from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { PasswordModule } from 'primeng/password';
 import {ImageModule} from 'primeng/image';
+import {ToastModule} from 'primeng/toast';
+import {MessageService} from 'primeng/api';
 
 @Component({
     selector: 'app-profil-account',
     standalone: true,
     templateUrl: './profil-account.component.html',
     styleUrl: './profil-account.component.scss',
-    imports: [ReactiveFormsModule,FormsModule, FormErrorInfoComponent, NgClass, ToastComponent, InputTextModule, ButtonModule, PasswordModule, ImageModule]
+    imports: [
+              ReactiveFormsModule,
+              FormsModule,
+              FormErrorInfoComponent,
+              NgClass,
+              ToastComponent,
+              InputTextModule,
+              ButtonModule,
+              PasswordModule,
+              ImageModule,
+              ToastModule,
+              ]
 })
 export class ProfilAccountComponent implements OnInit {
 
@@ -58,7 +71,7 @@ export class ProfilAccountComponent implements OnInit {
   serviceUser          : UserHttpService     = inject(UserHttpService)
   serviceLocalStorage  : LocalStorageService = inject(LocalStorageService)
   serviceHandlerErrors : HandlerErrorService = inject(HandlerErrorService)
-
+  messageService       : MessageService      = inject(MessageService)
   
   // ERROR
   errorUpdateName   : string[] = []
@@ -110,14 +123,15 @@ export class ProfilAccountComponent implements OnInit {
   // UPDATE
   updateName(){
     const name = this.controlName.value
-
+    
     this.serviceUser.updateUserName(name).subscribe({
       next : (data : UserUpdateName) => {
           this.userInfo.name = data.name
           this.serviceLocalStorage.setNameOfUserInLocalStorage(data.name)
           this.nameUpdateSuccess = true
+          this.messageService.add({severity:'success', summary:'Succès', detail:'Mise à jour réussi'})
         },
-      error : (err : string[]) => this.serviceHandlerErrors.displayErrors(err, this.errorUpdateName)
+      error : (err : string[]) => this.messageService.add({severity : 'error', summary : 'Une erreur s\'est produite', detail : err[0]})
       })
   }
 
@@ -165,10 +179,6 @@ export class ProfilAccountComponent implements OnInit {
     })
    }
 
-
-// test(){
-//   this.toast.sendChangement()
-// }
 
 }
 
