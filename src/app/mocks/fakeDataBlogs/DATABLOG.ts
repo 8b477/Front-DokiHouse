@@ -5,7 +5,7 @@ export const DATABLOG: Blog[] = [
     new Blog(
         "/assets/img/bonsai-1.png",
         "Les principes de base pour entretenir un bonsaï",
-        "Les bonsaïs nécessitent des soins spécifiques pour maintenir leur santé et leur beauté. Découvrez les principes fondamentaux de l'entretien des bonsaïs, y compris l'arrosage, la taille et la fertilisation.",
+        "Les bonsaïs nécessitent des soins spécifiques pour maintenir leur santé et leur beauté. Découvrez les principes fondamentaux de l'entretien des bonsaïs, y compris l'arrosage, la taille et la fertilisation. Découvrez les principes fondamentaux de l'entretien des bonsaïs, y compris l'arrosage, la taille et la fertilisation. Découvrez les principes fondamentaux de l'entretien des bonsaïs, y compris l'arrosage, la taille et la fertilisation.",
         "Maître Bonsaï",
         new Date("2023-01-15")
     ),

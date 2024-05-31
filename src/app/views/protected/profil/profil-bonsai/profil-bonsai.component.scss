@@ -57,3 +57,78 @@ dialog{
 #translate-y--50{
   transform: translateY(-50%)
 }
+
+.wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+  width: 80vw;
+  margin: 0 auto;
+
+  .container{
+    display: flex;
+    flex-direction: column;
+    margin-top: 3rem;
+    padding: 0.3rem;
+    border-radius: 7px;
+    width: 20%;
+    height: 35rem;
+    background-image: url("/assets/img/background-card/bg-card-bonsai.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    -webkit-box-shadow: 0px 4px 7px 3px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 4px 7px 3px rgba(0,0,0,0.75);
+    box-shadow: 0px 4px 7px 3px rgba(0,0,0,0.75);
+
+
+    .header-container{
+      height: 60%;
+
+      .img-container{
+        display: flex;
+        justify-content: center;
+        height: 80%;
+
+        img{
+          height: 100%;
+          border-radius: 50px;
+        }
+      }
+
+      .title-container{
+        margin-left: 0.5rem;
+        height: 20%;
+      }
+    }
+
+    .body-container{
+      display: flex;
+      align-items: center;
+      margin-left: 0.5rem;
+      margin-bottom: 0.5rem;
+      height: 30%;
+      overflow-y: auto;
+    }
+
+    .footer-container{
+      position: relative;
+      display: flex;
+      margin-left: 0.5rem;
+      height: 10%;
+      margin-left: 0.5rem;
+      padding-top: 0.2rem;
+
+      p{
+        position: absolute;
+        bottom: 7px;
+        margin: 0;
+        padding: 0;
+        height: min-content;
+        line-height: 50px;
+        position: relative;
+        bottom: 0;
+      }
+    }
+  }
+}

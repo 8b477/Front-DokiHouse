@@ -1,37 +1,38 @@
+import { HttpErrorResponse } from "@angular/common/http";
 import { TokenDecryptedModel } from "../../../API/models/tokenModels/TokenDecryptedModel";
 import { TokenModel } from "../../../API/models/tokenModels/TokenModel";
 import { UserLoginModel } from "../../../API/models/userModels/userLoginModel/UserLoginModel";
 import { FooterComponent } from "../../../shared/components/footer/footer.component";
 import { FormErrorInfoComponent } from '../../../shared/components/form-error-info/form-error-info.component';
 import { AuthenticationService } from "../../../shared/services/authentication-service/authentication.service";
-
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from "primeng/api";
 
 @Component({
     selector    : 'app-login',
     standalone  : true,
     templateUrl : './login.component.html',
     styleUrl    : './login.component.scss',
-    imports     : [ReactiveFormsModule, FormErrorInfoComponent, FooterComponent, RouterLink]
+    imports     : [ReactiveFormsModule, FormErrorInfoComponent, FooterComponent, RouterLink, ToastModule]
 })
 export class LoginComponent implements OnInit{
 
   // PUBLIC VARIABLE
   loginForm!  : FormGroup
   responce    : boolean = false
+  showPwd     : boolean = false
   userModel   : UserLoginModel      | undefined
   tokenModel  : TokenDecryptedModel | undefined
   token       : TokenModel          | undefined
-
 
   // SERVICES
   formBuilder           : FormBuilder           = inject(FormBuilder)
   authenticationService : AuthenticationService = inject(AuthenticationService)
   router                : Router                = inject(Router)
-
+  messageService        : MessageService        = inject(MessageService)
   // STATE
   ngOnInit() : void {
     this.buildFormAndValidator()
@@ -73,8 +74,13 @@ export class LoginComponent implements OnInit{
                           this.router.navigate(['/profil'])
                         }
                     },
-                    error : (error) => { console.log(error) }
+                    error : (error : HttpErrorResponse) => this.messageService.add({severity : 'error', summary : 'Connection refusée', detail : error.error})
                   })
+  }
+
+
+  public togglePwd(){
+    this.showPwd = !this.showPwd
   }
 
 }

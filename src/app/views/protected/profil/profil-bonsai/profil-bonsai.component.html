@@ -29,39 +29,29 @@
 
 
 <!-- DISPLAY DATA FROM API -->
-@if(dataToDisplay.length > 0){
-  <div class="ml-8 mt-8 flex justify-content-evenly align-items-end flex-wrap">
+ <!-- @if(dataToDisplay.length > 0){
+<div class="flex flex-wrap justify-content-center relative mt-5 gap-3 row-gap-4">
     @for (bonsai of dataToDisplay; track $index) {
-      <div>
-          <p-card header="{{bonsai.bonsaiName}}" subheader="" [style]="{width: '360px'}" styleClass="p-card-shadow">
-            <ng-template pTemplate="header">
-                <img alt="Card" src="{{bonsai.bonsaiPicture[0].fileName}}">
-            </ng-template>
-            <p>{{bonsai.bonsaiDescription}}</p>
-            <ng-template pTemplate="footer">
-              <p>{{bonsai.createAt}}</p>
-            </ng-template>
-        </p-card>
-      </div>
+      <p-card header="{{ bonsai.bonsaiName }}" [style]="{'width': '25rem', 'margin-bottom': '2em'}">
+          <ng-template pTemplate="header">
+                <img alt="Card" src="{{ bonsai.bonsaiPicture[0].fileName }}">
+          </ng-template>
+                  <p>{{bonsai.bonsaiDescription}}</p>
+      </p-card>
     }
   </div>
 }@else {
-  <div class="ml-8 mt-8 flex justify-content-evenly align-items-end flex-wrap">
+  <div class="flex justify-content-evenly align-items-end flex-wrap relative top-20">
     @for (bonsai of mockup; track $index) {
-      <div>
-          <p-card header="{{bonsai.bonsaiName}}" subheader="" [style]="{width: '360px'}" styleClass="p-card-shadow">
-            <ng-template pTemplate="header">
-                <img alt="Card" src="{{bonsai.bonsaiPicture[0].fileName}}">
-            </ng-template>
-            <p>{{bonsai.bonsaiDescription}}</p>
-            <ng-template pTemplate="footer">
-              <p>{{bonsai.createAt}}</p>
-            </ng-template>
-        </p-card>
-      </div>
+          <p-card header="{{ bonsai.bonsaiName }}" [style]="{'width': '25rem', 'margin-bottom': '2em'}">
+          <ng-template pTemplate="header">
+                <img alt="Card" src="{{ bonsai.bonsaiPicture[0].fileName }}">
+          </ng-template>
+                  <p>{{bonsai.bonsaiDescription}}</p>
+      </p-card>
     }
-  </div>
-}
+</div>
+} -->
 
 
 <!-- MODAL -->
@@ -73,3 +63,40 @@
 
 <!-- DEBUG TOOLS -->
 <button (click)="debug()">debugg</button>
+
+
+
+<div class="wrapper">
+  @if (dataToDisplay.length > 0) {
+
+    @for (bonsai of dataToDisplay; track $index) {
+
+      <div class="container">
+
+        <div class="header-container">
+
+          <div class="img-container">
+            <img src="{{ bonsai.bonsaiPicture[0].fileName }}" alt="">
+          </div>
+
+          <div class="title-container">
+            <p>{{ bonsai.bonsaiName }}</p>
+          </div>
+
+        </div>
+
+        <div class="body-container">
+          <p>{{ bonsai.bonsaiDescription }}</p>
+        </div>
+
+        <div class="footer-container">
+          <p>Créé le : <span>{{bonsai.createAt}}</span> </p>
+        </div>
+
+      </div>
+
+    }
+
+  }
+
+</div>
