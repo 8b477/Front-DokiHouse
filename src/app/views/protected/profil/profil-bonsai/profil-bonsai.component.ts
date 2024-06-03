@@ -1,5 +1,4 @@
-import { Router } from '@angular/router';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CardBonsaiComponent } from "../../gallery/components/card-bonsai/card-bonsai.component";
 import { BonsaiData } from '../../../../API/models/blogModels/BonsaiData';
 import { BonsaiServiceService } from '../../../../shared/services/bonsai-service/bonsai-service.service';
@@ -7,29 +6,39 @@ import { CreateBonsaiComponent } from "./components/create-bonsai/create-bonsai.
 import { SideBarreComponent } from "../../../../shared/components/side-barre/side-barre.component";
 import { Observable } from 'rxjs';
 import { BonsaiStateService } from './services/bonsai-state-service.service';
-import { AsyncPipe } from '@angular/common';
-import { ToastComponent } from "../../../../shared/components/toast/toast.component";
+import { AsyncPipe, DatePipe } from '@angular/common';
 import { UpdateBonsaiComponent } from "./components/update-bonsai/update-bonsai.component";
 import { BonsaiPicture } from '../../../../API/models/blogModels/BonsaiPicture';
-import { HandlerErrorService } from '../../../../shared/services/handler-error-service/handler-error.service';
 import { DialogModule } from 'primeng/dialog';
-import {CardModule} from 'primeng/card';
-import { MOCKUP_DATA } from '../../../../mocks/fakeDataGallery/DATAGALLERY';
+import { CardModule } from 'primeng/card';
+import { MessageService } from 'primeng/api';
+import { HttpErrorResponse } from '@angular/common/http';
+import { DeleteHoverDirective } from './directives/delete-hover.directive';
+
+
 
 @Component({
     selector: 'app-profil-bonsai',
     standalone: true,
     templateUrl: './profil-bonsai.component.html',
     styleUrl: './profil-bonsai.component.scss',
-    imports: [CardBonsaiComponent, CreateBonsaiComponent, SideBarreComponent, AsyncPipe, ToastComponent, UpdateBonsaiComponent, DialogModule, CardModule]
+    imports: [
+                AsyncPipe,
+                DatePipe,
+                CardBonsaiComponent,
+                CreateBonsaiComponent,
+                SideBarreComponent,
+                UpdateBonsaiComponent,
+                DialogModule,
+                CardModule,
+                DeleteHoverDirective,
+            ]
 })
 export class ProfilBonsaiComponent implements OnInit{
 
-    // MOCKUP
-    mockup : BonsaiData[] = MOCKUP_DATA
-
     // VARIABLE
     dataToDisplay : BonsaiData[] | []         = []
+    imageArray    : BonsaiPicture[]           = []
     currentIndex  : { [key: number]: number } = {}
 
     pathLogoHome   : string = "/assets/img/profil/bonsai/home.svg"
@@ -45,30 +54,20 @@ export class ProfilBonsaiComponent implements OnInit{
     titleBonsai       : string          = ""
     descriptionBonsai : string          = ""
     idBonsai          : number          = 0
-    imageArray        : BonsaiPicture[] = []
-    errorBonsai       : string[]        = []
 
-    @Output() redirectHome: EventEmitter<void> = new EventEmitter<void>()
-    @Output() addBonsai   : EventEmitter<void> = new EventEmitter<void>()
-    @Output() updateBonsai: EventEmitter<void> = new EventEmitter<void>()
-    @Output() deleteBonsai: EventEmitter<void> = new EventEmitter<void>()
 
     isCreateBonsai$ : Observable<boolean>
     isUpdateBonsai$ : Observable<boolean>
     isDeleteBonsai$ : Observable<boolean>
 
-    isVisibleCreate : boolean = false
-    isVisibleUpdate : boolean = false
-
 
     // INJECTION
     constructor
     (
-        private service      : BonsaiServiceService,
-        private stateService : BonsaiStateService  ,
-        private errorService : HandlerErrorService ,
-        private bonsaiService: BonsaiServiceService,
-        private routeService : Router              ,
+        private service        : BonsaiServiceService,
+        private stateService   : BonsaiStateService  ,
+        private bonsaiService  : BonsaiServiceService,
+        private messageService : MessageService      ,
     ) 
     {
         this.isCreateBonsai$ = this.stateService.getIsCreateBonsai()
@@ -92,10 +91,6 @@ export class ProfilBonsaiComponent implements OnInit{
 
 
     // PUBLIC METHODS
-    public callRedirectToHome(){
-        this.routeService.navigateByUrl('/profil/bonsai')
-    }
-
     public callAddBonsaiComponent(){
         this.stateService.setIsCreateBonsai(!this.stateService.getIsCreateBonsai().value)
 
@@ -116,17 +111,20 @@ export class ProfilBonsaiComponent implements OnInit{
 
     public callDeleteBonsaiComponent(){
         this.stateService.setIsDeleteBonsai(!this.stateService.getIsDeleteBonsai().value)
-
+        
         if(this.stateService.getIsDeleteBonsai().value){
             this.stateService.setIsCreateBonsai(false)
             this.stateService.setIsUpdateBonsai(false)
         }
     }
 
+img : string = ""
+
     public onCardClicked(event : BonsaiData){ 
         this.titleBonsai = event.bonsaiName
         this.descriptionBonsai = event.bonsaiDescription
         this.idBonsai = event.idBonsai
+        this.img =  event.bonsaiPicture[0].fileName
         if(this.imageArray)
             this.imageArray = event.bonsaiPicture
 
@@ -141,16 +139,14 @@ export class ProfilBonsaiComponent implements OnInit{
         //If STATE OF DELETEBONSAI IS TRUE
         if(this.stateService.getIsDeleteBonsai().value){
             this.bonsaiService.deleteBonsai(this.idBonsai).subscribe(
-                (err) => this.errorService.displayErrors(err, this.errorBonsai)
+                (err : HttpErrorResponse) => this.messageService.add({ severity : 'error', summary : 'Une erreur s\'est produite', detail : err.error })
             )
         } 
-        console.log(event)
+        if(this.stateService.getIsDeleteBonsai()){
+            this.showModalUpdate()
+        }
+        //console.log(event)
     }
-
-    public debuggerTools(){
-        console.log(this.stateService.getIsUpdateBonsai().value);
-    }
-
 
     public showModalCreate(){
         const modalToShow = document.getElementById("modal-create-bonsai")
@@ -166,13 +162,18 @@ export class ProfilBonsaiComponent implements OnInit{
         }
     }
 
+  private showModalUpdate(){
+        const modalToShow = document.getElementById("modal-update-bonsai")
+        if(modalToShow){
+            modalToShow.style.display = 'block'
+        }
+    }
 
-
-
-
-public debug(){
-    console.log(this.mockup[0].bonsaiPicture[0].fileName);
-    console.log("**********************");
-    console.log(this.mockup[0].bonsaiPicture);
-}
+    public hiddeModalUpdate(event : any){
+        const modalToShow = document.getElementById("modal-update-bonsai")
+        if(modalToShow){
+            modalToShow.style.display = 'none'
+        }
+    }
+  
 }

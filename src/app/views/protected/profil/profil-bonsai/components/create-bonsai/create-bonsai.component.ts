@@ -2,17 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { BonsaiServiceService } from '../../../../../../shared/services/bonsai-service/bonsai-service.service';
 import { BonsaiModel } from '../../../../../../API/models/bonsaiModels/bonsaiCreateModel';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { HandlerErrorService } from '../../../../../../shared/services/handler-error-service/handler-error.service';
 import { BonsaiAsCreated } from '../../../../../../API/models/bonsaiModels/bonsaiAsCreatedModel';
 import { InputTextModule } from 'primeng/inputtext';
 import { FloatLabelModule } from 'primeng/floatlabel';
+import { MessageService } from 'primeng/api';
+import {ToastModule} from 'primeng/toast';
+
 
 @Component({
-  selector: 'app-create-bonsai',
-  standalone: true,
-  imports: [ReactiveFormsModule, InputTextModule, FloatLabelModule],
-  templateUrl: './create-bonsai.component.html',
-  styleUrl: './create-bonsai.component.scss'
+    selector: 'app-create-bonsai',
+    standalone: true,
+    templateUrl: './create-bonsai.component.html',
+    styleUrl: './create-bonsai.component.scss',
+    imports: [ReactiveFormsModule, InputTextModule, FloatLabelModule, ToastModule]
 })
 export class CreateBonsaiComponent implements OnInit{
 
@@ -26,7 +28,7 @@ export class CreateBonsaiComponent implements OnInit{
 // INJECTION
   constructor(
     private bonsaiService        : BonsaiServiceService,
-    private serviceHandlerErrors : HandlerErrorService
+    private messageService       : MessageService
   ){}
 
 // STATE
@@ -38,9 +40,9 @@ export class CreateBonsaiComponent implements OnInit{
  private buildFormAndValidator() : void 
   {
     this.loginForm = new FormGroup({
-      title       : new FormControl('', Validators.required),
-      description : new FormControl('', Validators.required),
-      fileToAdd   : new FormControl('', Validators.required)
+      title        : new FormControl('', Validators.required),
+      description  : new FormControl('', Validators.required),
+      fileToAdd    : new FormControl('', Validators.required)
     })
   }
 
@@ -49,23 +51,26 @@ export class CreateBonsaiComponent implements OnInit{
     this.bonsaiService.createBonsai(bonsai).subscribe(({
       next : (data : BonsaiAsCreated) => {
         if(data.id)
-          this.idBonsai = data.id
+          this.idBonsai = data.id //recover id for add picture
           this.sendImg()
+          this.messageService.add({ severity : 'success', summary : 'Bonsai ajouter !', detail : 'Un nouveau bonsai à été ajouter à ta collection' })
       },
-      error : (err) => {
-      this.serviceHandlerErrors.displayErrors(err, this.createNewBonsaiErrors)
-      }
+      error : () => this.messageService.add({ severity: 'error', summary : 'Une erreur s\'est produite', detail : 'Le titre doit avoir une longueur mini de 3 et les extensions d\'image pris en charge sont : .jpg, .jpeg, .png' })
     }))
   }
 
 
 // PUBLIC METHODS
-  public sendImg(){
+  private sendImg(){
     const imgInput = document.getElementById('fileInput') as HTMLInputElement;
     const imgFile  = imgInput.files ? imgInput.files[0] : null;
 
     if (imgFile) {
       this.bonsaiService.addPicture(imgFile, this.idBonsai).subscribe()
+    }
+    else{
+        const defaultImgFile = new File([], 'bonsai-1.png', { type: 'image/png' });
+        this.bonsaiService.addPicture(defaultImgFile, this.idBonsai).subscribe()
     }
   }
 

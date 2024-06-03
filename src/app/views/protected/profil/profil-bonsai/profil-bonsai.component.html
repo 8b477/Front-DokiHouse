@@ -23,35 +23,10 @@
     </li>
   </ul>
 </div>
-<div class="ml-5">
-  <app-card-bonsai [dataFromAPI]="dataToDisplay" (cardClicked)="onCardClicked($event)"/>
-</div>
 
 
 <!-- DISPLAY DATA FROM API -->
- <!-- @if(dataToDisplay.length > 0){
-<div class="flex flex-wrap justify-content-center relative mt-5 gap-3 row-gap-4">
-    @for (bonsai of dataToDisplay; track $index) {
-      <p-card header="{{ bonsai.bonsaiName }}" [style]="{'width': '25rem', 'margin-bottom': '2em'}">
-          <ng-template pTemplate="header">
-                <img alt="Card" src="{{ bonsai.bonsaiPicture[0].fileName }}">
-          </ng-template>
-                  <p>{{bonsai.bonsaiDescription}}</p>
-      </p-card>
-    }
-  </div>
-}@else {
-  <div class="flex justify-content-evenly align-items-end flex-wrap relative top-20">
-    @for (bonsai of mockup; track $index) {
-          <p-card header="{{ bonsai.bonsaiName }}" [style]="{'width': '25rem', 'margin-bottom': '2em'}">
-          <ng-template pTemplate="header">
-                <img alt="Card" src="{{ bonsai.bonsaiPicture[0].fileName }}">
-          </ng-template>
-                  <p>{{bonsai.bonsaiDescription}}</p>
-      </p-card>
-    }
-</div>
-} -->
+<app-card-bonsai [dataToDisplay]="dataToDisplay" (cardClicked)="onCardClicked($event)"/>
 
 
 <!-- MODAL -->
@@ -60,43 +35,7 @@
    <app-create-bonsai/>
 </dialog>
 
-
-<!-- DEBUG TOOLS -->
-<button (click)="debug()">debugg</button>
-
-
-
-<div class="wrapper">
-  @if (dataToDisplay.length > 0) {
-
-    @for (bonsai of dataToDisplay; track $index) {
-
-      <div class="container">
-
-        <div class="header-container">
-
-          <div class="img-container">
-            <img src="{{ bonsai.bonsaiPicture[0].fileName }}" alt="image d'un bonsai" width="100%">
-          </div>
-
-          <div class="title-container">
-            <p>{{ bonsai.bonsaiName }}</p>
-          </div>
-
-        </div>
-
-        <div class="body-container">
-          <p>{{ bonsai.bonsaiDescription }}</p>
-        </div>
-
-        <div class="footer-container">
-          <p>Créé le : <span>{{bonsai.createAt}}</span> </p>
-        </div>
-
-      </div>
-
-    }
-
-  }
-
-</div>
+<dialog id="modal-update-bonsai">
+  <button class="modal-btn-close" (click)="hiddeModalUpdate($event)">X</button> -->
+  <app-update-bonsai [title]="titleBonsai" [description]="descriptionBonsai" [idBonsai]="idBonsai" [img]="img"/>
+</dialog>

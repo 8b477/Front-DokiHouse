@@ -11,7 +11,6 @@ import { UserUpdateMail } from '../../../../API/models/userModels/userUpdateMode
 import { UserHttpService } from '../../../../shared/services/user-service/user-http.service';
 import { ToastComponent } from "../../../../shared/components/toast/toast.component";
 import { UserUpdateName } from '../../../../API/models/userModels/userUpdateModels/userUpdateName/UserUpdateName';
-import { HandlerErrorService } from '../../../../shared/services/handler-error-service/handler-error.service';
 import {InputTextModule} from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { PasswordModule } from 'primeng/password';

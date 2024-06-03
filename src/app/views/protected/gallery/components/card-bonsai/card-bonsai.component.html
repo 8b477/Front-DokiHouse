@@ -1,80 +1,68 @@
-@if (onDataReady() | async) {
-	<ngb-carousel>
-  @for (item of dataPicture; track $index) {
-		<ng-template ngbSlide>
-			<div class="picsum-img-wrapper">
-				<img [src]="item.fileName" alt="Random{{item.idPicture}}" />
-			</div>
-			<div class="carousel-caption">
-				<h3>{{item.fileName}}</h3>
-				<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-			</div>
-		</ng-template>
-  }
-	</ngb-carousel>
-}
-<!-- 
-<button (click)="debuggerTest()">debugg</button>
-<button (click)="forceForeach()">debugg2</button> -->
+<div class="wrapper">
+  @if (dataToDisplay.length > 0) {
 
-<!-- @if(dataFromAPI.length > 0){
-  <div class="row">
-    <div *ngFor="let bonsai of dataFromAPI; index as i;" class="col-3">
-      <div class="card" (click)="onClickCard(bonsai)">
-        <p class="card-title">Title : {{ bonsai.bonsaiName }}</p>
-        <div id="carouselExampleControls{{bonsai.idBonsai}}" class="carousel slide" data-ride="carousel">
-          <div class="carousel-inner">
-            <ng-container *ngFor="let picture of bonsai.bonsaiPicture; let j = index;">
-              <div class="carousel-item" [ngClass]="{'active' : j === currentIndex[bonsai.idBonsai] }">
-                <img class="d-block card-image" src="{{picture.fileName}}" alt="">
-              </div>
-            </ng-container>
+    @for (bonsai of dataToDisplay; track $index) {
+
+      <div class="container" (click)="onClickCard(bonsai)" [appDeleteHover]="isDeleteBonsai$" [appUpdateHover]="isUpdateBonsai$">
+
+        <div class="header-container">
+
+          <div class="img-container">
+          @if(bonsai.bonsaiPicture.length > 0){
+            <img src="{{ bonsai.bonsaiPicture[0].fileName }}" alt="image d'un bonsai" width="100%">
+          }@else {
+            <img src="/assets/img/bonsai-1.png" alt="image d'un bonsai" width="100%">
+          }
           </div>
-          <button class="carousel-control-prev" type="button" [attr.data-bs-target]="'#carouselExample' + bonsai.idBonsai"
-            (click)="prevSlide(bonsai.idBonsai)">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          </button>
-          <button class="carousel-control-next" type="button" [attr.data-bs-target]="'#carouselExample' + bonsai.idBonsai"
-            (click)="nextSlide(bonsai.idBonsai)">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          </button>
-        </div>
-        <p class="footer">{{ bonsai.bonsaiDescription }}</p>
-        <span class="date">Créer le : {{ bonsai.createAt| date : 'dd/MM/YYYY'}}</span>
-        <button class="more-details">Voir plus</button>
-      </div>
-    </div>
-  </div>
-}
-@else {
-<h1>MOCKUP</h1>
-  <div class="row">
-    <div *ngFor="let bonsai of dataFromMockup; index as i;" class="col-3">
-    <div class="card" (click)="onClickCard(bonsai)">
-        <p class="card-title">Title : {{ bonsai.bonsaiName }}</p>
-        <div id="carouselExampleControls{{bonsai.idBonsai}}" class="carousel slide" data-ride="carousel">
-          <div class="carousel-inner">
-            <ng-container *ngFor="let picture of bonsai.bonsaiPicture; let j = index;">
-              <div class="carousel-item" [ngClass]="{'active' : j === currentIndex[bonsai.idBonsai] }">
-                <img class="d-block card-image" src="{{ picture.fileName }}" alt="">
-              </div>
-            </ng-container>
+
+          <div class="title-container">
+            <h3>{{ bonsai.bonsaiName }}</h3>
           </div>
-          <button class="carousel-control-prev" type="button" [attr.data-bs-target]="'#carouselExample' + bonsai.idBonsai"
-            (click)="prevSlide(bonsai.idBonsai)">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          </button>
-          <button class="carousel-control-next" type="button" [attr.data-bs-target]="'#carouselExample' + bonsai.idBonsai"
-            (click)="nextSlide(bonsai.idBonsai)">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          </button>
+
         </div>
-        <div class="footer">
+
+        <div class="body-container">
           <p>{{ bonsai.bonsaiDescription }}</p>
-          <span class="date">Créer le : {{ bonsai.createAt| date : 'dd/MM/YYYY'}}</span>
-          <button class="more-details">Voir plus</button>
         </div>
+
+        <div class="footer-container">
+          <p>Créé le : <span>{{bonsai.createAt | date: "dd MMMM YYYY" }}</span> </p>
+        </div>
+
       </div>
-    </div>
-  </div>
-} -->
+
+    }
+
+  }@else {
+
+    @for (bonsai of mockup; track $index) {
+
+      <div class="container" (click)="onClickCard(bonsai)" [appDeleteHover]="isDeleteBonsai$" [appDeleteHover]="isDeleteBonsai$" [appUpdateHover]="isUpdateBonsai$">
+
+        <div class="header-container">
+
+          <div class="img-container">
+            <img src="{{ bonsai.bonsaiPicture[0].fileName }}" alt="image d'un bonsai" width="100%">
+          </div>
+
+          <div class="title-container">
+            <h3>{{ bonsai.bonsaiName }}</h3>
+          </div>
+
+        </div>
+
+        <div class="body-container">
+          <p>{{ bonsai.bonsaiDescription }}</p>
+        </div>
+
+        <div class="footer-container">
+          <p>Créé le : <span>{{bonsai.createAt | date: "dd MMMM YYYY" }}</span> </p>
+        </div>
+
+      </div>
+
+    }
+
+  }
+
+</div>

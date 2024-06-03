@@ -18,6 +18,7 @@ export class UpdateBonsaiComponent {
 //OUTPUT
  @Input() title       : string = ""
  @Input() description : string = ""
+ @Input() img         : string = ""
  @Input() idBonsai    : number = 0
  @Input() imgArray    : BonsaiPicture[] = []
 

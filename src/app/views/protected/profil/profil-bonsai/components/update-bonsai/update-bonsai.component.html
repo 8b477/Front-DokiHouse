@@ -1,23 +1,19 @@
-<div class="row" [formGroup]="updateForm">
-    <div class="card">
-        <input class="card-title" formControlName="title" type="text" placeholder="titre" value="{{title}}">
-        <div class="d-block card-image">
-            @if(imgArray.length > 0){
-                @for (item of imgArray; track $index) {
-                    <img src="{{item.fileName}}" id="{{item.idPicture}}" alt="{{item.fileName}}">
-                }
-            }
+<div [formGroup]="updateForm">
+    <div id="card">
+        <div id="card-body">
+            <div class="flex-center">
+                <input formControlName="title" type="text" placeholder="titre" value="{{title}}">
+            </div>
+            <div id="card-image" class="block">
+                <input formControlName="fileToAdd" type="file" id="fileInput">
+                <img src="{{ img }}" id="previewImage" alt="Image Preview" width="100%" height="279px">
+            </div>
+            <div class="flex-center">
+                <textarea formControlName="description" (resize)="false" placeholder="description.." cols="35" value="{{description}}"></textarea>
+            </div>
         </div>
-        <input formControlName="description" type="text" placeholder="description" value="{{description}}">
-        <div class="footer">
+        <div id="footer">
             <button (click)="sendModel()" class="btn btn-primary more-details">Mettre à jour</button>
         </div>
     </div>
 </div>
-
-<!-- Make a nicer display for error like toast or popup-->
-@if(createNewBonsaiErrors.length > 0){
-    @for(error of createNewBonsaiErrors; track $index){
-        <p>{{error}}</p>
-    }
-}

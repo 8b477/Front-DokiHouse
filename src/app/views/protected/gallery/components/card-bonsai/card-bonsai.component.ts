@@ -2,10 +2,12 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { DatePipe, NgClass, NgFor, NgIf, AsyncPipe } from '@angular/common';
 import { BonsaiData } from '../../../../../API/models/blogModels/BonsaiData';
 import { MOCKUP_DATA } from '../../../../../mocks/fakeDataGallery/DATAGALLERY';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { BonsaiStateService } from '../../../profil/profil-bonsai/services/bonsai-state-service.service';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
-import { BonsaiPicture } from '../../../../../API/models/blogModels/BonsaiPicture';
+import { DeleteHoverDirective } from '../../../profil/profil-bonsai/directives/delete-hover.directive';
+import { UpdateHoverDirective } from '../../../profil/profil-bonsai/directives/update-hover.directive';
+
 
 
 @Component({
@@ -13,12 +15,15 @@ import { BonsaiPicture } from '../../../../../API/models/blogModels/BonsaiPictur
   selector    : 'app-card-bonsai',
   templateUrl : './card-bonsai.component.html',
   styleUrls   : ['./card-bonsai.component.scss'],
-  imports     : [DatePipe, NgIf, NgFor, NgClass, NgbCarouselModule, AsyncPipe]
+  imports     : [DatePipe, NgIf, NgFor, NgClass, NgbCarouselModule, AsyncPipe, DeleteHoverDirective, UpdateHoverDirective]
 })
 export class CardBonsaiComponent implements OnInit{
 
+    // VARIABLE
+    mockup : BonsaiData[] = MOCKUP_DATA
+
     // INPUT
-    @Input() dataFromAPI : BonsaiData[] | [] = []
+    @Input() dataToDisplay : BonsaiData[] | [] = []
 
 
     // OUTPUT
@@ -31,114 +36,16 @@ export class CardBonsaiComponent implements OnInit{
 
     // OBSERVABLE
     isUpdateBonsai$ : Observable<boolean>
+    isDeleteBonsai$ : Observable<boolean>
 
 
-
-//-------------------------------
-
-    dataPicture : BonsaiPicture[] = []
-
-  private destroy$ = new Subject<void>();
-
-  ngOnInit(): void {
-    this.fillDataPicture();
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
-
-  private fillDataPicture(): void {
-    if (this.dataFromAPI.length > 0) {
-      this.dataFromAPI.forEach((bonsai) => {
-        if (bonsai.bonsaiPicture && bonsai.bonsaiPicture.length > 0) {
-          this.dataPicture.push(...bonsai.bonsaiPicture);
-        }
-      });
-    }
-  }
-
-  onDataReady(): Observable<boolean> {
-    return new Observable<boolean>((observer) => {
-      if (this.dataPicture.length > 0) {
-        observer.next(true);
-        observer.complete();
-      } else {
-        const interval = setInterval(() => {
-          if (this.dataPicture.length > 0) {
-            clearInterval(interval);
-            observer.next(true);
-            observer.complete();
-          }
-        }, 100);
-      }
-    });
-  }
-  
-debuggerTest(){
-    console.log(this.dataPicture);
-}
-
-forceForeach(){
-    this.dataFromAPI.forEach((bonsai) => {
-            if(bonsai.bonsaiPicture.length > 0 && typeof(bonsai.bonsaiPicture) !== undefined){
-                this.dataPicture.push(...bonsai.bonsaiPicture)
-            }
-        })
-}
-//-------------------------------
-
-
-
-
-
-
-
-
+  ngOnInit(): void { }
 
     // INJECTION
     constructor(private bonsaiStateService : BonsaiStateService){
         this.isUpdateBonsai$ = this.bonsaiStateService.getIsUpdateBonsai()
+        this.isDeleteBonsai$ = this.bonsaiStateService.getIsDeleteBonsai()
     }
-
-
-    // STATE
-    // ngOnInit(): void {
-    //     if(this.dataFromAPI.length === 0)
-    //     {
-    //         this.dataFromMockup.forEach(bonsai => { this.currentIndex[bonsai.idBonsai] = 0 });
-    //     }
-    //     if(this.dataFromAPI.length !== 0)
-    //     {
-    //         this.dataFromAPI.forEach(bonsai => { this.currentIndex[bonsai.idBonsai] = 0 });
-    //     }
-
-    // }
-
-
-    // METHODS PUBLIC
-    // Manage index image for slider
-    public prevSlide(bonsaiId: number) {
-        if (this.dataFromAPI !== undefined && this.dataFromAPI.length > 0) {
-            const bonsai = this.dataFromAPI.find(b => b.idBonsai === bonsaiId);
-            if (bonsai) {
-                const pictureLength = bonsai.bonsaiPicture?.length || 0;
-                this.currentIndex[bonsaiId] = (this.currentIndex[bonsaiId] - 1 + pictureLength) % pictureLength;
-            }
-        } 
-    }
-
-
-public nextSlide(bonsaiId: number) {
-    const bonsai = this.dataFromAPI.find(b => b.idBonsai === bonsaiId)
-    if(bonsai){
-        const pictureLength = bonsai.bonsaiPicture?.length || 0;
-        this.currentIndex[bonsaiId] = (this.currentIndex[bonsaiId] + 1) % pictureLength;
-    }
-}
-
-
 
 
     public onClickCard(bonsai : BonsaiData){
