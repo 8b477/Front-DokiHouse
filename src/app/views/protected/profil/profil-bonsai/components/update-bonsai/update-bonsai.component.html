@@ -2,14 +2,14 @@
     <div id="card">
         <div id="card-body">
             <div class="flex-center">
-                <input formControlName="title" type="text" placeholder="titre" value="{{title}}">
+                <input formControlName="title" type="text" placeholder="titre" value="{{ title }}">
             </div>
             <div id="card-image" class="block">
-                <input formControlName="fileToAdd" type="file" id="fileInput">
+                <input type="file" id="fileInput">
                 <img src="{{ img }}" id="previewImage" alt="Image Preview" width="100%" height="279px">
             </div>
             <div class="flex-center">
-                <textarea formControlName="description" (resize)="false" placeholder="description.." cols="35" value="{{description}}"></textarea>
+                <input formControlName="description" value="{{ description }}" style="width: 100%; height: 3.5rem;">
             </div>
         </div>
         <div id="footer">
@@ -17,3 +17,6 @@
         </div>
     </div>
 </div>
+
+<!-- =================> TOAST -->
+<p-toast position="bottom-center"></p-toast>

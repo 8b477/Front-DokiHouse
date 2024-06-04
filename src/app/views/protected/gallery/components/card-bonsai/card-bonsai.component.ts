@@ -17,7 +17,7 @@ import { UpdateHoverDirective } from '../../../profil/profil-bonsai/directives/u
   styleUrls   : ['./card-bonsai.component.scss'],
   imports     : [DatePipe, NgIf, NgFor, NgClass, NgbCarouselModule, AsyncPipe, DeleteHoverDirective, UpdateHoverDirective]
 })
-export class CardBonsaiComponent implements OnInit{
+export class CardBonsaiComponent {
 
     // VARIABLE
     mockup : BonsaiData[] = MOCKUP_DATA
@@ -29,7 +29,6 @@ export class CardBonsaiComponent implements OnInit{
     // OUTPUT
     @Output() cardClicked = new EventEmitter<BonsaiData>();
 
-
     // VARIABLE
     dataFromMockup : BonsaiData[] = MOCKUP_DATA
     currentIndex   : {[key :number] : number} = []
@@ -38,8 +37,6 @@ export class CardBonsaiComponent implements OnInit{
     isUpdateBonsai$ : Observable<boolean>
     isDeleteBonsai$ : Observable<boolean>
 
-
-  ngOnInit(): void { }
 
     // INJECTION
     constructor(private bonsaiStateService : BonsaiStateService){

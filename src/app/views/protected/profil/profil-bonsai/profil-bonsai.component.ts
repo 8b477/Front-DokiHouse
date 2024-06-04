@@ -8,13 +8,12 @@ import { Observable } from 'rxjs';
 import { BonsaiStateService } from './services/bonsai-state-service.service';
 import { AsyncPipe, DatePipe } from '@angular/common';
 import { UpdateBonsaiComponent } from "./components/update-bonsai/update-bonsai.component";
-import { BonsaiPicture } from '../../../../API/models/blogModels/BonsaiPicture';
 import { DialogModule } from 'primeng/dialog';
 import { CardModule } from 'primeng/card';
 import { MessageService } from 'primeng/api';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DeleteHoverDirective } from './directives/delete-hover.directive';
-
+import {ToastModule} from 'primeng/toast';
 
 
 @Component({
@@ -32,13 +31,13 @@ import { DeleteHoverDirective } from './directives/delete-hover.directive';
                 DialogModule,
                 CardModule,
                 DeleteHoverDirective,
+                ToastModule,
             ]
 })
 export class ProfilBonsaiComponent implements OnInit{
 
     // VARIABLE
     dataToDisplay : BonsaiData[] | []         = []
-    imageArray    : BonsaiPicture[]           = []
     currentIndex  : { [key: number]: number } = {}
 
     pathLogoHome   : string = "/assets/img/profil/bonsai/home.svg"
@@ -54,7 +53,7 @@ export class ProfilBonsaiComponent implements OnInit{
     titleBonsai       : string          = ""
     descriptionBonsai : string          = ""
     idBonsai          : number          = 0
-
+    img               : string          = ""
 
     isCreateBonsai$ : Observable<boolean>
     isUpdateBonsai$ : Observable<boolean>
@@ -118,17 +117,19 @@ export class ProfilBonsaiComponent implements OnInit{
         }
     }
 
-img : string = ""
+
 
     public onCardClicked(event : BonsaiData){ 
+
         this.titleBonsai = event.bonsaiName
         this.descriptionBonsai = event.bonsaiDescription
         this.idBonsai = event.idBonsai
         this.img =  event.bonsaiPicture[0].fileName
-        if(this.imageArray)
-            this.imageArray = event.bonsaiPicture
 
-        if (this.stateService.getIsDeleteBonsai().value) {
+        if(this.stateService.getIsDeleteBonsai().value){
+//ADD POPUP FOR DELETE CONFIRM 
+
+
         //Remove to display but not call DB
             const indexToDelete = this.dataToDisplay.findIndex(item => item.idBonsai === this.idBonsai);
             if (indexToDelete !== -1) {
@@ -176,4 +177,19 @@ img : string = ""
         }
     }
   
+
+    showConfirm() {
+        this.messageService.clear();
+        this.messageService.add({key: 'a', sticky: true, severity:'warn', summary:'Are you sure?', detail:'Confirm to proceed'});
+    }
+
+
+    onConfirm() {
+        this.messageService.clear('a');
+    }
+
+    onReject() {
+        this.messageService.clear('a');
+    }
+
 }
