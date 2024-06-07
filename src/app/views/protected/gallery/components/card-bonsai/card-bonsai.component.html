@@ -42,7 +42,11 @@
         <div class="header-container">
 
           <div class="img-container">
+          @if(bonsai.bonsaiPicture.length > 0){
             <img src="{{ bonsai.bonsaiPicture[0].fileName }}" alt="image d'un bonsai" width="100%">
+          }@else {
+            <img src="/assets/img/bonsai-1.png" alt="image d'un bonsai" width="100%">
+          }
           </div>
 
           <div class="title-container">

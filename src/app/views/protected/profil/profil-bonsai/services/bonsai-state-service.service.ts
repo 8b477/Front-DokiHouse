@@ -6,9 +6,10 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class BonsaiStateService {
 
-  private isCreateBonsai: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
-  private isUpdateBonsai: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
-  private isDeleteBonsai: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
+  private isCreateBonsai      : BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
+  private isUpdateBonsai      : BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
+  private isDeleteBonsai      : BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
+  private isDeleteConfirmation: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
 
 // CREATE
   getIsCreateBonsai() {
@@ -35,6 +36,15 @@ export class BonsaiStateService {
 
   setIsDeleteBonsai(value: boolean) {
     this.isDeleteBonsai.next(value)
+  }
+
+// CONFIRMATION
+  getIsDeleteConfirmation(){
+    return this.isDeleteConfirmation
+  }
+
+  setIsDeleteConfirmation(value : boolean){
+    return this.isDeleteConfirmation.next(value)
   }
 
 

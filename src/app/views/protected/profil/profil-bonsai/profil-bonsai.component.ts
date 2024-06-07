@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CardBonsaiComponent } from "../../gallery/components/card-bonsai/card-bonsai.component";
 import { BonsaiData } from '../../../../API/models/blogModels/BonsaiData';
 import { BonsaiServiceService } from '../../../../shared/services/bonsai-service/bonsai-service.service';
 import { CreateBonsaiComponent } from "./components/create-bonsai/create-bonsai.component";
 import { SideBarreComponent } from "../../../../shared/components/side-barre/side-barre.component";
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { BonsaiStateService } from './services/bonsai-state-service.service';
 import { AsyncPipe, DatePipe } from '@angular/common';
 import { UpdateBonsaiComponent } from "./components/update-bonsai/update-bonsai.component";
@@ -55,23 +55,26 @@ export class ProfilBonsaiComponent implements OnInit{
     idBonsai          : number          = 0
     img               : string          = ""
 
-    isCreateBonsai$ : Observable<boolean>
-    isUpdateBonsai$ : Observable<boolean>
-    isDeleteBonsai$ : Observable<boolean>
+    confirmedDelete : boolean = false
+
+    isCreateBonsai$       : Observable<boolean>
+    isUpdateBonsai$       : Observable<boolean>
+    isDeleteBonsai$       : Observable<boolean>
+    isDeleteConfirmation$ : Observable<boolean>
 
 
     // INJECTION
     constructor
     (
-        private service        : BonsaiServiceService,
-        private stateService   : BonsaiStateService  ,
         private bonsaiService  : BonsaiServiceService,
+        private stateService   : BonsaiStateService  ,
         private messageService : MessageService      ,
     ) 
     {
         this.isCreateBonsai$ = this.stateService.getIsCreateBonsai()
         this.isUpdateBonsai$ = this.stateService.getIsUpdateBonsai()
         this.isDeleteBonsai$ = this.stateService.getIsDeleteBonsai()
+        this.isDeleteConfirmation$ = this.stateService.getIsDeleteConfirmation()
     }
 
 
@@ -83,7 +86,7 @@ export class ProfilBonsaiComponent implements OnInit{
 
     // PRIVATE METHODS
     private getBonsai(){
-       this.service.getOwnBonsaiUser().subscribe((data : BonsaiData[] | []) => {
+       this.bonsaiService.getOwnBonsaiUser().subscribe((data : BonsaiData[] | []) => {
             this.dataToDisplay = data
        } )
     }
@@ -120,33 +123,42 @@ export class ProfilBonsaiComponent implements OnInit{
 
 
     public onCardClicked(event : BonsaiData){ 
-
+        //BUILD OBJET BONSAI WITH DATA RECOVER IN EVENT
         this.titleBonsai = event.bonsaiName
         this.descriptionBonsai = event.bonsaiDescription
         this.idBonsai = event.idBonsai
-        this.img =  event.bonsaiPicture[0].fileName
 
-        if(this.stateService.getIsDeleteBonsai().value){
-//ADD POPUP FOR DELETE CONFIRM 
-
-
-        //Remove to display but not call DB
-            const indexToDelete = this.dataToDisplay.findIndex(item => item.idBonsai === this.idBonsai);
-            if (indexToDelete !== -1) {
-                this.dataToDisplay.splice(indexToDelete, 1);
-            }      
+        if(event.bonsaiPicture.length > 0){
+            this.img = event.bonsaiPicture[0].fileName
         }
-        //---------------------------------
-        //If STATE OF DELETEBONSAI IS TRUE
+        else{
+            this.img = "/assets/img/bonsai-1.png"
+        }
+
         if(this.stateService.getIsDeleteBonsai().value){
-            this.bonsaiService.deleteBonsai(this.idBonsai).subscribe(
-                (err : HttpErrorResponse) => this.messageService.add({ severity : 'error', summary : 'Une erreur s\'est produite', detail : err.error })
-            )
-        } 
-        if(this.stateService.getIsDeleteBonsai()){
+        //ADD POPUP FOR DELETE CONFIRM 
+        this.showDeleteConfirmation().subscribe((confirmed) => {
+            if (confirmed) {
+          // Remove to display but not call DB
+          const indexToDelete = this.dataToDisplay.findIndex(item => item.idBonsai === this.idBonsai)
+          if (indexToDelete !== -1) {
+            this.dataToDisplay.splice(indexToDelete, 1);
+          }
+          // Call API for delete item
+          this.bonsaiService.deleteBonsai(this.idBonsai).subscribe({
+            next: () => this.messageService.add({ severity: 'success', summary: 'Suppression réussie', detail: 'Le bonsaï a été supprimé.' }),
+            error: (err: HttpErrorResponse) => this.messageService.add({ severity: 'error', summary: 'Une erreur s\'est produite', detail: err.error })
+            })
+
+        this.stateService.setIsDeleteConfirmation(false)
+
+        }
+        })               
+    }
+        // MANAGE UPDATE
+        if(this.stateService.getIsUpdateBonsai().value){
             this.showModalUpdate()
         }
-        //console.log(event)
     }
 
     public showModalCreate(){
@@ -163,7 +175,7 @@ export class ProfilBonsaiComponent implements OnInit{
         }
     }
 
-  private showModalUpdate(){
+    private showModalUpdate(){
         const modalToShow = document.getElementById("modal-update-bonsai")
         if(modalToShow){
             modalToShow.style.display = 'block'
@@ -178,18 +190,26 @@ export class ProfilBonsaiComponent implements OnInit{
     }
   
 
-    showConfirm() {
-        this.messageService.clear();
-        this.messageService.add({key: 'a', sticky: true, severity:'warn', summary:'Are you sure?', detail:'Confirm to proceed'});
-    }
+    private showDeleteConfirmation() {   
+            this.messageService.add({
+                key: 'delete',
+                sticky: true,
+                severity:'warn',
+                summary:'Are you sure?',
+                detail:'Confirm to proceed'
+            })
+            return this.isDeleteConfirmation$
+        }
 
 
     onConfirm() {
-        this.messageService.clear('a');
+        this.stateService.setIsDeleteConfirmation(true)
+        this.messageService.clear('delete');
     }
 
     onReject() {
-        this.messageService.clear('a');
+        this.stateService.setIsDeleteConfirmation(false)
+        this.messageService.clear('delete');
     }
 
 }

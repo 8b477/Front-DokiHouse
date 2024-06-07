@@ -41,10 +41,7 @@
 </dialog>
 
 
-
-<button type="button" pButton pRipple (click)="showConfirm()" label="Confirm" class="ui-button-warning"></button>
-
-<p-toast position="bottom-center" key="a" (onClose)="onReject()" [baseZIndex]="5000">
+<p-toast position="bottom-center" key="delete" (onClose)="onReject()" [baseZIndex]="5000">
   <ng-template let-message pTemplate="message">
     <div class="flex flex-column" style="flex: 1">
         <div class="text-center">

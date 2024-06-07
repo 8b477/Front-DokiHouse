@@ -7,6 +7,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { MessageService } from 'primeng/api';
 import {ToastModule} from 'primeng/toast';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
@@ -27,8 +28,8 @@ export class CreateBonsaiComponent implements OnInit{
 
 // INJECTION
   constructor(
-    private bonsaiService        : BonsaiServiceService,
-    private messageService       : MessageService
+    private bonsaiService  : BonsaiServiceService,
+    private messageService : MessageService
   ){}
 
 // STATE
@@ -62,20 +63,21 @@ export class CreateBonsaiComponent implements OnInit{
 
 // PUBLIC METHODS
   private sendImg(){
+
     const imgInput = document.getElementById('fileInput') as HTMLInputElement;
     const imgFile  = imgInput.files ? imgInput.files[0] : null;
 
     if (imgFile) {
-      this.bonsaiService.addPicture(imgFile, this.idBonsai).subscribe()
-    }
-    else{
-        const defaultImgFile = new File([], 'bonsai-1.png', { type: 'image/png' });
-        this.bonsaiService.addPicture(defaultImgFile, this.idBonsai).subscribe()
+      this.bonsaiService.addPicture(imgFile, this.idBonsai).subscribe(({
+        next : (data : HttpErrorResponse) => this.messageService.add({ severity : 'success', summary : 'Ajout de l\'image réussi', detail : data.error }),
+        error : (err) => this.messageService.add({ severity : 'error', summary : 'Ajout de l\'image failed (origin)', detail : err.error })
+      }))
     }
   }
 
 
  public sendModel(){
+ 
     const title = this.loginForm.controls['title'].value
     const description = this.loginForm.controls['description'].value
 
