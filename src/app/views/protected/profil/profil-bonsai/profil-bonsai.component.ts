@@ -1,10 +1,10 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CardBonsaiComponent } from "../../gallery/components/card-bonsai/card-bonsai.component";
 import { BonsaiData } from '../../../../API/models/blogModels/BonsaiData';
 import { BonsaiServiceService } from '../../../../shared/services/bonsai-service/bonsai-service.service';
 import { CreateBonsaiComponent } from "./components/create-bonsai/create-bonsai.component";
 import { SideBarreComponent } from "../../../../shared/components/side-barre/side-barre.component";
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { BonsaiStateService } from './services/bonsai-state-service.service';
 import { AsyncPipe, DatePipe } from '@angular/common';
 import { UpdateBonsaiComponent } from "./components/update-bonsai/update-bonsai.component";
@@ -36,35 +36,32 @@ import {ToastModule} from 'primeng/toast';
 })
 export class ProfilBonsaiComponent implements OnInit{
 
-    // VARIABLE
-    dataToDisplay : BonsaiData[] | []         = []
-    currentIndex  : { [key: number]: number } = {}
-
+// DATA FROM API
+    dataToDisplay : BonsaiData[] | [] = []
+// LOGO SIDE BAR
     pathLogoHome   : string = "/assets/img/profil/bonsai/home.svg"
     pathLogoAdd    : string = "/assets/img/profil/bonsai/plus.svg"
     pathLogoUpdate : string = "/assets/img/profil/bonsai/update.svg"
     pathLogoDelete : string = "/assets/img/profil/bonsai/delete.svg"
-
+// ALT LOGO SIDE BAR
     altLogoHome   : string = "logo d'une maison"
     altLogoAdd    : string = "logo d'un plus"
     altLogoUpdate : string = "logo update"
     altLogoDelete : string = "logo d'une poubelle"
-
+// INFOS BONSAI
     titleBonsai       : string          = ""
     descriptionBonsai : string          = ""
     idBonsai          : number          = 0
     img               : string          = ""
     defaultPath       : string          = "/assets/img/bonsai-1.png"
-
-    confirmedDelete : boolean = false
-
+    confirmedDelete   : boolean         = false
+// OBSERVABLE
     isCreateBonsai$       : Observable<boolean>
     isUpdateBonsai$       : Observable<boolean>
     isDeleteBonsai$       : Observable<boolean>
     isDeleteConfirmation$ : Observable<boolean>
 
-
-    // INJECTION
+// INJECTION
     constructor
     (
         private bonsaiService  : BonsaiServiceService,
@@ -79,26 +76,48 @@ export class ProfilBonsaiComponent implements OnInit{
     }
 
 
-    // STATE
+// STATE
     ngOnInit(): void {
         this.getBonsai()
     }
 
 
-    // PRIVATE METHODS
+// PRIVATE METHODS
     private getBonsai(){
        this.bonsaiService.getOwnBonsaiUser().subscribe((data : BonsaiData[] | []) => {
             this.dataToDisplay = data
        } )
     }
 
-    private checkIfContainPictureAndBind(arrayToCheck : BonsaiData, bind : string, defaultPath : string){
+    private setValueToSend(bonsaiClicked : BonsaiData){
+        this.titleBonsai = bonsaiClicked.bonsaiName
+        this.descriptionBonsai = bonsaiClicked.bonsaiDescription
+        this.idBonsai = bonsaiClicked.idBonsai
+    }
+
+    private checkIfContainPictureAndBind(arrayToCheck : BonsaiData, pathImage : string, defaultPath : string){
         if(arrayToCheck.bonsaiPicture.length > 0){
-            bind = arrayToCheck.bonsaiPicture[0].fileName
+            pathImage = arrayToCheck.bonsaiPicture[0].fileName
         }
         else{
-            bind = defaultPath
+            pathImage = defaultPath
         }
+    }
+
+    private removeDisplayBonsais(){
+        const indexToDelete = this.dataToDisplay.findIndex(item => item.idBonsai === this.idBonsai)
+        if (indexToDelete !== -1) {
+        this.dataToDisplay.splice(indexToDelete, 1);
+        }
+    }
+
+    private callAPIToRemoveBonsaiClicked(){
+        this.bonsaiService.deleteBonsai(this.idBonsai).subscribe({
+            next: () => {
+                this.messageService.add({ severity: 'success', summary: 'Suppression réussie', detail: 'Le bonsaï a été supprimé.' })
+            },
+            error: (err: HttpErrorResponse) => this.messageService.add({ severity: 'error', summary: 'Une erreur s\'est produite', detail: err.error })
+        })
     }
 
     private showDeleteConfirmation() {   
@@ -119,16 +138,9 @@ export class ProfilBonsaiComponent implements OnInit{
         }
     }
 
-    // PUBLIC METHODS
-    public callAddBonsaiComponent(){
-        this.stateService.setIsCreateBonsai(!this.stateService.getIsCreateBonsai().value)
 
-        if(this.stateService.getIsCreateBonsai().value){
-            this.stateService.setIsUpdateBonsai(false)
-            this.stateService.setIsDeleteBonsai(false)
-        }
-    }
 
+// PUBLIC METHODS
     public callUpdateBonsaiComponent(){
         this.stateService.setIsUpdateBonsai(!this.stateService.getIsUpdateBonsai().value)
 
@@ -148,40 +160,26 @@ export class ProfilBonsaiComponent implements OnInit{
     }
 
     public onCardClicked(event : BonsaiData){ 
-        //BUILD OBJET BONSAI WITH DATA RECOVER IN EVENT
-        this.titleBonsai = event.bonsaiName
-        this.descriptionBonsai = event.bonsaiDescription
-        this.idBonsai = event.idBonsai
-
+        this.setValueToSend(event)
         this.checkIfContainPictureAndBind(event, this.img, this.defaultPath)
 
-
         if(this.stateService.getIsDeleteBonsai().value){
-        //ADD POPUP FOR DELETE CONFIRM 
-        this.showDeleteConfirmation().subscribe((confirmed) => {
-            if (confirmed) {
-          // Remove to display but not call DB
-          const indexToDelete = this.dataToDisplay.findIndex(item => item.idBonsai === this.idBonsai)
-          if (indexToDelete !== -1) {
-            this.dataToDisplay.splice(indexToDelete, 1);
-          }
-          // Call API for delete item
-          this.bonsaiService.deleteBonsai(this.idBonsai).subscribe({
-            next: () => this.messageService.add({ severity: 'success', summary: 'Suppression réussie', detail: 'Le bonsaï a été supprimé.' }),
-            error: (err: HttpErrorResponse) => this.messageService.add({ severity: 'error', summary: 'Une erreur s\'est produite', detail: err.error })
-            })
-
-        this.stateService.setIsDeleteConfirmation(false)
-
+            this.showDeleteConfirmation().subscribe((confirmed) => {
+                if (confirmed) {
+                    this.removeDisplayBonsais()
+                    this.callAPIToRemoveBonsaiClicked()
+                    this.stateService.setIsDeleteConfirmation(false)
+                }
+            })               
         }
-        })               
-    }
         // MANAGE UPDATE
         if(this.stateService.getIsUpdateBonsai().value){
             this.showModalUpdate()
         }
     }
 
+
+// MANAGE MODAL
     public showModalCreate(){
         const modalToShow = document.getElementById("modal-create-bonsai")
         if(modalToShow){
@@ -203,6 +201,7 @@ export class ProfilBonsaiComponent implements OnInit{
         }
     }
   
+// MANAGE TOAST
     public onConfirm() {
         this.stateService.setIsDeleteConfirmation(true)
         this.messageService.clear('delete');
@@ -212,5 +211,6 @@ export class ProfilBonsaiComponent implements OnInit{
         this.stateService.setIsDeleteConfirmation(false)
         this.messageService.clear('delete');
     }
+
 
 }

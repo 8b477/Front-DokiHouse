@@ -55,10 +55,7 @@ export class UpdateBonsaiComponent implements OnInit, OnChanges{
   private updateBonsai(bonsaiId : number, bonsai : BonsaiModel){
     this.bonsaiService.updateBonsai(bonsaiId, bonsai).subscribe(({
       next : () => { this.messageService.add({ severity : 'success', summary : 'Changement validé !', detail : 'la mise à jour du bonsai à été correctement éffectuer' }) },
-      error : (err : string) => {
-        console.log(err)
-         this.messageService.add({ severity : 'error', summary : 'Une erreur s\'est produite !', detail : err })
-      }
+      error : (err : string) => this.messageService.add({ severity : 'error', summary : 'Une erreur s\'est produite !', detail : err })
     }))
   }
 
