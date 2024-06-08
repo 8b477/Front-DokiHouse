@@ -54,6 +54,7 @@ export class ProfilBonsaiComponent implements OnInit{
     descriptionBonsai : string          = ""
     idBonsai          : number          = 0
     img               : string          = ""
+    defaultPath       : string          = "/assets/img/bonsai-1.png"
 
     confirmedDelete : boolean = false
 
@@ -91,6 +92,32 @@ export class ProfilBonsaiComponent implements OnInit{
        } )
     }
 
+    private checkIfContainPictureAndBind(arrayToCheck : BonsaiData, bind : string, defaultPath : string){
+        if(arrayToCheck.bonsaiPicture.length > 0){
+            bind = arrayToCheck.bonsaiPicture[0].fileName
+        }
+        else{
+            bind = defaultPath
+        }
+    }
+
+    private showDeleteConfirmation() {   
+            this.messageService.add({
+                key: 'delete',
+                sticky: true,
+                severity:'warn',
+                summary:'Are you sure?',
+                detail:'Confirm to proceed'
+            })
+            return this.isDeleteConfirmation$
+    }
+
+    private showModalUpdate(){
+        const modalToShow = document.getElementById("modal-update-bonsai")
+        if(modalToShow){
+            modalToShow.style.display = 'block'
+        }
+    }
 
     // PUBLIC METHODS
     public callAddBonsaiComponent(){
@@ -120,20 +147,14 @@ export class ProfilBonsaiComponent implements OnInit{
         }
     }
 
-
-
     public onCardClicked(event : BonsaiData){ 
         //BUILD OBJET BONSAI WITH DATA RECOVER IN EVENT
         this.titleBonsai = event.bonsaiName
         this.descriptionBonsai = event.bonsaiDescription
         this.idBonsai = event.idBonsai
 
-        if(event.bonsaiPicture.length > 0){
-            this.img = event.bonsaiPicture[0].fileName
-        }
-        else{
-            this.img = "/assets/img/bonsai-1.png"
-        }
+        this.checkIfContainPictureAndBind(event, this.img, this.defaultPath)
+
 
         if(this.stateService.getIsDeleteBonsai().value){
         //ADD POPUP FOR DELETE CONFIRM 
@@ -175,13 +196,6 @@ export class ProfilBonsaiComponent implements OnInit{
         }
     }
 
-    private showModalUpdate(){
-        const modalToShow = document.getElementById("modal-update-bonsai")
-        if(modalToShow){
-            modalToShow.style.display = 'block'
-        }
-    }
-
     public hiddeModalUpdate(event : any){
         const modalToShow = document.getElementById("modal-update-bonsai")
         if(modalToShow){
@@ -189,25 +203,12 @@ export class ProfilBonsaiComponent implements OnInit{
         }
     }
   
-
-    private showDeleteConfirmation() {   
-            this.messageService.add({
-                key: 'delete',
-                sticky: true,
-                severity:'warn',
-                summary:'Are you sure?',
-                detail:'Confirm to proceed'
-            })
-            return this.isDeleteConfirmation$
-        }
-
-
-    onConfirm() {
+    public onConfirm() {
         this.stateService.setIsDeleteConfirmation(true)
         this.messageService.clear('delete');
     }
 
-    onReject() {
+    public onReject() {
         this.stateService.setIsDeleteConfirmation(false)
         this.messageService.clear('delete');
     }
