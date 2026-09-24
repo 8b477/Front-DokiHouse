@@ -1,6 +1,6 @@
 # 🌳 Projet DokiHouse 🌱
 ### Disclaimer
-**Ce projet est un exercice pratique, construit avec la documentation officiel, dans le but d'améliorer ma compréhension d'Angular 17, le backend n'est pas fourni volontairement**
+**Ce projet est un exercice pratique, construit avec la documentation officiel, dans le but d'améliorer ma compréhension d'Angular 17, le backend est construit avec ASP Net Core : https://github.com/8b477/API_DokiHouse**
 
 PAS DE VIBE CODING OU AUTRE ICI, UNIQUEMENT DOC ANGULAR ET VIDÉO YOUTUBE POUR M'AIDER, CE QUI EXPLIQUE LA PIÈTRE QUALITÉ DU VISUEL ET DU CODE JE SUPPOSE 😜
 
