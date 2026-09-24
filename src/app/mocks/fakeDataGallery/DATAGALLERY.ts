@@ -1,4 +1,4 @@
-import { BonsaiData } from "../../API/models/blogModels/BonsaiData";
+import { BonsaiData } from "../../API/Models/blogModels/BonsaiData";
 
 
 export const MOCKUP_DATA: BonsaiData[] = [

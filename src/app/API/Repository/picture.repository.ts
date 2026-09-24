@@ -1,7 +1,7 @@
-import { Observable } from "rxjs";
-import { Picture } from "../interfaces/picture.getaway";
 import { HttpClient } from "@angular/common/http";
 import { inject } from "@angular/core";
+import { Observable } from "rxjs";
+import { Picture } from "../Interfaces/picture.getaway";
 
 export class PictureRepository extends Picture{
 

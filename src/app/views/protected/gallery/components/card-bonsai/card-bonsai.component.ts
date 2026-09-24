@@ -1,12 +1,12 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { DatePipe, NgClass, NgFor, NgIf, AsyncPipe } from '@angular/common';
-import { BonsaiData } from '../../../../../API/models/blogModels/BonsaiData';
-import { MOCKUP_DATA } from '../../../../../mocks/fakeDataGallery/DATAGALLERY';
-import { Observable } from 'rxjs';
-import { BonsaiStateService } from '../../../profil/profil-bonsai/services/bonsai-state-service.service';
+import { AsyncPipe, DatePipe, NgClass, NgFor, NgIf } from '@angular/common';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+import { Observable } from 'rxjs';
+import { BonsaiData } from '../../../../../API/Models/blogModels/BonsaiData';
+import { MOCKUP_DATA } from '../../../../../mocks/fakeDataGallery/DATAGALLERY';
 import { DeleteHoverDirective } from '../../../profil/profil-bonsai/directives/delete-hover.directive';
 import { UpdateHoverDirective } from '../../../profil/profil-bonsai/directives/update-hover.directive';
+import { BonsaiStateService } from '../../../profil/profil-bonsai/services/bonsai-state-service.service';
 
 
 

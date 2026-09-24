@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { UserConnectedModel } from '../../../API/models/userModels/userConnectedModel/UserConnectedModel';
 
 
 @Injectable({

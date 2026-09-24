@@ -1,4 +1,12 @@
-# 🌳 Projet DokiHouse 🌱 (*in progress*)
+# 🌳 Projet DokiHouse 🌱
+### Disclaimer
+**Ce projet est un exercice pratique, construit avec la documentation officiel, dans le but d'améliorer ma compréhension d'Angular 17, le backend n'est pas fourni volontairement**
+
+PAS DE VIBE CODING OU AUTRE ICI, UNIQUEMENT DOC ANGULAR ET VIDÉO YOUTUBE POUR M'AIDER, CE QUI EXPLIQUE LA PIÈTRE QUALITÉ DU VISUEL ET DU CODE JE SUPPOSE 😜
+
+*Version : Angular 17*
+
+---
 
 ## Présentation du projet 🌿
 
@@ -35,13 +43,13 @@ git clone https://github.com/8b477/Front-DokiHouse.git
 1. Accédez au répertoire du projet :
 
 ```bash
-git cd Front-DokiHouse
+cd Front-DokiHouse
 ```
 
 2. Installez les dépendances avec npm :
 
 ```bash
-git npm install
+npm install
 ```
 
 # Lancement de l'application 
@@ -49,12 +57,8 @@ git npm install
 Une fois les dépendances installées, lancez l'application avec la commande suivante :
 
 ```bash
-git ng serve
+ng serve
 ```
-
-C'est tout ! Votre application Angular devrait être en cours d'exécution localement sur localhost:4200.
-
-Amusez-vous bien ! 🎉
 
 Pour plus d'infos consulte la documentation officiel d'Angular :  
 => [Doc Officiel](https://angular.io/cli/serve)

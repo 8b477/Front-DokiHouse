@@ -1,19 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { CardBonsaiComponent } from "../../gallery/components/card-bonsai/card-bonsai.component";
-import { BonsaiData } from '../../../../API/models/blogModels/BonsaiData';
-import { BonsaiServiceService } from '../../../../shared/services/bonsai-service/bonsai-service.service';
-import { CreateBonsaiComponent } from "./components/create-bonsai/create-bonsai.component";
-import { SideBarreComponent } from "../../../../shared/components/side-barre/side-barre.component";
-import { Observable } from 'rxjs';
-import { BonsaiStateService } from './services/bonsai-state-service.service';
 import { AsyncPipe, DatePipe } from '@angular/common';
-import { UpdateBonsaiComponent } from "./components/update-bonsai/update-bonsai.component";
-import { DialogModule } from 'primeng/dialog';
-import { CardModule } from 'primeng/card';
-import { MessageService } from 'primeng/api';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { MessageService } from 'primeng/api';
+import { CardModule } from 'primeng/card';
+import { DialogModule } from 'primeng/dialog';
+import { ToastModule } from 'primeng/toast';
+import { Observable } from 'rxjs';
+import { BonsaiData } from '../../../../API/Models/blogModels/BonsaiData';
+import { SideBarreComponent } from "../../../../shared/components/side-barre/side-barre.component";
+import { BonsaiServiceService } from '../../../../shared/services/bonsai-service/bonsai-service.service';
+import { CardBonsaiComponent } from "../../gallery/components/card-bonsai/card-bonsai.component";
+import { CreateBonsaiComponent } from "./components/create-bonsai/create-bonsai.component";
+import { UpdateBonsaiComponent } from "./components/update-bonsai/update-bonsai.component";
 import { DeleteHoverDirective } from './directives/delete-hover.directive';
-import {ToastModule} from 'primeng/toast';
+import { BonsaiStateService } from './services/bonsai-state-service.service';
 
 
 @Component({

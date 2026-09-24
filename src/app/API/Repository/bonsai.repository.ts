@@ -1,11 +1,11 @@
-import { Observable } from "rxjs";
-import { BonsaiGateway } from "../interfaces/bonsai.getaway";
 import { HttpBackend, HttpClient } from "@angular/common/http";
 import { inject } from "@angular/core";
+import { Observable } from "rxjs";
 import { environment } from "../../../environments/environment";
-import { BonsaiData } from "../models/blogModels/BonsaiData";
-import { BonsaiModel } from "../models/bonsaiModels/bonsaiCreateModel";
-import { BonsaiAsCreated } from "../models/bonsaiModels/bonsaiAsCreatedModel";
+import { BonsaiGateway } from "../Interfaces/bonsai.getaway";
+import { BonsaiData } from "../Models/blogModels/BonsaiData";
+import { BonsaiAsCreated } from "../Models/bonsaiModels/bonsaiAsCreatedModel";
+import { BonsaiModel } from "../Models/bonsaiModels/bonsaiCreateModel";
 
 export class BonsaiRepository extends BonsaiGateway{
 

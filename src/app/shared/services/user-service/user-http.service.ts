@@ -1,13 +1,13 @@
 import { Injectable, inject } from '@angular/core';
-import { AuthenticationService } from '../authentication-service/authentication.service';
 import { Router } from '@angular/router';
 import { Observable, catchError } from 'rxjs';
-import { UserRepository } from '../../../API/repository/user.repository';
-import { UserCreateModel } from '../../../API/models/userModels/userCreateModel/UserCreateModel';
-import { UserUpdateName } from '../../../API/models/userModels/userUpdateModels/userUpdateName/UserUpdateName';
-import { UpdatePasswd } from '../../../API/models/userModels/userUpdateModels/userUpdatePasswd/UserUpdatePasswd';
-import { UserCheckMail } from '../../../API/models/userModels/userCheckMailModel/UserCheckMail';
-import { UserUpdateMail } from '../../../API/models/userModels/userUpdateModels/userUpdateMail/UserUpdateMail';
+import { UserCheckMail } from '../../../API/Models/userModels/userCheckMailModel/UserCheckMail';
+import { UserCreateModel } from '../../../API/Models/userModels/userCreateModel/UserCreateModel';
+import { UserUpdateMail } from '../../../API/Models/userModels/userUpdateModels/userUpdateMail/UserUpdateMail';
+import { UserUpdateName } from '../../../API/Models/userModels/userUpdateModels/userUpdateName/UserUpdateName';
+import { UpdatePasswd } from '../../../API/Models/userModels/userUpdateModels/userUpdatePasswd/UserUpdatePasswd';
+import { UserRepository } from '../../../API/Repository/user.repository';
+import { AuthenticationService } from '../authentication-service/authentication.service';
 import { HandlerErrorService } from '../handler-error-service/handler-error.service';
 
 @Injectable({

@@ -1,22 +1,22 @@
-import { UserConnectedModel } from '../../../../API/models/userModels/userConnectedModel/UserConnectedModel';
+import { NgClass } from '@angular/common';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { FormErrorInfoComponent } from "../../../../shared/components/form-error-info/form-error-info.component";
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { NgClass } from '@angular/common';
-import { UpdatePasswd } from '../../../../API/models/userModels/userUpdateModels/userUpdatePasswd/UserUpdatePasswd';
-import { LocalStorageService } from '../../../../shared/services/local-storage-service/local-storage.service';
-import { UserCheckMail } from '../../../../API/models/userModels/userCheckMailModel/UserCheckMail';
-import { UserUpdateMail } from '../../../../API/models/userModels/userUpdateModels/userUpdateMail/UserUpdateMail';
-import { UserHttpService } from '../../../../shared/services/user-service/user-http.service';
-import { ToastComponent } from "../../../../shared/components/toast/toast.component";
-import { UserUpdateName } from '../../../../API/models/userModels/userUpdateModels/userUpdateName/UserUpdateName';
-import {InputTextModule} from 'primeng/inputtext';
+import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
+import { ImageModule } from 'primeng/image';
+import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
-import {ImageModule} from 'primeng/image';
-import {ToastModule} from 'primeng/toast';
-import {MessageService} from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
+import { UserCheckMail } from '../../../../API/Models/userModels/userCheckMailModel/UserCheckMail';
+import { UserConnectedModel } from '../../../../API/Models/userModels/userConnectedModel/UserConnectedModel';
+import { UserUpdateMail } from '../../../../API/Models/userModels/userUpdateModels/userUpdateMail/UserUpdateMail';
+import { UserUpdateName } from '../../../../API/Models/userModels/userUpdateModels/userUpdateName/UserUpdateName';
+import { UpdatePasswd } from '../../../../API/Models/userModels/userUpdateModels/userUpdatePasswd/UserUpdatePasswd';
+import { FormErrorInfoComponent } from "../../../../shared/components/form-error-info/form-error-info.component";
+import { ToastComponent } from "../../../../shared/components/toast/toast.component";
+import { LocalStorageService } from '../../../../shared/services/local-storage-service/local-storage.service';
+import { UserHttpService } from '../../../../shared/services/user-service/user-http.service';
 
 @Component({
     selector: 'app-profil-account',

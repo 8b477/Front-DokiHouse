@@ -1,9 +1,9 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { FormGroup, ReactiveFormsModule, Validators, FormControl } from '@angular/forms';
-import { BonsaiModel } from '../../../../../../API/models/bonsaiModels/bonsaiCreateModel';
-import { BonsaiServiceService } from '../../../../../../shared/services/bonsai-service/bonsai-service.service';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
-import {ToastModule} from 'primeng/toast';
+import { ToastModule } from 'primeng/toast';
+import { BonsaiModel } from '../../../../../../API/Models/bonsaiModels/bonsaiCreateModel';
+import { BonsaiServiceService } from '../../../../../../shared/services/bonsai-service/bonsai-service.service';
 
 @Component({
   selector: 'app-update-bonsai',

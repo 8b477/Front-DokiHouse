@@ -1,6 +1,6 @@
 import { Observable } from "rxjs";
-import { BonsaiModel } from "../models/bonsaiModels/bonsaiCreateModel";
-import { BonsaiData } from "../models/blogModels/BonsaiData";
+import { BonsaiData } from "../Models/blogModels/BonsaiData";
+import { BonsaiModel } from "../Models/bonsaiModels/bonsaiCreateModel";
 
 export abstract class BonsaiGateway{
 

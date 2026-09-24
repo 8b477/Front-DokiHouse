@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { CardBonsaiComponent } from "./components/card-bonsai/card-bonsai.component";
-import { BonsaiData } from '../../../API/models/blogModels/BonsaiData';
+import { CardModule } from 'primeng/card';
+import { BonsaiData } from '../../../API/Models/blogModels/BonsaiData';
 import { BonsaiServiceService } from '../../../shared/services/bonsai-service/bonsai-service.service';
-import {CardModule} from 'primeng/card';
+import { CardBonsaiComponent } from "./components/card-bonsai/card-bonsai.component";
 
 
 @Component({

@@ -1,9 +1,9 @@
-import { jwtDecode } from 'jwt-decode';
 import { HttpBackend, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { jwtDecode } from 'jwt-decode';
 import { BehaviorSubject, Observable, map } from 'rxjs';
-import { UserLoginModel } from '../../../API/models/userModels/userLoginModel/UserLoginModel';
-import { UserConnectedModel } from '../../../API/models/userModels/userConnectedModel/UserConnectedModel';
+import { UserConnectedModel } from '../../../API/Models/userModels/userConnectedModel/UserConnectedModel';
+import { UserLoginModel } from '../../../API/Models/userModels/userLoginModel/UserLoginModel';
 
 @Injectable({
   providedIn: 'root'

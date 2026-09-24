@@ -1,10 +1,10 @@
 import { Observable } from "rxjs";
-import { UserCreateModel } from "../models/userModels/userCreateModel/UserCreateModel";
-import { UserUpdateName } from "../models/userModels/userUpdateModels/userUpdateName/UserUpdateName";
-import { UserModel } from "../models/userModels/UserModel";
-import { UpdatePasswd } from "../models/userModels/userUpdateModels/userUpdatePasswd/UserUpdatePasswd";
-import { UserCheckMail } from "../models/userModels/userCheckMailModel/UserCheckMail";
-import { UserUpdateMail } from "../models/userModels/userUpdateModels/userUpdateMail/UserUpdateMail";
+import { UserCheckMail } from "../Models/userModels/userCheckMailModel/UserCheckMail";
+import { UserCreateModel } from "../Models/userModels/userCreateModel/UserCreateModel";
+import { UserModel } from "../Models/userModels/UserModel";
+import { UserUpdateMail } from "../Models/userModels/userUpdateModels/userUpdateMail/UserUpdateMail";
+import { UserUpdateName } from "../Models/userModels/userUpdateModels/userUpdateName/UserUpdateName";
+import { UpdatePasswd } from "../Models/userModels/userUpdateModels/userUpdatePasswd/UserUpdatePasswd";
 
 export abstract class UserGateway{
 

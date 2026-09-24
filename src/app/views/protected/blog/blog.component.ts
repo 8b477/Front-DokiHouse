@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { CardBlogComponent } from './components/card-blog/card-blog.component';
+import { Blog } from '../../../API/Models/blogModels/BlogModel';
 import { DATABLOG } from '../../../mocks/fakeDataBlogs/DATABLOG';
-import { Blog } from '../../../API/models/blogModels/BlogModel';
+import { CardBlogComponent } from './components/card-blog/card-blog.component';
 
 
 @Component({

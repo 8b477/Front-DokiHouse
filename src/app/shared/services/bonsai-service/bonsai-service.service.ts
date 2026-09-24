@@ -1,11 +1,11 @@
-import { Observable, catchError } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { BonsaiRepository } from '../../../API/repository/bonsai.repository';
-import { BonsaiData } from '../../../API/models/blogModels/BonsaiData';
-import { BonsaiModel } from '../../../API/models/bonsaiModels/bonsaiCreateModel';
+import { Observable, catchError } from 'rxjs';
+import { BonsaiData } from '../../../API/Models/blogModels/BonsaiData';
+import { BonsaiAsCreated } from '../../../API/Models/bonsaiModels/bonsaiAsCreatedModel';
+import { BonsaiModel } from '../../../API/Models/bonsaiModels/bonsaiCreateModel';
+import { BonsaiRepository } from '../../../API/Repository/bonsai.repository';
+import { PictureRepository } from '../../../API/Repository/picture.repository';
 import { HandlerErrorService } from '../handler-error-service/handler-error.service';
-import { BonsaiAsCreated } from '../../../API/models/bonsaiModels/bonsaiAsCreatedModel';
-import { PictureRepository } from '../../../API/repository/picture.repository';
 
 
 
